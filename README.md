@@ -97,11 +97,17 @@ Compatible with `@luizsantiago/agentic-harness` **0.7.x** (optional npm peer; re
 
 ## Development
 
+Clone, install once (links the local CLI so `npx` works in this repo), then use the same commands as end users:
+
 ```bash
+npm install
 npm test
-node index.js install   # local package root
-node index.js doctor
+npx @luizsantiago/agentic-harness install
+npx @luizsantiago/agentic-fullstack install
+npx @luizsantiago/agentic-fullstack doctor
 ```
+
+Run `npm install` first in this repo: `prepare` links `node_modules/.bin/agentic-fullstack` so `npx` resolves the local package (same name as `package.json`). Without that step you get `agentic-fullstack: not found`. `doctor` is a subcommand of this package — no separate npm token.
 
 ## Compatibility
 

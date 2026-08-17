@@ -1,6 +1,6 @@
 {
   "name": "@luizsantiago/agentic-fullstack",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Layer sister skills (frontend + backend) for the Spec-Driven Harness. Application manuals per stack layer — progressive loading, low token cost.",
   "type": "module",
   "bin": {
@@ -10,6 +10,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "prepare": "node scripts/link-local-bin.mjs",
     "test": "node --test test/install.test.js",
     "prepublishOnly": "npm test"
   },
@@ -19,6 +20,7 @@
     "skills/",
     "rules/",
     "templates/",
+    "scripts/link-local-bin.mjs",
     ".specs/features/",
     "LICENSE"
   ],
