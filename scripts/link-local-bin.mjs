@@ -31,12 +31,9 @@ const relativeIndex = path.relative(binDir, indexPath).replace(/\\/g, "/");
 fs.mkdirSync(binDir, { recursive: true });
 
 const shim = `#!/usr/bin/env node
-import { spawnSync } from "node:child_process";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const binDir = path.dirname(fileURLToPath(import.meta.url));
-const indexPath = path.resolve(binDir, "${relativeIndex}");
+const { spawnSync } = require("node:child_process");
+const path = require("node:path");
+const indexPath = path.resolve(__dirname, "${relativeIndex}");
 const result = spawnSync(process.execPath, [indexPath, ...process.argv.slice(2)], {
   stdio: "inherit",
 });
