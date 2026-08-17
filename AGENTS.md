@@ -14,12 +14,14 @@ npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
 ```
 
-For development from this repo (before publish or when testing local changes):
+For development from this repo (same `package.json` name breaks `npx @luizsantiago/agentic-fullstack` here — use the local CLI):
 
 ```bash
 node index.js install
 node index.js doctor
 ```
+
+Published npm version (check with `npm view @luizsantiago/agentic-fullstack version`). CI publish uses GitHub secret `NPM_TOKEN` (Automation token with bypass 2FA).
 
 ### Test
 

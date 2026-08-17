@@ -1,6 +1,7 @@
 node_modules/
 .DS_Store
 *.log
+actionlint
 
 # Harness runtime (installed via npx @luizsantiago/agentic-harness install)
 .cursor/
