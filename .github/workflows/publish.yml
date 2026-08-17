@@ -53,7 +53,8 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.bump != 'none'
         env:
           VERSION_BUMP: ${{ inputs.bump }}
-        run: npm version "$VERSION_BUMP" -m "chore(release): %s"
+        run: |
+          npm version "$VERSION_BUMP" -m "chore(release): %s"
 
       - name: Publish to npm
         run: npm publish --access public
