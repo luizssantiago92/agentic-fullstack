@@ -1,0 +1,11 @@
+{
+  "files": [
+    "index.js",
+    "lib/",
+    "skills/",
+    "rules/",
+    "templates/",
+    ".specs/features/",
+    "LICENSE"
+  ]
+}

@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+*.log
+
+# Harness runtime (installed via npx @luizsantiago/agentic-harness install)
+.cursor/
+.claude/
+.cursorrules
+.specs/harness/
+.specs/STATE.md
+.specs/LESSONS.md
+.specs/lessons.json
+.specs/project/

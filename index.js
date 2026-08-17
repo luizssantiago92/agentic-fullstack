@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+import { PACKAGE_VERSION } from "./lib/constants.js";
+import { doctor, install } from "./lib/install.js";
+
+const USAGE = `Usage: agentic-fullstack [command]
+
+Commands:
+  install   Install frontend/backend layer skills, rule, and PROJECT template
+  doctor    Check harness + layer skills installation health
+  --help    Show this message
+  --version Print the package version
+
+Install order (recommended):
+  npx @luizsantiago/agentic-harness install
+  npx @luizsantiago/agentic-fullstack install
+`;
+
+const [, , command, ...args] = process.argv;
+
+if (command === "--version" || command === "-v" || command === "version") {
+  console.log(PACKAGE_VERSION);
+  process.exit(0);
+} else if (!command || command === "--help" || command === "-h" || command === "help") {
+  const out = command ? console.log : console.error;
+  out(USAGE);
+  process.exit(command ? 0 : 1);
+} else if (command === "install") {
+  try {
+    await install();
+    console.log("✨ Fullstack layer skills installed.");
+  } catch (err) {
+    console.error(`❌ ${err.message}`);
+    process.exit(1);
+  }
+} else if (command === "doctor") {
+  try {
+    const { ok } = await doctor();
+    process.exit(ok ? 0 : 1);
+  } catch (err) {
+    console.error(`❌ ${err.message}`);
+    process.exit(1);
+  }
+} else {
+  console.error(USAGE);
+  process.exit(1);
+}
+
+// silence unused args lint
+void args;

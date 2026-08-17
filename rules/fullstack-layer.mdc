@@ -1,0 +1,34 @@
+---
+description: Layer routing for frontend/backend sister skills during Execute. Reads .specs/project/PROJECT.md Layer registry. At most one layer skill per task. Compatible with Spec-Driven Harness — does not replace gates or engineering-standards.
+alwaysApply: true
+---
+
+# Fullstack Layer Routing
+
+Extension for `@luizsantiago/agentic-fullstack`. Requires Spec-Driven Harness (`agent-architecture.md`).
+
+## Layer registry
+
+Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task. Each row maps a layer id → skill file → path globs. v1 ships **frontend** and **backend**; future layers (mobile, cli, data, embedded) add a row + install `{layer}-engineering.md` — do not load two layer skills in one turn.
+
+## Execute — which skill to load
+
+| Task `Files` vs registry | Load | Do not load |
+| --- | --- | --- |
+| Matches **one** layer only | That layer's skill (e.g. `frontend-engineering.md`) | Other layer skills |
+| Matches **zero** layers | Neither — follow `engineering-standards.md` only | Layer skills |
+| Matches **two or more** layers | **STOP** — split task or amend `tasks.md` | All layer skills |
+
+Always keep `engineering-standards.md` and the current phase reference (`references/implement.md`) in the working set. Layer skills are **additive**, not replacements.
+
+## After commit
+
+Drop the layer skill from context before the next task (same pattern as conditional Verify sisters).
+
+## Verify
+
+Do **not** load layer skills on `/verify`. Use harness Verify stack: `validate.md`, `security-review.md`, then at most one of `appsec.md` or `qa-strategy.md`.
+
+## Re-install safety
+
+Harness `install` overwrites its own skills only. These files are extension-owned: `frontend-engineering.md`, `backend-engineering.md`, this rule. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh the extension.
