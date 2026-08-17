@@ -28,7 +28,7 @@ jobs:
         run: npm test
 
       - name: Lint GitHub Actions workflows
-        uses: rhysd/actionlint@v1
+        uses: rhysd/actionlint@v1.7.12
 
       - name: Verify packaged skills exist
         run: |
