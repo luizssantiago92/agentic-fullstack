@@ -1,0 +1,45 @@
+{
+  "name": "@luizsantiago/agentic-fullstack",
+  "version": "0.1.0",
+  "description": "Layer sister skills (frontend + backend) for the Spec-Driven Harness. Application manuals per stack layer — progressive loading, low token cost.",
+  "type": "module",
+  "bin": {
+    "agentic-fullstack": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/install.test.js"
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "skills/",
+    "rules/",
+    "templates/",
+    ".specs/features/",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizssantiago92/agentic-fullstack.git"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cursor",
+    "claude",
+    "spec-driven",
+    "harness",
+    "fullstack",
+    "frontend",
+    "backend",
+    "cli"
+  ],
+  "author": "luizsantiago",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
