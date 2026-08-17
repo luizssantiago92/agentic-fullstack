@@ -27,6 +27,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Lint GitHub Actions workflows
+        uses: rhysd/actionlint@v1
+
       - name: Verify packaged skills exist
         run: |
           test -f skills/frontend-engineering.md

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -6,14 +7,20 @@ import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
 import {
+  DEFAULT_LAYERS,
   HARNESS_HUB,
   PACKAGE_ROOT,
   PROJECT_DIR,
   PROJECT_FILE,
   SKILL_ASSETS,
+  renderLayerRegistryTable,
 } from "../lib/constants.js";
-import { doctor, install } from "../lib/install.js";
-import { pathExists, readFileSafe } from "../lib/fs-utils.js";
+import { doctor, install, parseRegistrySkillFiles } from "../lib/install.js";
+import {
+  pathExists,
+  readFileSafe,
+  writeFileSafe,
+} from "../lib/fs-utils.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -40,6 +47,11 @@ async function stubHarness(cwd) {
   );
 }
 
+/** @param {string} content */
+function sha256(content) {
+  return crypto.createHash("sha256").update(content).digest("hex");
+}
+
 test("install copies skills, rule, and creates PROJECT.md when missing", async () => {
   const cwd = await makeTempDir("afs-install-");
   await stubHarness(cwd);
@@ -59,6 +71,29 @@ test("install copies skills, rule, and creates PROJECT.md when missing", async (
 
   const project = await readFileSafe(path.join(cwd, PROJECT_DIR, PROJECT_FILE));
   assert.ok(project?.includes("## Layer registry"));
+});
+
+test("install rejects when harness missing without --force", async () => {
+  const cwd = await makeTempDir("afs-no-harness-");
+  await assert.rejects(
+    () => install({ cwd, silent: true }),
+    /Spec-Driven Harness not detected/,
+  );
+});
+
+test("install --force works without harness", async () => {
+  const cwd = await makeTempDir("afs-force-");
+  const { projectCreated } = await install({ cwd, silent: true, force: true });
+  assert.equal(projectCreated, true);
+
+  for (const skill of SKILL_ASSETS) {
+    assert.equal(await pathExists(path.join(cwd, ".cursor/skills", skill)), true);
+  }
+
+  const { ok, issues } = await doctor({ cwd, silent: true });
+  assert.equal(ok, false);
+  assert.ok(issues.includes("harness_missing"));
+  assert.ok(issues.includes("gates_missing"));
 });
 
 test("install does not overwrite existing PROJECT.md", async () => {
@@ -94,7 +129,6 @@ test("harness re-install simulation preserves extension skills", async () => {
   await stubHarness(cwd);
   await install({ cwd, silent: true });
 
-  // Simulate harness overwriting only its SKILL_ASSETS
   const harnessSkills = [
     "agent-architecture.md",
     "engineering-standards.md",
@@ -114,9 +148,47 @@ test("harness re-install simulation preserves extension skills", async () => {
   }
 });
 
+test("install preserves skill file checksums", async () => {
+  const cwd = await makeTempDir("afs-checksum-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+
+  for (const skill of SKILL_ASSETS) {
+    const src = await fs.readFile(path.join(PACKAGE_ROOT, "skills", skill), "utf8");
+    const dest = await fs.readFile(path.join(cwd, ".cursor/skills", skill), "utf8");
+    assert.equal(sha256(src), sha256(dest));
+    assert.equal(src, dest);
+  }
+});
+
+test("writeFileSafe rejects paths outside project root", async () => {
+  const cwd = await makeTempDir("afs-escape-");
+  const outside = path.join(path.dirname(cwd), "escape-outside.md");
+  await assert.rejects(
+    () => writeFileSafe(outside, "x", { root: cwd }),
+    /outside project root/,
+  );
+});
+
+test("install refuses symlink skill destination", async () => {
+  const cwd = await makeTempDir("afs-symlink-");
+  await stubHarness(cwd);
+  const skillDir = path.join(cwd, ".cursor/skills");
+  const target = path.join(cwd, "real-skill-target.md");
+  const link = path.join(skillDir, SKILL_ASSETS[0]);
+  await fs.mkdir(skillDir, { recursive: true });
+  await fs.writeFile(target, "# real\n", "utf8");
+  await fs.symlink(target, link);
+
+  await assert.rejects(
+    () => install({ cwd, silent: true }),
+    /symlink/i,
+  );
+});
+
 test("doctor fails when harness and gates are missing", async () => {
   const cwd = await makeTempDir("afs-doctor-fail-");
-  await install({ cwd, silent: true });
+  await install({ cwd, silent: true, force: true });
 
   const { ok, issues } = await doctor({ cwd, silent: true });
   assert.equal(ok, false);
@@ -132,6 +204,50 @@ test("doctor passes after install", async () => {
   const { ok, issues } = await doctor({ cwd, silent: true });
   assert.equal(ok, true);
   assert.deepEqual(issues, []);
+});
+
+test("doctor flags unknown registry skill files", async () => {
+  const cwd = await makeTempDir("afs-registry-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+
+  const projectPath = path.join(cwd, PROJECT_DIR, PROJECT_FILE);
+  const project = await readFileSafe(projectPath);
+  assert.ok(project);
+  const updated = project.replace(
+    "frontend-engineering.md",
+    "mobile-engineering.md",
+  );
+  await fs.writeFile(projectPath, updated, "utf8");
+
+  const { ok, issues } = await doctor({ cwd, silent: true });
+  assert.equal(ok, false);
+  assert.ok(issues.includes("registry_unknown_skill:mobile-engineering.md"));
+});
+
+test("parseRegistrySkillFiles extracts skill basenames", async () => {
+  const template = await fs.readFile(
+    path.join(PACKAGE_ROOT, "templates", PROJECT_FILE),
+    "utf8",
+  );
+  const skills = parseRegistrySkillFiles(template);
+  assert.deepEqual(skills, SKILL_ASSETS);
+});
+
+test("DEFAULT_LAYERS matches template layer registry table", async () => {
+  const template = await fs.readFile(
+    path.join(PACKAGE_ROOT, "templates", PROJECT_FILE),
+    "utf8",
+  );
+  const rendered = renderLayerRegistryTable(DEFAULT_LAYERS);
+  for (const layer of DEFAULT_LAYERS) {
+    assert.ok(template.includes(`| ${layer.id} | \`${layer.skill}\` |`));
+    for (const glob of layer.globs) {
+      assert.ok(template.includes(`\`${glob}\``));
+    }
+  }
+  assert.ok(rendered.includes("frontend-engineering.md"));
+  assert.ok(rendered.includes("backend-engineering.md"));
 });
 
 test("packaged skill files exist in package root", async () => {
@@ -165,7 +281,6 @@ test("token budget: layer skills stay lean", async () => {
     "utf8",
   );
 
-  // chars / 4 ≈ tokens; cap layer skills ~2.5k tokens each per plan
   assert.ok(front.length / 4 < 2800, `frontend skill too large: ~${front.length / 4} tokens`);
   assert.ok(back.length / 4 < 2800, `backend skill too large: ~${back.length / 4} tokens`);
   assert.ok(rule.length / 4 < 600, `rule too large: ~${rule.length / 4} tokens`);

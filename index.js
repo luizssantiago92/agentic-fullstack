@@ -6,14 +6,17 @@ import { doctor, install } from "./lib/install.js";
 const USAGE = `Usage: agentic-fullstack [command]
 
 Commands:
-  install   Install frontend/backend layer skills, rule, and PROJECT template
-  doctor    Check harness + layer skills installation health
-  --help    Show this message
-  --version Print the package version
+  install [--force]   Install frontend/backend layer skills, rule, and PROJECT template
+  doctor              Check harness + layer skills installation health
+  --help              Show this message
+  --version           Print the package version
 
 Install order (recommended):
   npx @luizsantiago/agentic-harness install
   npx @luizsantiago/agentic-fullstack install
+
+Options:
+  --force   Install layer skills without harness (doctor will still require harness)
 `;
 
 const [, , command, ...args] = process.argv;
@@ -26,8 +29,9 @@ if (command === "--version" || command === "-v" || command === "version") {
   out(USAGE);
   process.exit(command ? 0 : 1);
 } else if (command === "install") {
+  const force = args.includes("--force");
   try {
-    await install();
+    await install({ force });
     console.log("✨ Fullstack layer skills installed.");
   } catch (err) {
     console.error(`❌ ${err.message}`);
@@ -45,6 +49,3 @@ if (command === "--version" || command === "-v" || command === "version") {
   console.error(USAGE);
   process.exit(1);
 }
-
-// silence unused args lint
-void args;
