@@ -8,7 +8,7 @@ on:
       bump:
         description: "Version bump, or none to publish the current package.json version"
         required: true
-        default: none
+        default: "none"
         type: choice
         options:
           - none
