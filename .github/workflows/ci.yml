@@ -10,8 +10,16 @@ permissions:
   contents: read
 
 jobs:
+  lint-workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Lint GitHub Actions workflows
+        uses: rhysd/actionlint@v1.7.12
+
   test:
     runs-on: ubuntu-latest
+    needs: lint-workflows
     strategy:
       matrix:
         node-version: [18, 20, 22]
@@ -24,11 +32,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install (links local CLI bin for npx in this repo)
+        run: npm install
+
+      - name: Verify npx resolves local package CLI
+        if: matrix.node-version == 22
+        run: |
+          npx @luizsantiago/agentic-fullstack --version
+          test -x node_modules/.bin/agentic-fullstack
+
       - name: Run tests
         run: npm test
-
-      - name: Lint GitHub Actions workflows
-        uses: rhysd/actionlint@v1.7.12
 
       - name: Verify packaged skills exist
         run: |
@@ -41,6 +55,7 @@ jobs:
         run: |
           npm pack --dry-run 2>&1 | grep -q "frontend-engineering.md"
           npm pack --dry-run 2>&1 | grep -q "demo-login/spec.md"
+          npm pack --dry-run 2>&1 | grep -q "scripts/link-local-bin.mjs"
           if npm pack --dry-run 2>&1 | grep -E 'test/'; then
             echo "test/ must not ship in the npm package" >&2
             exit 1

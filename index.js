@@ -15,6 +15,8 @@ Install order (recommended):
   npx @luizsantiago/agentic-harness install
   npx @luizsantiago/agentic-fullstack install
 
+Package root development: run npm install first (prepare links the local bin), then npx works.
+
 Options:
   --force   Install layer skills without harness (doctor will still require harness)
 `;

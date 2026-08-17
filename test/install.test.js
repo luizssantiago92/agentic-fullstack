@@ -267,6 +267,18 @@ test("packaged skill files exist in package root", async () => {
   );
 });
 
+test("link-local-bin enables npx in package root", async () => {
+  const binPath = path.join(PACKAGE_ROOT, "node_modules", ".bin", "agentic-fullstack");
+  const { execFileSync } = await import("node:child_process");
+  execFileSync(process.execPath, ["scripts/link-local-bin.mjs"], {
+    cwd: PACKAGE_ROOT,
+    env: { ...process.env, INIT_CWD: PACKAGE_ROOT },
+  });
+  assert.equal(await pathExists(binPath), true);
+  const version = execFileSync(binPath, ["--version"], { encoding: "utf8" }).trim();
+  assert.match(version, /^\d+\.\d+\.\d+$/);
+});
+
 test("token budget: layer skills stay lean", async () => {
   const front = await fs.readFile(
     path.join(PACKAGE_ROOT, "skills/frontend-engineering.md"),

@@ -9,6 +9,7 @@ npm extension package `@luizsantiago/agentic-fullstack` — layer sister skills 
 ### Install (fresh clone)
 
 ```bash
+npm install   # links local CLI bin — required in this repo before npx fullstack works
 npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
@@ -16,19 +17,18 @@ npx @luizsantiago/agentic-fullstack doctor
 
 `install` fails without harness unless you pass `--force` (layer skills only; `doctor` still requires harness + gates).
 
-For development from this repo (same `package.json` name breaks `npx @luizsantiago/agentic-fullstack` here — use the local CLI):
+`doctor` is a subcommand of `@luizsantiago/agentic-fullstack` — not a separate package and not a separate npm token.
 
-```bash
-node index.js install
-node index.js install --force
-node index.js doctor
-```
+Why `npm install` here: when the cwd is this package, `npx @luizsantiago/agentic-fullstack` resolves to the local folder but npm does not create `node_modules/.bin/agentic-fullstack` until `prepare` runs (`scripts/link-local-bin.mjs`). Without that step you get `agentic-fullstack: not found`.
+
+Fallback: `node index.js install` / `node index.js doctor`.
 
 Published npm version (check with `npm view @luizsantiago/agentic-fullstack version`). CI publish uses GitHub secret `NPM_TOKEN` (Automation token with bypass 2FA).
 
 ### Test
 
 ```bash
+npm install
 npm test
 ```
 
