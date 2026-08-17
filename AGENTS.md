@@ -31,11 +31,14 @@ Uses Node built-in test runner; no external test dependencies.
 
 ### Publish
 
-Requires GitHub secret `NPM_TOKEN`. After merge to `main`:
+Requires GitHub secret **`NPM_TOKEN`**.
 
-1. Actions → **Publish to npm** → Run workflow
-2. First release: choose bump **`none`** to publish `0.1.0`
-3. Later releases: `patch`, `minor`, or `major`
+Use an npm **Automation** token (or Granular with **Bypass 2FA for automation**). Classic publish tokens with 2FA fail in CI with `EOTP`.
+
+After updating the secret:
+
+1. Actions → **Publish to npm** → Run workflow → bump **`none`** (or recreate GitHub Release `v0.1.0`)
+2. Confirm: `npm view @luizsantiago/agentic-fullstack version`
 
 CI runs on push/PR to `main` (`.github/workflows/ci.yml`).
 

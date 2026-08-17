@@ -85,6 +85,8 @@ Publishing is automated via GitHub Actions (`.github/workflows/publish.yml`).
 
 Requires repository secret **`NPM_TOKEN`** (npm automation token with write access to `@luizsantiago/*`).
 
+**Important:** the token must be an **Automation** or **Granular** token with **Bypass 2FA for automation** enabled. Classic tokens with 2FA will fail in CI with `npm error code EOTP`. Create at [npmjs.com/settings/tokens](https://www.npmjs.com/settings/~youruser/tokens) → Generate New Token → Automation (recommended for CI).
+
 Compatible with `@luizsantiago/agentic-harness` **0.7.x**.
 
 ## Development
