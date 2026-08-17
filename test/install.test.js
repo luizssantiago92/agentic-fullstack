@@ -114,6 +114,16 @@ test("harness re-install simulation preserves extension skills", async () => {
   }
 });
 
+test("doctor fails when harness and gates are missing", async () => {
+  const cwd = await makeTempDir("afs-doctor-fail-");
+  await install({ cwd, silent: true });
+
+  const { ok, issues } = await doctor({ cwd, silent: true });
+  assert.equal(ok, false);
+  assert.ok(issues.includes("harness_missing"));
+  assert.ok(issues.includes("gates_missing"));
+});
+
 test("doctor passes after install", async () => {
   const cwd = await makeTempDir("afs-doctor-");
   await stubHarness(cwd);

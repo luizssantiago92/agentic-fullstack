@@ -18,6 +18,7 @@
     "skills/",
     "rules/",
     "templates/",
+    ".specs/features/",
     "LICENSE"
   ],
   "repository": {

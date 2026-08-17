@@ -17,7 +17,7 @@ One layer skill per row. Task `Files` must match **at most one** layer per task.
 | Layer id | Skill file | Path globs (match any) |
 | --- | --- | --- |
 | frontend | `frontend-engineering.md` | `apps/web/**`, `frontend/**`, `**/*.tsx`, `**/*.jsx`, `**/*.vue`, `**/*.svelte` |
-| backend | `backend-engineering.md` | `apps/api/**`, `backend/**`, `**/routes/**`, `**/handlers/**`, `**/migrations/**` |
+| backend | `backend-engineering.md` | `apps/api/**`, `backend/**`, `apps/api/**/routes/**`, `**/migrations/**` |
 
 Future layers (not in v1): add a row + install `{layer}-engineering.md` — e.g. `mobile`, `cli`, `data`, `embedded`.
 

@@ -11,7 +11,7 @@ Lean application manual for **backend** tasks during Execute. Complements `engin
 
 ## When to Use
 
-Load during **Execute** when the current task's `Files` match the **backend** globs in `.specs/project/PROJECT.md` (defaults: `apps/api/**`, `backend/**`, `**/routes/**`, `**/handlers/**`, `**/migrations/**`).
+Load during **Execute** when the current task's `Files` match the **backend** globs in `.specs/project/PROJECT.md` (defaults: `apps/api/**`, `backend/**`, `apps/api/**/routes/**`, `**/migrations/**`).
 
 ## When NOT to Use
 

@@ -1,11 +1,3 @@
-{
-  "files": [
-    "index.js",
-    "lib/",
-    "skills/",
-    "rules/",
-    "templates/",
-    ".specs/features/",
-    "LICENSE"
-  ]
-}
+test/
+.github/
+*.tgz
