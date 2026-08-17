@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify packaged skills exist
+        run: |
+          test -f skills/frontend-engineering.md
+          test -f skills/backend-engineering.md
+          test -f rules/fullstack-layer.mdc
+          test -f templates/PROJECT.md
+
+      - name: Verify npm pack contents
+        run: |
+          npm pack --dry-run 2>&1 | grep -q "frontend-engineering.md"
+          npm pack --dry-run 2>&1 | grep -q "demo-login/spec.md"
+          if npm pack --dry-run 2>&1 | grep -E 'test/'; then
+            echo "test/ must not ship in the npm package" >&2
+            exit 1
+          fi

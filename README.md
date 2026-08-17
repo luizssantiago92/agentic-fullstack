@@ -1,6 +1,11 @@
 # Agentic Fullstack
 
+[![npm version](https://img.shields.io/npm/v/@luizsantiago/agentic-fullstack.svg)](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Layer sister skills for the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness). **Application manuals** for frontend and backend Execute work — the agent discovers framework knowledge; these skills say **how to apply it** per layer with low token cost.
+
+npm package: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
 
 ## Install
 
@@ -68,11 +73,25 @@ Progressive loading avoids dumping all harness sisters every turn (~70–80% sav
 
 See `.specs/features/demo-login/` — two tasks (T1 frontend, T2 backend) showing layer split. Spec-only demo; no application code in this repo.
 
+## Releases
+
+Publishing is automated via GitHub Actions (`.github/workflows/publish.yml`).
+
+| Trigger | When to use |
+| --- | --- |
+| **Actions → Publish to npm → Run workflow → `none`** | Publish the current `package.json` version (first release or republish after version fix) |
+| **Run workflow → `patch` / `minor` / `major`** | Bump version, publish, push tag to `main` |
+| **GitHub Release published** | Publishes the version in `package.json` at release time |
+
+Requires repository secret **`NPM_TOKEN`** (npm automation token with write access to `@luizsantiago/*`).
+
+Compatible with `@luizsantiago/agentic-harness` **0.7.x**.
+
 ## Development
 
 ```bash
 npm test
-node index.js install
+node index.js install   # local package root
 node index.js doctor
 ```
 
