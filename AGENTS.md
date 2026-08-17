@@ -10,11 +10,16 @@ npm extension package `@luizsantiago/agentic-fullstack` — layer sister skills 
 
 ```bash
 npx @luizsantiago/agentic-harness install
+npx @luizsantiago/agentic-fullstack install
+npx @luizsantiago/agentic-fullstack doctor
+```
+
+For development from this repo (before publish or when testing local changes):
+
+```bash
 node index.js install
 node index.js doctor
 ```
-
-Or after publish: `npx @luizsantiago/agentic-fullstack install`
 
 ### Test
 
@@ -23,6 +28,16 @@ npm test
 ```
 
 Uses Node built-in test runner; no external test dependencies.
+
+### Publish
+
+Requires GitHub secret `NPM_TOKEN`. After merge to `main`:
+
+1. Actions → **Publish to npm** → Run workflow
+2. First release: choose bump **`none`** to publish `0.1.0`
+3. Later releases: `patch`, `minor`, or `major`
+
+CI runs on push/PR to `main` (`.github/workflows/ci.yml`).
 
 ### Re-install safety
 
@@ -37,6 +52,7 @@ Uses Node built-in test runner; no external test dependencies.
 | `rules/fullstack-layer.mdc` | Layer routing rule |
 | `templates/PROJECT.md` | Default project config template |
 | `.specs/features/demo-login/` | Demo spec/tasks for layer split |
+| `.github/workflows/` | CI and npm publish |
 
 ### Harness integration
 
