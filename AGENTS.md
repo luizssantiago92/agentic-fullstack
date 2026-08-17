@@ -14,10 +14,13 @@ npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
 ```
 
+`install` fails without harness unless you pass `--force` (layer skills only; `doctor` still requires harness + gates).
+
 For development from this repo (same `package.json` name breaks `npx @luizsantiago/agentic-fullstack` here — use the local CLI):
 
 ```bash
 node index.js install
+node index.js install --force
 node index.js doctor
 ```
 

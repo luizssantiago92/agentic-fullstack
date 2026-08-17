@@ -14,6 +14,12 @@ npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
 ```
 
+Without harness (layer skills only — `doctor` will still fail until harness is installed):
+
+```bash
+npx @luizsantiago/agentic-fullstack install --force
+```
+
 Check health:
 
 ```bash
@@ -59,7 +65,7 @@ Measured from shipped files in this package:
 | Asset | Chars | ~Tokens |
 | --- | ---: | ---: |
 | `frontend-engineering.md` | 3,450 | ~863 |
-| `backend-engineering.md` | 3,630 | ~908 |
+| `backend-engineering.md` | 3,621 | ~905 |
 | `fullstack-layer.mdc` | 1,856 | ~464 |
 | **Execute turn (typical)** | — | ~6k with hub phase ref + `engineering-standards` + one layer skill |
 
@@ -87,7 +93,7 @@ Requires repository secret **`NPM_TOKEN`** (npm automation token with write acce
 
 **Important:** the token must be an **Automation** or **Granular** token with **Bypass 2FA for automation** enabled. Classic tokens with 2FA will fail in CI with `npm error code EOTP`. Create at [npmjs.com/settings/tokens](https://www.npmjs.com/settings/~youruser/tokens) → Generate New Token → Automation (recommended for CI).
 
-Compatible with `@luizsantiago/agentic-harness` **0.7.x**.
+Compatible with `@luizsantiago/agentic-harness` **0.7.x** (optional npm peer; required for harness gates and a passing `doctor`).
 
 ## Development
 
@@ -99,7 +105,7 @@ node index.js doctor
 
 ## Compatibility
 
-- Requires `@luizsantiago/agentic-harness` 0.7.x
+- Requires `@luizsantiago/agentic-harness` 0.7.x for gates and a passing `doctor` (optional npm peer; use `install --force` for layer skills only)
 - Node.js 18+
 - Python 3.10+ recommended (harness gates)
 

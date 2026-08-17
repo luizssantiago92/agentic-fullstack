@@ -42,5 +42,13 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "@luizsantiago/agentic-harness": ">=0.7.0"
+  },
+  "peerDependenciesMeta": {
+    "@luizsantiago/agentic-harness": {
+      "optional": true
+    }
   }
 }
