@@ -293,13 +293,13 @@ test("packaged skill files exist in package root", async () => {
   );
   assert.equal(
     await pathExists(
-      path.join(PACKAGE_ROOT, ".specs/features/demo-data-routing/spec.md"),
+      path.join(PACKAGE_ROOT, ".specs/features/demo-login/spec.md"),
     ),
     true,
   );
   assert.equal(
     await pathExists(
-      path.join(PACKAGE_ROOT, ".specs/features/demo-data-routing/tasks.md"),
+      path.join(PACKAGE_ROOT, ".specs/features/demo-login/tasks.md"),
     ),
     true,
   );
