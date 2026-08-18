@@ -94,12 +94,20 @@ Each layer skill stays under ~700 tokens; the routing rule under ~600. Progressi
 
 ## Demo features
 
-Spec-only demos (no application code in this repo). CI runs `npm run demo:validate` against both:
+Spec-only routing demos (always shipped). CI runs `npm run demo:validate` against both:
 
 | Feature | Tasks | Layers |
 | --- | --- | --- |
 | `.specs/features/demo-login/` | T1, T2 | frontend, backend |
 | `.specs/features/demo-data-routing/` | T1, T2, T3 | data, analytics, datascience |
+
+Optional **minimal code** for demo-login (REQ-001 form + REQ-002 API, no extra deps):
+
+```bash
+npm run demo:example
+```
+
+See [`examples/demo-login/`](examples/demo-login/).
 
 ## Releases
 

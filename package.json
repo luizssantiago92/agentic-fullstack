@@ -1,6 +1,6 @@
 {
   "name": "@luizsantiago/agentic-fullstack",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "Layer sister skills (frontend, backend, data, analytics, data science) for the Spec-Driven Harness. Application manuals per stack layer — progressive loading, low token cost.",
   "type": "module",
   "bin": {
@@ -11,8 +11,9 @@
   },
   "scripts": {
     "prepare": "node scripts/link-local-bin.mjs",
-    "test": "node --test test/install.test.js test/gate.test.js",
+    "test": "node --test test/install.test.js test/gate.test.js examples/demo-login/login.test.js",
     "demo:validate": "python3 .specs/harness/scripts/validate_layer_routing.py demo-login && python3 .specs/harness/scripts/validate_layer_routing.py demo-data-routing",
+    "demo:example": "node --test examples/demo-login/login.test.js",
     "prepublishOnly": "npm test"
   },
   "files": [
@@ -24,6 +25,7 @@
     "gates/",
     "scripts/link-local-bin.mjs",
     ".specs/features/",
+    "examples/",
     "LICENSE"
   ],
   "repository": {
