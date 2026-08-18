@@ -11,7 +11,7 @@ Lean application manual for **data science / ML experiment** tasks during Execut
 
 ## When to Use
 
-Load when task `Files` match **datascience** globs (defaults: `experiments/**`, `ml/**`, `models/**`, `training/**`).
+Load when task `Files` match **datascience** globs (defaults: `experiments/**`, `ml/**`, `models/**`, `training/**`, `notebooks/training/**`). Explore notebooks stay on **analytics** (`notebooks/explore/**`).
 
 ## When NOT to Use
 

@@ -1,6 +1,6 @@
 {
   "name": "@luizsantiago/agentic-fullstack",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Layer sister skills (frontend, backend, data, analytics, data science) for the Spec-Driven Harness. Application manuals per stack layer — progressive loading, low token cost.",
   "type": "module",
   "bin": {
