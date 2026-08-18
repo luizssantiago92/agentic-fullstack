@@ -1,5 +1,5 @@
 ---
-description: Layer routing for frontend/backend sister skills during Execute. Reads .specs/project/PROJECT.md Layer registry. At most one layer skill per task. Compatible with Spec-Driven Harness — does not replace gates or engineering-standards.
+description: Layer routing for frontend/backend/data sister skills during Execute. Reads .specs/project/PROJECT.md Layer registry. At most one layer skill per task. Compatible with Spec-Driven Harness — does not replace gates or engineering-standards.
 alwaysApply: true
 ---
 
@@ -9,7 +9,7 @@ Extension for `@luizsantiago/agentic-fullstack`. Requires Spec-Driven Harness (`
 
 ## Layer registry
 
-Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task. Each row maps a layer id → skill file → path globs. v1 ships **frontend** and **backend**; future layers (mobile, cli, data, embedded) add a row + install `{layer}-engineering.md` — do not load two layer skills in one turn.
+Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task. Each row maps a layer id → skill file → path globs. Shipped layers: **frontend**, **backend**, **data**, **analytics**, **datascience** — do not load two layer skills in one turn.
 
 ## Execute — which skill to load
 
@@ -21,6 +21,8 @@ Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task.
 
 Always keep `engineering-standards.md` and the current phase reference (`references/implement.md`) in the working set. Layer skills are **additive**, not replacements.
 
+Run `python3 .specs/harness/scripts/validate_layer_routing.py <feature>` before Execute when available.
+
 ## After commit
 
 Drop the layer skill from context before the next task (same pattern as conditional Verify sisters).
@@ -31,4 +33,4 @@ Do **not** load layer skills on `/verify`. Use harness Verify stack: `validate.m
 
 ## Re-install safety
 
-Harness `install` overwrites its own skills only. These files are extension-owned: `frontend-engineering.md`, `backend-engineering.md`, this rule. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh the extension.
+Harness `install` overwrites its own skills only. Extension-owned: `frontend-engineering.md`, `backend-engineering.md`, `data-engineering.md`, `analytics-engineering.md`, `data-science-engineering.md`, this rule, `validate_layer_routing.py`. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh the extension.

@@ -13,9 +13,19 @@ Lean application manual for **frontend** tasks during Execute. Complements `engi
 
 Load during **Execute** when the current task's `Files` match the **frontend** globs in `.specs/project/PROJECT.md` (defaults: `apps/web/**`, `frontend/**`, `**/*.tsx`, `**/*.jsx`, `**/*.vue`, `**/*.svelte`).
 
+## Task shapes (quick routing)
+
+| Shape | Focus |
+| --- | --- |
+| Form / page UI | User-visible states from spec; a11y names on controls |
+| Client state | Test behavior, not implementation; smallest component diff |
+| Monorepo | Task `Gate` + `PROJECT.md` frontend filter |
+| SSR / RSC | Prefer tests at stable boundary (page/e2e) when client-only tests cannot reach server components |
+
 ## When NOT to Use
 
-- Backend-only tasks (API, migrations, server handlers) — record: `Frontend skill: skipped — backend-only task`
+- Backend-only tasks (API, app migrations, server handlers) — record: `Frontend skill: skipped — backend-only task`
+- Data pipelines, analytics, or ML experiment paths — use the matching data layer skill
 - Verify phase — use `qa-strategy.md` for multi-step UI walkthrough, not this skill
 - Task `Files` span frontend **and** backend — **STOP**; split the task or amend `tasks.md` per `fullstack-layer.mdc`
 

@@ -48,15 +48,28 @@ jobs:
         run: |
           test -f skills/frontend-engineering.md
           test -f skills/backend-engineering.md
+          test -f skills/data-engineering.md
+          test -f skills/analytics-engineering.md
+          test -f skills/data-science-engineering.md
           test -f rules/fullstack-layer.mdc
           test -f templates/PROJECT.md
+          test -f gates/validate_layer_routing.py
 
       - name: Verify npm pack contents
         run: |
           npm pack --dry-run 2>&1 | grep -q "frontend-engineering.md"
+          npm pack --dry-run 2>&1 | grep -q "data-engineering.md"
           npm pack --dry-run 2>&1 | grep -q "demo-login/spec.md"
+          npm pack --dry-run 2>&1 | grep -q "gates/validate_layer_routing.py"
           npm pack --dry-run 2>&1 | grep -q "scripts/link-local-bin.mjs"
           if npm pack --dry-run 2>&1 | grep -E 'test/'; then
             echo "test/ must not ship in the npm package" >&2
             exit 1
           fi
+
+      - name: Demo layer routing gate
+        if: matrix.node-version == 22
+        run: |
+          npx --yes @luizsantiago/agentic-harness install
+          node index.js install
+          npm run demo:validate
