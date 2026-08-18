@@ -18,7 +18,7 @@ npx @luizsantiago/agentic-fullstack install --sync-registry
 | analytics | `analytics/**`, `reports/**`, `**/sql/analytics/**`, `notebooks/explore/**` |
 | datascience | `experiments/**`, `ml/**`, `models/**`, `training/**`, `notebooks/training/**` |
 
-Ajuste as linhas se o monorepo for diferente. Globs que se sobrepõem de propósito (dois andares no mesmo path) fazem o gate falhar — isso é o produto a proteger o turno.
+Ajuste as linhas se o monorepo for diferente. Globs que se sobrepõem de propósito (dois andares no mesmo path) fazem o gate falhar — isso é o produto protegendo o turno.
 
 ## Detalhes que evitam surpresa
 

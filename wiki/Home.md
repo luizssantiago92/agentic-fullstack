@@ -11,7 +11,7 @@ Pacote npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@l
 
 ## Promessa
 
-Menos contexto desperdiçado, PRs que um humano consegue revisar, e um STOP claro quando a task mistura camadas. O agente continua a **descobrir** React, Fastify, dbt ou sklearn no *seu* repo — as skills não são tutorial de framework. São o **manual de execução** daquele andar.
+Menos contexto desperdiçado, PRs que um humano consegue revisar, e um STOP claro quando a task mistura camadas. O agente continua **descobrindo** React, Fastify, dbt ou sklearn no *seu* repo — as skills não são tutorial de framework. São o **manual de execução** daquele andar.
 
 ## O kit (o que cada ferramenta faz)
 
