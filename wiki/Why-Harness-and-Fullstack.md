@@ -11,7 +11,7 @@ Without the Harness, Fullstack is just a stack of manuals. Without Fullstack, th
 
 ## Strategy (why this sells)
 
-1. **Tokens are budget.** Lean sister skills (~500–1000 tokens) instead of dumping the whole Harness catalog every turn.
+1. **Tokens are budget.** Lean sister skills (hard cap `<2800` chars÷4; routing rule `<600`) instead of dumping the whole Harness catalog every turn.
 2. **Human review.** A login-form PR should not drag a warehouse migration with it.
 3. **Explicit STOP.** If task `Files` hit two layers, the agent **stops** and splits the task — it does not guess.
 4. **Extension, not a fork.** Re-installing the Harness **does not delete** Fullstack skills. You stack; you do not replace.

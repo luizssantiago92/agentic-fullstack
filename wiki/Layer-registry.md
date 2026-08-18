@@ -8,7 +8,7 @@ On first install the file is created. After that it is **not overwritten** — y
 npx @luizsantiago/agentic-fullstack install --sync-registry
 ```
 
-## Default map (0.3.3)
+## Default map
 
 | Floor | Where it usually lives |
 | --- | --- |

@@ -18,7 +18,7 @@ Documented deviations from the original incremental plan:
 
 - Single source of truth for layer registry (`DEFAULT_LAYERS` → generated `PROJECT.md`)
 - Opt-in `--sync-registry` for existing projects
-- Ship `data-engineering`, `analytics-engineering`, `data-science-engineering` as separate ~900-token manuals
+- Ship `data-engineering`, `analytics-engineering`, `data-science-engineering` as separate manuals under the skill token cap (`<2800` chars÷4)
 - Enforce at most one layer per task via `validate_layer_routing.py`
 - Keep demo-login as **spec/tasks documentation**; validate routing via gate (no example app required)
 

@@ -7,7 +7,7 @@ Your team already has an agent that writes code. The failure mode is not “not 
 - The **Harness** is the method: spec, tasks, gates, Verify, engineering standards.
 - **Fullstack** is the building map: frontend, backend, data, analytics, data science.
 
-npm package: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) (currently **0.3.3**, MIT).
+npm package: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) (MIT).
 
 ## Promise
 

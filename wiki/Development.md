@@ -1,6 +1,6 @@
 # Development
 
-This is for people who change the **package code** (`agentic-fullstack`), not the customer app.
+This is for people who change the **package code** (`agentic-fullstack`), not the customer app. Product-repo install is on [Install](Install) (no `npm install` there).
 
 ```bash
 npm install
