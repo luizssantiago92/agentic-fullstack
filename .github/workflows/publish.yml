@@ -91,6 +91,20 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Push version tag (manual dispatch with bump)
+      - name: Push version bump commit
         if: github.event_name == 'workflow_dispatch' && inputs.bump != 'none'
         run: git push origin main --follow-tags
+
+      - name: Ensure version tag exists (publish current version)
+        if: github.event_name == 'workflow_dispatch' && inputs.bump == 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")
+          if git ls-remote --tags origin "refs/tags/v${VERSION}" | grep -q .; then
+            echo "Tag v${VERSION} already exists on origin"
+          else
+            git tag -a "v${VERSION}" -m "v${VERSION}"
+            git push origin "v${VERSION}"
+            echo "Created and pushed tag v${VERSION}"
+          fi

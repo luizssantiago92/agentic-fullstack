@@ -44,6 +44,8 @@ Requires GitHub secret **`NPM_TOKEN`**.
 
 Use an npm **Automation** token (or Granular with **Bypass 2FA for automation**). Classic publish tokens with 2FA fail in CI with `EOTP`.
 
+Manual publish with bump `none` publishes `package.json` and creates git tag `vX.Y.Z` if it does not already exist. Bump `patch`/`minor`/`major` also pushes the version commit.
+
 CI runs on push/PR to `main` (`.github/workflows/ci.yml`).
 
 ### Re-install safety
