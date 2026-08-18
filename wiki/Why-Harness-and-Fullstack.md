@@ -26,7 +26,19 @@ Without the Harness, Fullstack is just a stack of manuals. Without Fullstack, th
 | Commit | You | Drop the layer skill from context |
 | Verify | Harness only | `validate.md`, `security-review.md`, and at most one of `appsec.md` or `qa-strategy.md` — **no** Fullstack skills |
 
-Golden rule: **one layer skill per Execute turn.** The Harness still owns spec/tasks/state gates. Fullstack adds `validate_layer_routing.py` for **Files** vs the map in `PROJECT.md`.
+Golden rule: **one layer skill per Execute turn.** The Harness still owns spec/tasks/state gates. Fullstack adds `validate_layer_routing.py` (CLI: `npx @luizsantiago/agentic-fullstack validate-layers`) for **Files** vs the map in `PROJECT.md`.
+
+## Feature vertical, tasks horizontal
+
+Harness authoring says “prefer vertical slices” (e.g. schema + API + UI). That still means a **thin feature**, not one task whose `Files` mix floors.
+
+With Fullstack installed:
+
+- One user path per **feature** (login, not “all APIs then all UI”).
+- One layer per **task** `Files` list. Split UI vs API into T1/T2 and use `Depends on`.
+- Mixed `apps/web` + `apps/api` in one task → layer gate **FAIL**.
+
+Daily ritual: [How to use](How-to-use). Harness-side copy: [Companion: Agentic Fullstack](https://github.com/luizssantiago92/spec-driven-harness/wiki/Companion-agentic-fullstack).
 
 ## What this product is not
 

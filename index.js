@@ -2,12 +2,14 @@
 
 import { PACKAGE_VERSION } from "./lib/constants.js";
 import { doctor, install } from "./lib/install.js";
+import { validateLayers } from "./lib/validate-layers.js";
 
 const USAGE = `Usage: agentic-fullstack [command]
 
 Commands:
   install [--force] [--sync-registry]   Install layer skills, rule, and PROJECT template
   doctor              Check harness + layer skills installation health
+  validate-layers [feature]   Run the layer routing gate (task Files vs PROJECT.md)
   --help              Show this message
   --version           Print the package version
 
@@ -45,6 +47,21 @@ if (command === "--version" || command === "-v" || command === "version") {
   try {
     const { ok } = await doctor();
     process.exit(ok ? 0 : 1);
+  } catch (err) {
+    console.error(`❌ ${err.message}`);
+    process.exit(1);
+  }
+} else if (command === "validate-layers") {
+  const target = args.find((a) => !a.startsWith("-"));
+  try {
+    const result = validateLayers({ target });
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    process.exit(result.status ?? 1);
   } catch (err) {
     console.error(`❌ ${err.message}`);
     process.exit(1);

@@ -59,9 +59,12 @@ jobs:
         run: |
           npm pack --dry-run 2>&1 | grep -q "frontend-engineering.md"
           npm pack --dry-run 2>&1 | grep -q "data-engineering.md"
-          npm pack --dry-run 2>&1 | grep -q "demo-login/spec.md"
           npm pack --dry-run 2>&1 | grep -q "gates/validate_layer_routing.py"
           npm pack --dry-run 2>&1 | grep -q "scripts/link-local-bin.mjs"
+          if npm pack --dry-run 2>&1 | grep -E 'demo-login/'; then
+            echo "demo-login must not ship in the npm package" >&2
+            exit 1
+          fi
           if npm pack --dry-run 2>&1 | grep -E 'test/'; then
             echo "test/ must not ship in the npm package" >&2
             exit 1

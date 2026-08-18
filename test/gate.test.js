@@ -101,7 +101,7 @@ test("layer gate fails when one task spans two layers", async () => {
   assert.match(result.stdout, /T1 spans layers backend, frontend/);
 });
 
-test("layer gate warns when files match zero layers", async () => {
+test("layer gate warns when docs files match zero layers", async () => {
   const cwd = await makeTempDir("afs-gate-warn-");
   await stubHarness(cwd);
   await install({ cwd, silent: true });
@@ -115,6 +115,23 @@ test("layer gate warns when files match zero layers", async () => {
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /PASS/);
   assert.match(result.stdout, /T1 file README.md matches no layer/);
+  assert.match(result.stdout, /T1 matches 0 layers/);
+});
+
+test("layer gate fails when code files match zero layers", async () => {
+  const cwd = await makeTempDir("afs-gate-code-zero-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "orphan-src",
+    `# Orphan\n\n${taskBlock("T1", "Touch unmatched source", "src/orphan.ts")}\n`,
+  );
+
+  const result = runGate(cwd, "orphan-src");
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL/);
+  assert.match(result.stdout, /src\/orphan.ts matches no layer/);
   assert.match(result.stdout, /T1 matches 0 layers/);
 });
 
@@ -149,4 +166,27 @@ test("layer gate prefers path prefix over extension glob", async () => {
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /T1 → layer backend/);
   assert.doesNotMatch(result.stdout, /spans layers/);
+});
+
+test("CLI validate-layers matches the Python gate on demo-login", async () => {
+  const cwd = await makeTempDir("afs-cli-layers-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "demo-login",
+    `# Demo\n\n${taskBlock("T1", "Render login form UI", "apps/web/src/components/LoginForm.tsx")}\n${taskBlock("T2", "Add login API endpoint", "apps/api/src/routes/login.ts")}\n`,
+  );
+
+  const cli = spawnSync(process.execPath, [path.join(PACKAGE_ROOT, "index.js"), "validate-layers", "demo-login"], {
+    cwd,
+    encoding: "utf8",
+  });
+  const py = runGate(cwd, "demo-login");
+  assert.equal(cli.status, 0, cli.stderr || cli.stdout);
+  assert.equal(py.status, 0, py.stderr || py.stdout);
+  assert.match(cli.stdout, /PASS/);
+  assert.match(cli.stdout, /T1 → layer frontend/);
+  assert.match(cli.stdout, /T2 → layer backend/);
+  assert.equal(cli.stdout, py.stdout);
 });

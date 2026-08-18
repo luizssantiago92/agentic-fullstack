@@ -14,6 +14,8 @@ Describe your stack in one short paragraph (frameworks, monorepo layout, package
 
 One layer skill per row. Task `Files` must match **at most one** layer per task.
 
+Keep the **feature** vertical (one user path). Split **tasks** by layer — mixed `apps/web` + `apps/api` in one `Files` list fails the layer gate.
+
 | Layer id | Skill file | Path globs (match any) |
 | --- | --- | --- |
 | frontend | `frontend-engineering.md` | `apps/web/**`, `frontend/**`, `**/*.tsx`, `**/*.jsx`, `**/*.vue`, `**/*.svelte` |
@@ -23,6 +25,8 @@ One layer skill per row. Task `Files` must match **at most one** layer per task.
 | datascience | `data-science-engineering.md` | `experiments/**`, `ml/**`, `models/**`, `training/**`, `notebooks/training/**` |
 
 Future layers (not shipped by default): add a row + install `{layer}-engineering.md` — e.g. `mobile`, `cli`, `embedded`.
+
+If the app is not under `apps/web` / `apps/api`, add globs such as `src/app/**`, `src/pages/**`, or `packages/web/**` to the matching layer. Do not add extra always-on `**/*` globs.
 
 ## Test commands
 
@@ -53,3 +57,4 @@ Discover from this section before each task. Prefer the narrowest command the ta
 - Artifacts remain in English (harness rule).
 - Layer tasks must not share the same file in parallel (harness `validate_tasks.py`).
 - When globs overlap, refine paths in this file or split tasks.
+- Vertical **feature**, horizontal **tasks**: one layer per task `Files`.

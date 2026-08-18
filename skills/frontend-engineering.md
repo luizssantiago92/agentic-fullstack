@@ -40,6 +40,7 @@ Complex or multi-step UI → `qa-strategy.md` on `/verify`. Do not duplicate Int
 
 ## Output
 
+`Frontend skill: loaded — [task id]`
 `Frontend skill: skipped — [reason]`
 
 ## Related

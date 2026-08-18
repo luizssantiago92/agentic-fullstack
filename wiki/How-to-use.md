@@ -2,6 +2,18 @@
 
 This is the ritual. If install was “turning the studio on”, this is the **work turn**.
 
+## Pairing contract (Harness + Fullstack)
+
+Harness `tasks.md` prefers **vertical slices**. Fullstack requires **one layer per task `Files`**. Together they mean:
+
+| Phrase | What it means here |
+| --- | --- |
+| Vertical **feature** | One user path (login, checkout) — not “all schema, then all APIs, then all UI” as *phases* |
+| Horizontal **tasks** | T1 frontend, T2 backend (or data / analytics / datascience), with `Depends on` when needed |
+| One layer per task | Do **not** put `apps/web` and `apps/api` in the same `Files` list — the layer gate **FAIL**s |
+
+The [Demo](Demo) login spec is the canonical split: T1 UI, T2 API. Mirror note on the Harness wiki: [Companion: Agentic Fullstack](https://github.com/luizssantiago92/spec-driven-harness/wiki/Companion-agentic-fullstack).
+
 ## Before Execute
 
 1. Spec and tasks in Harness format (`spec.md`, `tasks.md`).
@@ -9,10 +21,16 @@ This is the ritual. If install was “turning the studio on”, this is the **wo
 3. Run the layer gate on the feature:
 
 ```bash
+npx @luizsantiago/agentic-fullstack validate-layers my-feature
+```
+
+Equivalent:
+
+```bash
 python3 .specs/harness/scripts/validate_layer_routing.py my-feature
 ```
 
-PASS with `ok T1 → layer frontend` (and another for backend, and so on) = you may execute. FAIL = split the task. WARN of 0 layers = paths missed the map; fix `Files` or `PROJECT.md`.
+PASS with `ok T1 → layer frontend` (and another for backend, and so on) = you may execute. FAIL = split the task. Unmatched **docs** (`README.md`, `*.md`) = PASS with **warn**. Unmatched **code** (`*.ts`, `*.py`, …) = **FAIL** — fix `Files` or the map in `PROJECT.md`.
 
 ## During Execute (Harness + Fullstack together)
 

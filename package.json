@@ -12,7 +12,7 @@
   "scripts": {
     "prepare": "node scripts/link-local-bin.mjs",
     "test": "node --test test/install.test.js test/gate.test.js",
-    "demo:validate": "python3 .specs/harness/scripts/validate_layer_routing.py demo-login",
+    "demo:validate": "node index.js validate-layers demo-login",
     "prepublishOnly": "npm test"
   },
   "files": [
@@ -23,7 +23,6 @@
     "templates/",
     "gates/",
     "scripts/link-local-bin.mjs",
-    ".specs/features/",
     "LICENSE"
   ],
   "repository": {

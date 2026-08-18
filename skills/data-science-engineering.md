@@ -1,6 +1,6 @@
 ---
 name: data-science-engineering
-description: Layer sister skill for data science Execute work. Load when task Files match datascience globs in .specs/project/PROJECT.md. Application manual for ML experiments, training, evaluation — not dbt pipelines or BI dashboards.
+description: Data science Execute manual. Load when task Files match datascience globs in PROJECT.md. Agent discovers training APIs from the codebase.
 ---
 
 # Data Science Engineering
@@ -52,8 +52,9 @@ Run task `Gate`. Adequacy A–D. Drop skill after commit.
 
 Production model deployment, PII features, or adversarial inputs → `security-review.md` / `appsec.md` on `/verify`.
 
-## Output (optional)
+## Output
 
+`Data science skill: loaded — [task id]`
 `Data science skill: skipped — [reason]`
 
 ## Related

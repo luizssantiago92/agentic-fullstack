@@ -162,6 +162,33 @@ def layers_for_file(file_path: str, registry: dict[str, list[str]]) -> list[str]
     return [layer_id for spec, layer_id in scored if spec == best]
 
 
+_CODE_SUFFIXES = frozenset(
+    {
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".py",
+        ".go",
+        ".rs",
+        ".java",
+        ".kt",
+        ".swift",
+        ".vue",
+        ".svelte",
+        ".css",
+        ".scss",
+        ".sql",
+    }
+)
+
+
+def _looks_like_code(file_path: str) -> bool:
+    return Path(file_path).suffix.lower() in _CODE_SUFFIXES
+
+
 def parse_tasks(tasks_text: str) -> list[tuple[str, list[str]]]:
     tasks: list[tuple[str, list[str]]] = []
     for match in TASK_HEADING.finditer(tasks_text):
@@ -221,6 +248,7 @@ def main(argv: list[str] | None = None) -> int:
         if not files:
             continue
         layer_hits: set[str] = set()
+        unmatched_code = False
         for file_path in files:
             hits = layers_for_file(file_path, registry)
             if len(hits) > 1:
@@ -228,9 +256,15 @@ def main(argv: list[str] | None = None) -> int:
                     f"{task_id} file {file_path} matches multiple layers: {', '.join(hits)}"
                 )
             elif len(hits) == 0:
-                report.warn(
-                    f"{task_id} file {file_path} matches no layer — refine globs or PROJECT.md"
-                )
+                if _looks_like_code(file_path):
+                    unmatched_code = True
+                    report.error(
+                        f"{task_id} file {file_path} matches no layer — code path must hit PROJECT.md globs"
+                    )
+                else:
+                    report.warn(
+                        f"{task_id} file {file_path} matches no layer — refine globs or PROJECT.md"
+                    )
             layer_hits.update(hits)
         if len(layer_hits) > 1:
             report.error(
@@ -238,6 +272,10 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif len(layer_hits) == 1:
             report.ok(f"{task_id} → layer {next(iter(layer_hits))}")
+        elif unmatched_code:
+            report.error(
+                f"{task_id} matches 0 layers — split task or amend Files / PROJECT.md"
+            )
         else:
             report.warn(
                 f"{task_id} matches 0 layers — refine globs or PROJECT.md"

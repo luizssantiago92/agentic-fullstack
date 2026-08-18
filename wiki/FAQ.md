@@ -18,7 +18,11 @@ Normal. Use `--sync-registry` only for the layer table.
 
 ## The gate passed with `warn`
 
-Zero floors. `Files` are not on the map. It is not red, but Execute will run without a Fullstack skill — `engineering-standards` only.
+Zero floors on **docs** paths (`README.md`, `*.md`). It is not red, but Execute will run without a Fullstack skill — `engineering-standards` only. Unmatched **code** (`*.ts`, `*.py`, …) is a **FAIL** — fix `Files` or the Layer registry.
+
+## Can I put UI and API in one Harness “vertical slice” task?
+
+Not with Fullstack installed. Keep the **feature** vertical; split **tasks** by floor. See [How to use](How-to-use).
 
 ## `npx` cannot find the command in this package repo
 
@@ -39,7 +43,3 @@ Globstar bug, fixed in **0.3.2**. Upgrade and reinstall the gate.
 ## A `.tsx` under `apps/api` — which skill?
 
 Backend, from 0.3.2 (folder wins over extension).
-
-## Where is npm publish / maintainer documentation?
-
-Not in this wiki. See [CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md) in the git repo. If you still see a **Publishing** page on GitHub Wiki, delete it — that page was removed from the source.
