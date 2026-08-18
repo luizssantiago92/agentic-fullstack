@@ -138,6 +138,10 @@ Run `npm install` first in this repo: `prepare` links `node_modules/.bin/agentic
 - Node.js 18+
 - Python 3.10+ recommended (harness gates + layer routing gate)
 
+## Wiki
+
+Source pages (GitHub Wiki): [`wiki/`](wiki/). See `wiki/README.md` for how to publish after enabling Wikis on GitHub.
+
 ## License
 
 MIT
