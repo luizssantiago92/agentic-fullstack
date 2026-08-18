@@ -3,140 +3,87 @@
 [![npm version](https://img.shields.io/npm/v/@luizsantiago/agentic-fullstack.svg)](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Layer sister skills for the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness). **Application manuals** for frontend, backend, and data-stack Execute work — the agent discovers framework knowledge; these skills say **how to apply it** per layer with low token cost.
+Layer sister skills for the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness). The Harness is the SDD method. This package is the **floor map**: frontend, backend, data, analytics, data science — one Execute manual per layer.
 
-npm package: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
+npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
 
 ## Install
+
+Run these in **your product repository** (the company app). Node.js 18+. Python 3.10+ for gates.
 
 ```bash
 npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
-```
-
-Without harness (layer skills only — `doctor` will still fail until harness is installed):
-
-```bash
-npx @luizsantiago/agentic-fullstack install --force
-```
-
-Sync the Layer registry table in an existing `PROJECT.md` from package defaults (does not touch other sections):
-
-```bash
-npx @luizsantiago/agentic-fullstack install --sync-registry
-```
-
-Check health:
-
-```bash
 npx @luizsantiago/agentic-fullstack doctor
 ```
 
-Re-running harness install **does not remove** extension skills. Re-run fullstack install to refresh extension files.
+Done when doctor prints `All checks passed`. Then edit `.specs/project/PROJECT.md` if your folders are not `apps/web`, `apps/api`, `dbt`, and so on.
+
+| Command | When |
+| --- | --- |
+| `install --force` | Skills only, no Harness yet (`doctor` still fails until Harness is installed) |
+| `install --sync-registry` | Refresh **only** the Layer registry table after a package upgrade (keeps your Stack / test commands) |
+
+Re-running Harness install **does not delete** Fullstack skills. Re-run Fullstack `install` to refresh skills, the rule, and the layer gate.
+
+## Use with the Harness
+
+1. Write spec/tasks as usual (Harness).
+2. Keep each task `Files` on **one** floor.
+3. Before Execute:
+
+```bash
+python3 .specs/harness/scripts/validate_layer_routing.py your-feature
+```
+
+4. During Execute load `engineering-standards.md` + `references/implement.md` **and one** layer skill (`frontend-engineering.md` *or* `backend-engineering.md` *or* data / analytics / datascience). Never two layer skills in the same turn.
+5. After commit, drop the layer skill. On `/verify`, load **no** Fullstack skills.
+
+How to pick a skill and the daily ritual: [wiki — How to use](wiki/How-to-use.md).
 
 ## What you get
 
 | Artifact | Purpose |
 | --- | --- |
-| `.cursor/skills/frontend-engineering.md` | Frontend Execute manual |
-| `.cursor/skills/backend-engineering.md` | Backend Execute manual |
-| `.cursor/skills/data-engineering.md` | Data pipelines, dbt, ETL, warehouse |
-| `.cursor/skills/analytics-engineering.md` | Analytics, EDA, SQL, dashboards, reports |
-| `.cursor/skills/data-science-engineering.md` | ML experiments, training, model artifacts |
-| `.cursor/rules/fullstack-layer.mdc` | Layer routing — one layer skill per task |
-| `.specs/harness/scripts/validate_layer_routing.py` | Gate: task `Files` vs registry (max 1 layer) |
-| `.specs/project/PROJECT.md` | Stack, layer registry, test/lint commands (created if missing) |
+| `.cursor/skills/*-engineering.md` | Five Execute manuals (also copied to `.claude/skills/`) |
+| `.cursor/rules/fullstack-layer.mdc` | At most one layer skill per task |
+| `.specs/harness/scripts/validate_layer_routing.py` | Gate: task `Files` vs the registry |
+| `.specs/project/PROJECT.md` | Your stack + layer map (created if missing, never overwritten on a normal install) |
 
-Same skills are copied to `.claude/skills/` for Claude Code.
-
-## Layer registry
-
-`PROJECT.md` § Layer registry maps layer id → skill file → globs. Shipped layers:
-
-| Layer id | Skill | Focus |
+| Layer | Skill | Typical paths |
 | --- | --- | --- |
-| `frontend` | `frontend-engineering.md` | Web UI, components, a11y |
-| `backend` | `backend-engineering.md` | APIs, services, app migrations |
-| `data` | `data-engineering.md` | Pipelines, dbt, ETL, warehouse |
-| `analytics` | `analytics-engineering.md` | EDA, SQL analytics, reports |
-| `datascience` | `data-science-engineering.md` | ML experiments, features, models |
+| `frontend` | `frontend-engineering.md` | `apps/web/**`, `**/*.tsx` |
+| `backend` | `backend-engineering.md` | `apps/api/**`, `backend/**` |
+| `data` | `data-engineering.md` | `dbt/**`, `**/etl/**`, `warehouse/**` |
+| `analytics` | `analytics-engineering.md` | `analytics/**`, `notebooks/explore/**` |
+| `datascience` | `data-science-engineering.md` | `experiments/**`, `ml/**`, `training/**` |
 
-**Rule:** at most **one** layer skill per task. If task `Files` match two layers, split the task or refine globs.
+Skills are application manuals, not framework tutorials. The agent still discovers React, Fastify, dbt, or sklearn from **your** repo. Token budget: each skill `<2800` chars÷4; the routing rule `<600`.
 
-Validate routing before Execute:
+Peer: `@luizsantiago/agentic-harness` **≥ 0.7.0** (optional on npm; required for a green `doctor`).
 
-```bash
-python3 .specs/harness/scripts/validate_layer_routing.py demo-login
-# or after install in this repo:
-npm run demo:validate
-```
+## This repository (package contributors)
 
-## Scope
-
-| Works well | Limited |
-| --- | --- |
-| Web fullstack + data/analytics/ML monorepos | Mobile native, CLI-only, embedded |
-| Monorepos with configurable globs in `PROJECT.md` | Framework tutorials (agent uses codebase + docs) |
-| FE-only, BE-only, or data-only projects | Projects without harness installed |
-
-## Knowledge vs manual
-
-| Who | Role |
-| --- | --- |
-| Harness | SDD process, gates, Verify, Knowledge Verification Chain |
-| Agent | Discover APIs, patterns, versions from code and docs |
-| Layer skills | How to execute on the right layer: tests, a11y, API validation, pipelines |
-| `PROJECT.md` | Where each layer lives in **your** repo |
-
-## Token budget (chars ÷ 4)
-
-Each layer skill stays under ~700 tokens; the routing rule under ~600. Progressive loading avoids dumping all harness sisters every turn.
-
-## Demo
-
-Spec-only example of layer split (no application code). CI runs `npm run demo:validate` against it:
-
-`.specs/features/demo-login/` — T1 frontend (`apps/web/**`), T2 backend (`apps/api/**`).
-
-Routing for data / analytics / datascience is covered by `test/gate.test.js`, not extra demo apps.
-
-## Releases
-
-Publishing is automated via GitHub Actions (`.github/workflows/publish.yml`).
-
-| Trigger | When to use |
-| --- | --- |
-| **Actions → Publish to npm → Run workflow → `none`** | Publish the current `package.json` version and create `vX.Y.Z` if missing |
-| **Run workflow → `patch` / `minor` / `major`** | Bump version, publish, push tag to `main` |
-| **GitHub Release published** | Publishes the version in `package.json` at release time |
-
-Requires repository secret **`NPM_TOKEN`** (npm automation token with write access to `@luizsantiago/*`).
-
-**Important:** the token must be an **Automation** or **Granular** token with **Bypass 2FA for automation** enabled. Classic tokens with 2FA will fail in CI with `npm error code EOTP`.
-
-Compatible with `@luizsantiago/agentic-harness` **0.7.x** (optional npm peer; required for harness gates and a passing `doctor`).
-
-## Development
-
-Clone, install once (links the local CLI so `npx` works in this repo), then use the same commands as end users:
+`npx` only works here after `npm install` (`prepare` links the local bin). Then:
 
 ```bash
 npm install
 npm test
 npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack install --sync-registry   # refresh registry table only
 npx @luizsantiago/agentic-fullstack doctor
 npm run demo:validate
 ```
 
-Run `npm install` first in this repo: `prepare` links `node_modules/.bin/agentic-fullstack` so `npx` resolves the local package. Without that step you get `agentic-fullstack: not found`.
+`demo:validate` is **this git only** (spec-only `demo-login`). In a product repo, pass your feature name to `validate_layer_routing.py`.
 
-## Compatibility
+## Releases
 
-- Requires `@luizsantiago/agentic-harness` 0.7.x for gates and a passing `doctor` (optional npm peer; use `install --force` for layer skills only)
-- Node.js 18+
-- Python 3.10+ recommended (harness gates + layer routing gate)
+GitHub Actions (`.github/workflows/publish.yml`). Secret **`NPM_TOKEN`** must be an npm **Automation** or **Granular** token with **Bypass 2FA**. Details: [wiki — Publishing](wiki/Publishing.md).
+
+## Wiki
+
+Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`).
 
 ## License
 
