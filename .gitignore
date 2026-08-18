@@ -3,6 +3,8 @@ node_modules/
 *.log
 *.tgz
 actionlint
+__pycache__/
+*.pyc
 
 # Harness runtime (installed via npx @luizsantiago/agentic-harness install)
 .cursor/

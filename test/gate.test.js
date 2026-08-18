@@ -117,3 +117,36 @@ test("layer gate warns when files match zero layers", async () => {
   assert.match(result.stdout, /T1 file README.md matches no layer/);
   assert.match(result.stdout, /T1 matches 0 layers/);
 });
+
+test("layer gate matches nested globstar paths", async () => {
+  const cwd = await makeTempDir("afs-gate-globstar-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "nested-globs",
+    `# Nested\n\n${taskBlock("T1", "Add nested etl job", "services/payments/etl/sync.py")}\n${taskBlock("T2", "Add analytics sql module", "lib/sql/analytics/dau.sql")}\n${taskBlock("T3", "Add nested api migration", "apps/api/src/migrations/001_init.sql")}\n`,
+  );
+
+  const result = runGate(cwd, "nested-globs");
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /T1 → layer data/);
+  assert.match(result.stdout, /T2 → layer analytics/);
+  assert.match(result.stdout, /T3 → layer backend/);
+});
+
+test("layer gate prefers path prefix over extension glob", async () => {
+  const cwd = await makeTempDir("afs-gate-tsx-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "api-tsx",
+    `# Tsx\n\n${taskBlock("T1", "Add api tsx handler", "apps/api/src/handlers/health.tsx")}\n`,
+  );
+
+  const result = runGate(cwd, "api-tsx");
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /T1 → layer backend/);
+  assert.doesNotMatch(result.stdout, /spans layers/);
+});

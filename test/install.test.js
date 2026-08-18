@@ -189,6 +189,29 @@ test("install refuses symlink skill destination", async () => {
   );
 });
 
+test("install refuses symlink parent directory", async () => {
+  const cwd = await makeTempDir("afs-symlink-parent-");
+  const outside = path.join(
+    path.dirname(cwd),
+    `${path.basename(cwd)}-outside-cursor`,
+  );
+  await fs.mkdir(path.join(outside, "skills"), { recursive: true });
+  await fs.writeFile(
+    path.join(outside, "skills", "agent-architecture.md"),
+    "# Agent Architecture (stub for tests)\n",
+    "utf8",
+  );
+  const scriptsDir = path.join(cwd, ".specs/harness/scripts");
+  await fs.mkdir(scriptsDir, { recursive: true });
+  await fs.writeFile(path.join(scriptsDir, "validate_spec.py"), "# stub\n", "utf8");
+  await fs.symlink(outside, path.join(cwd, ".cursor"));
+
+  await assert.rejects(
+    () => install({ cwd, silent: true }),
+    /symlink/i,
+  );
+});
+
 test("doctor fails when harness and gates are missing", async () => {
   const cwd = await makeTempDir("afs-doctor-fail-");
   await install({ cwd, silent: true, force: true });
