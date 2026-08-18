@@ -39,3 +39,7 @@ Globstar bug, fixed in **0.3.2**. Upgrade and reinstall the gate.
 ## A `.tsx` under `apps/api` — which skill?
 
 Backend, from 0.3.2 (folder wins over extension).
+
+## Where is npm publish / maintainer documentation?
+
+Not in this wiki. See [CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md) in the git repo. If you still see a **Publishing** page on GitHub Wiki, delete it — that page was removed from the source.
