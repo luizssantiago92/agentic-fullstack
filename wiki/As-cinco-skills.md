@@ -8,7 +8,7 @@ Cinco manuais irmãos. Mesmo formato, andares diferentes. **Uma por turno.**
 
 **Quando carregar:** `Files` batem nos globs de frontend (`apps/web/**`, `frontend/**`, `**/*.tsx`, …).
 
-**O que pede ao agente:** teste mais estreito do `PROJECT.md` / campo Gate; estados do spec (vazio, erro, loading); nomes acessíveis nos controlos; diff cirúrgico.
+**O que pede ao agente:** teste mais estreito do `PROJECT.md` / campo Gate; estados do spec (vazio, erro, loading); nomes acessíveis nos controles; diff cirúrgico.
 
 **Não é:** tutorial de React. Não carregar em Verify (aí é `qa-strategy.md` se o fluxo for longo).
 

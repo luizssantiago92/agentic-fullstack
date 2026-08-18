@@ -43,4 +43,4 @@ npx @luizsantiago/agentic-fullstack --help
 
 ## Se `npx` não acha o comando *neste* git do pacote
 
-Aí você está a desenvolver o **próprio** npm, não o app do cliente. Rode `npm install` na raiz (o `prepare` liga o bin local) ou use `node index.js install`. Detalhe em [Desenvolvimento](Desenvolvimento).
+Aí você está desenvolvendo o **próprio** npm, não o app do cliente. Rode `npm install` na raiz (o `prepare` liga o bin local) ou use `node index.js install`. Detalhe em [Desenvolvimento](Desenvolvimento).

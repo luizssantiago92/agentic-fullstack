@@ -32,7 +32,7 @@ Se sair “All checks passed”, o canteiro e a planta estão no mesmo terreno.
 npx @luizsantiago/agentic-fullstack install --force
 ```
 
-Útil para experimentar. O `doctor` **continua a falhar** até o Harness existir — de propósito: o produto completo é a dupla.
+Útil para experimentar. O `doctor` **continua falhando** até o Harness existir — de propósito: o produto completo é a dupla.
 
 ## Depois de um upgrade do pacote
 

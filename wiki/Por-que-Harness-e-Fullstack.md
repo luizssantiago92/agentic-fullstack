@@ -4,7 +4,7 @@
 
 | Papel | Analogia | O que faz |
 | --- | --- | --- |
-| **Spec-Driven Harness** | O canteiro de obras | Spec em inglês, tasks atómicas, gates Python, Verify, `engineering-standards.md` |
+| **Spec-Driven Harness** | O canteiro de obras | Spec em inglês, tasks atômicas, gates Python, Verify, `engineering-standards.md` |
 | **Agentic Fullstack** | A planta do edifício | Diz em *qual andar* a task mora e carrega só o manual daquele andar |
 
 Sem o Harness, o Fullstack é só um conjunto de manuais. Sem o Fullstack, o Harness trata frontend e warehouse como o mesmo tipo de Execute. **Os dois juntos** é o produto: processo SDD + routing por camada.

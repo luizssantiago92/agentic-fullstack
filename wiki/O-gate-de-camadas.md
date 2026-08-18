@@ -12,7 +12,7 @@ Neste repositório do pacote:
 npm run demo:validate
 ```
 
-(isso corre só o spec [Demo](Demo).)
+(isso roda só o spec [Demo](Demo).)
 
 ## Como ler o resultado
 

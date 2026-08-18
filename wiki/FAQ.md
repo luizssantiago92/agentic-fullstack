@@ -10,7 +10,7 @@ Não. Esse é o anti-padrão que o produto existe para impedir. Parte a task.
 
 ## O `doctor` falhou depois de `--force`
 
-Esperado. Instale o Harness e volte a correr o install Fullstack.
+Esperado. Instale o Harness e rode de novo o install Fullstack.
 
 ## O `install` não mudou o meu `PROJECT.md`
 

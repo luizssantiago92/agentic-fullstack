@@ -1,6 +1,6 @@
 # Desenvolvimento
 
-Isto é para quem mexe no **código do pacote** (`agentic-fullstack`), não no app do cliente.
+Isso é para quem mexe no **código do pacote** (`agentic-fullstack`), não no app do cliente.
 
 ```bash
 npm install

@@ -9,7 +9,7 @@ Pasta `.specs/features/demo-login/`:
 - **T1** — `apps/web/src/components/LoginForm.tsx` → andar frontend  
 - **T2** — `apps/api/src/routes/login.ts` → andar backend  
 
-No spec: formulário com email, password e submit; API 200 com token / 401 com erro estável. É o “olá, mundo” do *routing*, não um serviço para correr.
+No spec: formulário com email, password e submit; API 200 com token / 401 com erro estável. É o “olá, mundo” do *routing*, não um serviço para rodar.
 
 ```bash
 npm run demo:validate
