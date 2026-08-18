@@ -13,7 +13,7 @@ npm install   # links local CLI bin — required in this repo before npx fullsta
 npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
-npm run demo:validate   # layer routing gate on demo-login spec/tasks
+npm run demo:validate   # layer routing gate on demo-login and demo-data-routing
 ```
 
 `install` fails without harness unless you pass `--force` (layer skills only; `doctor` still requires harness + gates).
@@ -59,7 +59,8 @@ CI runs on push/PR to `main` (`.github/workflows/ci.yml`).
 | `gates/validate_layer_routing.py` | Layer routing gate (copied to `.specs/harness/scripts/`) |
 | `lib/project-template.js` | Generates `PROJECT.md` from `DEFAULT_LAYERS` |
 | `templates/PROJECT.md` | Default project config (generated from constants) |
-| `.specs/features/demo-login/` | Demo spec/tasks for layer split |
+| `.specs/features/demo-login/` | Demo spec/tasks for FE/BE layer split |
+| `.specs/features/demo-data-routing/` | Demo spec/tasks for data/analytics/datascience split |
 | `prd/agentic-fullstack-v2.md` | PRD for v2 layers and boundaries |
 
 ### Harness integration

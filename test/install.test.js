@@ -268,6 +268,18 @@ test("packaged skill files exist in package root", async () => {
     await pathExists(path.join(PACKAGE_ROOT, "templates", PROJECT_FILE)),
     true,
   );
+  assert.equal(
+    await pathExists(
+      path.join(PACKAGE_ROOT, ".specs/features/demo-data-routing/spec.md"),
+    ),
+    true,
+  );
+  assert.equal(
+    await pathExists(
+      path.join(PACKAGE_ROOT, ".specs/features/demo-data-routing/tasks.md"),
+    ),
+    true,
+  );
 });
 
 test("link-local-bin enables npx in package root", async () => {
