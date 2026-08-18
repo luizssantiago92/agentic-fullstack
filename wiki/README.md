@@ -3,7 +3,6 @@
 English **end-user** playbook only (install, Execute ritual, skills, registry, FAQ).
 
 - npm install: **repository [README](https://github.com/luizssantiago92/agentic-fullstack/blob/main/README.md)** (three `npx` commands).
-- Maintainer setup and npm publish: **[CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md)** in the git repo — **not** in this wiki.
 
 ## Enable the wiki
 
@@ -19,8 +18,8 @@ Copy `_Sidebar.md` contents into the wiki **Sidebar** (edit sidebar in the wiki 
 
 If you copied an older version of this wiki, **delete** these pages from the GitHub Wiki — they are intentionally **not** in the repo anymore:
 
-- **Publishing** (maintainer/npm — lives in CONTRIBUTING.md)
-- **Development** (package contributors — lives in CONTRIBUTING.md)
+- **Publishing** (removed — not public end-user docs)
+- **Development** (removed — not public end-user docs)
 
 After sync, the sidebar should match `_Sidebar.md` (10 product pages + FAQ, no Publishing or Development).
 

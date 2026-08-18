@@ -62,13 +62,9 @@ Skills are application manuals, not framework tutorials. The agent still discove
 
 Peer: `@luizsantiago/agentic-harness` **≥ 0.7.0** (optional on npm; required for a green `doctor`).
 
-## Maintainers
-
-Clone, test, and publish: [CONTRIBUTING.md](CONTRIBUTING.md).
-
 ## Wiki
 
-Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`). Maintainer ops stay in this git repo, not the wiki.
+Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`).
 
 ## License
 

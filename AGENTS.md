@@ -27,7 +27,7 @@ Why `npm install` here: when the cwd is this package, `npx @luizsantiago/agentic
 
 Fallback: `node index.js install` / `node index.js doctor`.
 
-Published npm version (check with `npm view @luizsantiago/agentic-fullstack version`). CI publish uses GitHub secret `NPM_TOKEN` (Automation token with bypass 2FA).
+Published npm version: `npm view @luizsantiago/agentic-fullstack version`.
 
 ### Test
 
@@ -38,17 +38,9 @@ npm test
 
 Uses Node built-in test runner; no external test dependencies. CI (Node 22) also runs harness install + `npm run demo:validate`.
 
-### Publish
+### CI
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full maintainer runbook. Summary:
-
-Requires GitHub secret **`NPM_TOKEN`**.
-
-Use an npm **Automation** token (or Granular with **Bypass 2FA for automation**). Classic publish tokens with 2FA fail in CI with `EOTP`.
-
-Manual publish with bump `none` publishes `package.json` and creates git tag `vX.Y.Z` if it does not already exist. Bump `patch`/`minor`/`major` also pushes the version commit.
-
-CI runs on push/PR to `main` (`.github/workflows/ci.yml`).
+Push/PR to `main`: `.github/workflows/ci.yml` (lint workflows, `npm test`, pack checks).
 
 ### Re-install safety
 

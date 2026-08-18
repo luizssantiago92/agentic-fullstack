@@ -31,7 +31,3 @@ Less wasted context, PRs a human can review, and a clear STOP when a task spans 
 3. [Five skills](Five-skills) — what to load (and what *not* to load).
 
 If you read only one extra page: [Why Harness + Fullstack](Why-Harness-and-Fullstack).
-
-## Not in this wiki
-
-Package maintainers (clone, tests, npm publish) use **[CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md)** in the git repository. There is no **Publishing** or **Development** page here on purpose.

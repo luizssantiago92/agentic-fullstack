@@ -24,4 +24,4 @@ npx @luizsantiago/agentic-fullstack --help
 
 Doctor exit 0 only if the Harness hub, five skills, rule, `PROJECT.md`, Harness gates, and the layer gate are present. Codes: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`. Glob drift vs package defaults **does not fail** doctor. Missing Python does not fail either (the gate degrades).
 
-If `npx` cannot find the command **in this package git**, you are developing the npm package — see [CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md) in the repository (not this wiki).
+If `npx` cannot find the command **in this package git**, run `npm install` first (links the local CLI), or use `node index.js install` / `node index.js doctor`.
