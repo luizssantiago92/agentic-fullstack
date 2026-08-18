@@ -106,7 +106,7 @@ Publishing is automated via GitHub Actions (`.github/workflows/publish.yml`).
 
 | Trigger | When to use |
 | --- | --- |
-| **Actions → Publish to npm → Run workflow → `none`** | Publish the current `package.json` version |
+| **Actions → Publish to npm → Run workflow → `none`** | Publish the current `package.json` version and create `vX.Y.Z` if missing |
 | **Run workflow → `patch` / `minor` / `major`** | Bump version, publish, push tag to `main` |
 | **GitHub Release published** | Publishes the version in `package.json` at release time |
 
