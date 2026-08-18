@@ -40,6 +40,8 @@ Uses Node built-in test runner; no external test dependencies. CI (Node 22) also
 
 ### Publish
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full maintainer runbook. Summary:
+
 Requires GitHub secret **`NPM_TOKEN`**.
 
 Use an npm **Automation** token (or Granular with **Bypass 2FA for automation**). Classic publish tokens with 2FA fail in CI with `EOTP`.
