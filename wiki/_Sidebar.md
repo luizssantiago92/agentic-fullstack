@@ -8,6 +8,4 @@
 * [CLI](CLI)
 * [Layer routing gate](Layer-routing-gate)
 * [Demo](Demo)
-* [Development](Development)
-* [Publishing](Publishing)
 * [FAQ](FAQ)

@@ -74,6 +74,6 @@ jobs:
       - name: Demo layer routing gate
         if: matrix.node-version == 22
         run: |
-          npx --yes @luizsantiago/agentic-harness install
+          npx --yes @luizsantiago/agentic-harness@0.7 install
           node index.js install
           npm run demo:validate

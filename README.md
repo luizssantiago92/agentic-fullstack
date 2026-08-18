@@ -62,28 +62,13 @@ Skills are application manuals, not framework tutorials. The agent still discove
 
 Peer: `@luizsantiago/agentic-harness` **≥ 0.7.0** (optional on npm; required for a green `doctor`).
 
-## This repository (package contributors)
+## Maintainers
 
-`npx` only works here after `npm install` (`prepare` links the local bin). Then:
-
-```bash
-npm install
-npm test
-npx @luizsantiago/agentic-harness install
-npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack doctor
-npm run demo:validate
-```
-
-`demo:validate` is **this git only** (spec-only `demo-login`). In a product repo, pass your feature name to `validate_layer_routing.py`.
-
-## Releases
-
-GitHub Actions (`.github/workflows/publish.yml`). Secret **`NPM_TOKEN`** must be an npm **Automation** or **Granular** token with **Bypass 2FA**. Details: [wiki — Publishing](wiki/Publishing.md).
+Clone, test, and publish: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Wiki
 
-Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`).
+Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`). Maintainer ops stay in this git repo, not the wiki.
 
 ## License
 
