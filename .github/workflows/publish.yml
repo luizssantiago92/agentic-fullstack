@@ -56,7 +56,9 @@ jobs:
           echo "Release tag v$TAG matches package.json $PKG"
 
       - name: Run tests
-        run: npm test
+        run: |
+          npm install
+          npm test
 
       - name: Configure git
         if: github.event_name == 'workflow_dispatch' && inputs.bump != 'none'

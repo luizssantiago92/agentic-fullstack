@@ -101,24 +101,65 @@ def parse_registry(project_text: str) -> dict[str, list[str]]:
     return layers
 
 
+def glob_to_regex(pattern: str) -> str:
+    """Convert a glob with globstar (**) into a full-match regex."""
+    i = 0
+    n = len(pattern)
+    parts: list[str] = ["^"]
+    while i < n:
+        if pattern.startswith("**/", i):
+            parts.append("(?:.*/)?")
+            i += 3
+            continue
+        if pattern.startswith("/**/", i):
+            parts.append("/(?:.*/)?")
+            i += 4
+            continue
+        if pattern[i:] == "/**":
+            parts.append("(?:/.*)?")
+            i = n
+            continue
+        if pattern.startswith("**", i):
+            parts.append(".*")
+            i += 2
+            continue
+        if pattern[i] == "*":
+            parts.append("[^/]*")
+            i += 1
+            continue
+        if pattern[i] == "?":
+            parts.append("[^/]")
+            i += 1
+            continue
+        parts.append(re.escape(pattern[i]))
+        i += 1
+    parts.append("$")
+    return "".join(parts)
+
+
 def glob_match(pattern: str, file_path: str) -> bool:
     path = file_path.replace("\\", "/").lstrip("./")
     pattern = pattern.replace("\\", "/")
-    if pattern.endswith("/**"):
-        prefix = pattern[:-3].rstrip("/")
-        return path == prefix or path.startswith(prefix + "/")
-    if "**" in pattern:
-        regex = "^" + re.escape(pattern).replace("\\*\\*", ".*").replace("\\*", "[^/]*") + "$"
-        return re.match(regex, path) is not None
-    return Path(path).match(pattern) or __import__("fnmatch").fnmatch(path, pattern)
+    return re.match(glob_to_regex(pattern), path) is not None
+
+
+def glob_specificity(pattern: str) -> int:
+    """Literal prefix length — used to prefer path layers over extension globs."""
+    star = pattern.find("*")
+    literal = pattern if star < 0 else pattern[:star]
+    return len(literal.replace("\\", "/").rstrip("/"))
 
 
 def layers_for_file(file_path: str, registry: dict[str, list[str]]) -> list[str]:
-    matched: list[str] = []
+    scored: list[tuple[int, str]] = []
     for layer_id, globs in registry.items():
-        if any(glob_match(g, file_path) for g in globs):
-            matched.append(layer_id)
-    return matched
+        matched = [g for g in globs if glob_match(g, file_path)]
+        if matched:
+            scored.append((max(glob_specificity(g) for g in matched), layer_id))
+    if not scored:
+        return []
+    best = max(spec for spec, _ in scored)
+    return [layer_id for spec, layer_id in scored if spec == best]
 
 
 def parse_tasks(tasks_text: str) -> list[tuple[str, list[str]]]:
