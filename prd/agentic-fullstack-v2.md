@@ -4,6 +4,16 @@
 
 Extend `@luizsantiago/agentic-fullstack` with CLI registry sync, three data sister skills (engineering, analytics, data science), layer routing gate, and spec-only demo validation — without breaking v1 FE/BE routing or harness coexistence.
 
+## Shipped in 0.2.3
+
+v2 shipped as a single npm release (**0.2.3**) rather than incremental 0.1.6 → 0.2.3 publishes. Functionally complete for Fases 1–7.
+
+Documented deviations from the original incremental plan:
+
+- **Monolithic release:** one PR/version instead of one PR per phase.
+- **Datascience globs:** `experiments/**`, `ml/**`, `models/**`, `training/**` — not a catch-all `**/*.ipynb` (training notebooks belong under those prefixes so they do not steal analytics explore notebooks).
+- **Fase 8 (example app code):** not shipped. Demo remains spec/tasks only; CI runs `demo:validate` against `.specs/features/demo-login/`.
+
 ## Goals
 
 - Single source of truth for layer registry (`DEFAULT_LAYERS` → generated `PROJECT.md`)
@@ -35,33 +45,33 @@ Extend `@luizsantiago/agentic-fullstack` with CLI registry sync, three data sist
 
 ### Fase 1 — CLI
 
-- [ ] `install` creates `PROJECT.md` from `renderProjectTemplate(DEFAULT_LAYERS)`
-- [ ] `install --sync-registry` updates only § Layer registry
-- [ ] Doctor logs glob drift warning (non-blocking)
+- [x] `install` creates `PROJECT.md` from `renderProjectTemplate(DEFAULT_LAYERS)`
+- [x] `install --sync-registry` updates only § Layer registry
+- [x] Doctor logs glob drift warning (non-blocking)
 
 ### Fase 2 — PRD
 
-- [ ] This document in `prd/`
+- [x] This document in `prd/`
 
 ### Fase 3 — FE/BE
 
-- [ ] Task shape tables added; token budget tests pass
+- [x] Task shape tables added; token budget tests pass
 
 ### Fase 4–6 — Data skills
 
-- [ ] Three new skills in `SKILL_ASSETS`
-- [ ] Backend default globs narrowed (app migrations only)
-- [ ] Rule lists all extension-owned assets
+- [x] Three new skills in `SKILL_ASSETS`
+- [x] Backend default globs narrowed (app migrations only)
+- [x] Rule lists all extension-owned assets
 
 ### Fase 7 — Gate
 
-- [ ] `validate_layer_routing.py` installed to `.specs/harness/scripts/`
-- [ ] Doctor checks `layer_gate_missing`
-- [ ] `npm run demo:validate` exits 0 on demo-login
+- [x] `validate_layer_routing.py` installed to `.specs/harness/scripts/`
+- [x] Doctor checks `layer_gate_missing`
+- [x] `npm run demo:validate` exits 0 on demo-login
 
 ### Fase 8 — Demo
 
-- [ ] Spec-only demo retained; CI runs layer gate (no example app code)
+- [x] Spec-only demo retained; CI runs layer gate (no example app code)
 
 ## Token budget
 
