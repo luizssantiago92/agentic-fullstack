@@ -60,6 +60,8 @@ jobs:
           npm pack --dry-run 2>&1 | grep -q "frontend-engineering.md"
           npm pack --dry-run 2>&1 | grep -q "data-engineering.md"
           npm pack --dry-run 2>&1 | grep -q "demo-login/spec.md"
+          npm pack --dry-run 2>&1 | grep -q "demo-data-routing/spec.md"
+          npm pack --dry-run 2>&1 | grep -q "examples/demo-login/login.test.js"
           npm pack --dry-run 2>&1 | grep -q "gates/validate_layer_routing.py"
           npm pack --dry-run 2>&1 | grep -q "scripts/link-local-bin.mjs"
           if npm pack --dry-run 2>&1 | grep -E 'test/'; then
@@ -73,3 +75,4 @@ jobs:
           npx --yes @luizsantiago/agentic-harness install
           node index.js install
           npm run demo:validate
+          npm run demo:example

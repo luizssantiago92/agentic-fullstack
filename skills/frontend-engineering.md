@@ -1,75 +1,47 @@
 ---
 name: frontend-engineering
-description: Layer sister skill for frontend Execute work. Load when task Files match frontend globs in .specs/project/PROJECT.md. Application manual only — agent discovers framework knowledge from codebase, docs, and MCP. Triggers on React, Next, UI, components, tsx, jsx, vue, svelte paths.
+description: Frontend Execute manual. Load when task Files match frontend globs in PROJECT.md. Agent discovers framework APIs from the codebase.
 ---
 
 # Frontend Engineering
 
-Lean application manual for **frontend** tasks during Execute. Complements `engineering-standards.md` — does not replace harness gates or the Knowledge Verification Chain in `agent-architecture.md`.
+Application manual for **frontend** Execute. Complements `engineering-standards.md`. Does not replace harness gates.
 
-**Token rule.** Load only when the current task's `Files` match a **frontend** layer in `PROJECT.md` § Layer registry. Drop this file from the working set after the task commit. Never load with `backend-engineering.md` in the same turn.
+**Token rule.** Load only when task `Files` match the **frontend** layer. Drop after commit. Never load with another layer skill in the same turn.
 
 ## When to Use
 
-Load during **Execute** when the current task's `Files` match the **frontend** globs in `.specs/project/PROJECT.md` (defaults: `apps/web/**`, `frontend/**`, `**/*.tsx`, `**/*.jsx`, `**/*.vue`, `**/*.svelte`).
+Load when `Files` match frontend globs (`apps/web/**`, `frontend/**`, `**/*.tsx`, `**/*.jsx`, `**/*.vue`, `**/*.svelte`).
 
-## Task shapes (quick routing)
+## Task shapes
 
-| Shape | Focus |
-| --- | --- |
-| Form / page UI | User-visible states from spec; a11y names on controls |
-| Client state | Test behavior, not implementation; smallest component diff |
-| Monorepo | Task `Gate` + `PROJECT.md` frontend filter |
-| SSR / RSC | Prefer tests at stable boundary (page/e2e) when client-only tests cannot reach server components |
+Form/page: spec UI states + a11y names. Client state: test behavior. SSR/RSC: test at a stable page/e2e boundary. Monorepo: task `Gate` + `PROJECT.md` filter.
 
 ## When NOT to Use
 
-- Backend-only tasks (API, app migrations, server handlers) — record: `Frontend skill: skipped — backend-only task`
-- Data pipelines, analytics, or ML experiment paths — use the matching data layer skill
-- Verify phase — use `qa-strategy.md` for multi-step UI walkthrough, not this skill
-- Task `Files` span frontend **and** backend — **STOP**; split the task or amend `tasks.md` per `fullstack-layer.mdc`
+- Backend-only, data, analytics, or ML paths — matching layer skill instead
+- Verify — `qa-strategy.md` for multi-step UI walkthrough
+- Files span two layers — **STOP**; split the task
 
 ## Knowledge vs manual
 
-| Agent discovers (harness chain) | This skill applies |
-| --- | --- |
-| Component APIs, hooks, router, styling system from codebase + docs + MCP | Which test command to run, a11y minimum, spec UI states, surgical diff rules |
-| Framework syntax and version-specific behavior | Never invent APIs — if unknown, stop and log in `STATE.md` |
+Agent discovers component APIs, hooks, router, styling. This skill applies test command, a11y minimum, spec states, surgical diffs. Never invent APIs — unknown → log in `STATE.md`.
 
 ## Procedure
 
-### 1. Discover test command
-
-Read `PROJECT.md` § Test commands (frontend) and the task `Gate` field. Prefer the **narrowest** command (single package, single test file). Do not assume root `npm test` unless `PROJECT.md` says so.
-
-### 2. Test first (RED)
-
-- Derive the test from the spec acceptance criterion and task `Done when`
-- Assert **user-visible behavior** (text, state, navigation, disabled/enabled) — not implementation details unless the spec requires them
-- Cover loading, empty, and error states when the spec constrains them
-
-### 3. Implement (smallest change)
-
-- Follow existing component and styling conventions in the codebase
-- **Accessibility minimum:** interactive controls have accessible names; focus order is not broken; images have alt when they convey information
-- **Surgical UI:** no drive-by visual refactors, renames, or layout changes outside the task `Files` and `Done when`
-
-### 4. Gate and commit
-
-Run the task `Gate` command. Pass Adequacy A–D from `references/implement.md` before commit. Drop this skill from context after commit.
+1. **Test command.** `PROJECT.md` § Test commands (frontend) + task `Gate`. Prefer the narrowest command.
+2. **RED.** Test from acceptance criteria / `Done when`. Assert user-visible behavior. Cover loading/empty/error when the spec constrains them.
+3. **Implement.** Follow existing conventions. Controls have accessible names; no drive-by visual refactors outside `Files`.
+4. **Gate.** Run `Gate`. Adequacy A–D in `references/implement.md`. Drop this skill after commit.
 
 ## Verify hook
 
-If the feature is Complex or has a multi-step user-facing flow, defer walkthrough depth to `qa-strategy.md` during `/verify` — do not duplicate Interactive UAT here.
+Complex or multi-step UI → `qa-strategy.md` on `/verify`. Do not duplicate Interactive UAT here.
 
-## Output (optional note in commit body or STATE)
+## Output
 
-One line when skipped: `Frontend skill: skipped — [reason]`
+`Frontend skill: skipped — [reason]`
 
 ## Related
 
-- `agent-architecture.md` — SDD hub, gates, Knowledge Verification Chain
-- `references/implement.md` — per-task cycle, Adequacy A–D
-- `engineering-standards.md` — secure coding, git, artifact language
-- `qa-strategy.md` — conditional QA on Verify
-- `.specs/project/PROJECT.md` — layer globs and test commands
+`agent-architecture.md`, `references/implement.md`, `engineering-standards.md`, `qa-strategy.md`, `.specs/project/PROJECT.md`
