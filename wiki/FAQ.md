@@ -1,37 +1,41 @@
 # FAQ
 
-## `npx @luizsantiago/agentic-fullstack: not found` in this repo
+## Qual é a diferença para o Harness?
 
-Run `npm install` in the package root so `prepare` can link `node_modules/.bin/agentic-fullstack`. Or use `node index.js`.
+Harness = processo SDD. Fullstack = em que andar a task vive. Leia [Por que Harness + Fullstack](Por-que-Harness-e-Fullstack).
 
-## `doctor` fails after `--force`
+## Posso carregar frontend e backend juntos “para ir mais rápido”?
 
-Expected. `--force` installs skills without the harness. Install `@luizsantiago/agentic-harness` and re-run fullstack `install`, then `doctor`.
+Não. Esse é o anti-padrão que o produto existe para impedir. Parte a task.
 
-## `install` did not change my `PROJECT.md`
+## O `doctor` falhou depois de `--force`
 
-Normal install never overwrites it. Use `install --sync-registry` to refresh **only** the Layer registry table.
+Esperado. Instale o Harness e volte a correr o install Fullstack.
 
-## Doctor warns that globs differ from defaults
+## O `install` não mudou o meu `PROJECT.md`
 
-Non-blocking. Either customize on purpose or run `--sync-registry`.
+Normal. Use `--sync-registry` só para a tabela de camadas.
 
-## Gate PASSes but prints `warn` for a task
+## O gate passou com `warn`
 
-That task’s `Files` matched **zero** layers. Refine paths in `tasks.md` or globs in `PROJECT.md`. Two-or-more layers is a **FAIL**, not a warn.
+Zero andares. Os `Files` não estão no mapa. Não é vermelho, mas o Execute vai sem skill Fullstack — só `engineering-standards`.
 
-## Can I load frontend and backend skills together?
+## `npx` não encontra o comando neste repo do pacote
 
-No. Split the task. The rule is **one layer skill per Execute turn**.
+```bash
+npm install
+```
 
-## Where is the example login app?
+Ou `node index.js`.
 
-There isn’t one. See [Demo](Demo).
+## Cadê o app de exemplo?
 
-## Why did `**/etl/**` not match my file on old versions?
+Não há. A [Demo](Demo) é spec-only. O seu “hello world” é o primeiro login (ou o primeiro modelo) **no repo da empresa**.
 
-Before **0.3.2**, a pattern ending in `/**` was treated as a literal prefix, so nested globstars did not work. Upgrade and re-install the gate.
+## `**/etl/**` não casava no meu CI antigo
 
-## `apps/api/foo.tsx` — frontend or backend?
+Bug de globstar, corrigido no **0.3.2**. Atualize e reinstale o gate.
 
-**Backend** (longer path prefix `apps/api/**` wins over `**/*.tsx`), as of 0.3.2.
+## Um `.tsx` em `apps/api` — qual skill?
+
+Backend, a partir do 0.3.2 (pasta ganha da extensão).

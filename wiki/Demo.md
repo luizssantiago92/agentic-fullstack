@@ -1,21 +1,22 @@
 # Demo
 
-This package is a **CLI + skills** repo, not an app. The only shipped demo is **spec-only**.
+Este pacote **não** é um produto de login. A demo existe só para **mostrar o split** de tasks — spec e tasks, zero código de app.
 
-## demo-login
+## O que vem no npm
 
-Path: `.specs/features/demo-login/`
+Pasta `.specs/features/demo-login/`:
 
-| Task | Files | Layer |
-| --- | --- | --- |
-| T1 | `apps/web/src/components/LoginForm.tsx` | frontend |
-| T2 | `apps/api/src/routes/login.ts` | backend |
+- **T1** — `apps/web/src/components/LoginForm.tsx` → andar frontend  
+- **T2** — `apps/api/src/routes/login.ts` → andar backend  
 
-There is **no** application code and **no** `examples/` tree. CI runs `npm run demo:validate` against this feature.
+No spec: formulário com email, password e submit; API 200 com token / 401 com erro estável. É o “olá, mundo” do *routing*, não um serviço para correr.
 
-## What is not shipped
+```bash
+npm run demo:validate
+```
 
-- No `examples/demo-login` runnable app
-- No `demo-data-routing` spec — data / analytics / datascience routing is covered by `test/gate.test.js`
+Deve dizer T1 → frontend e T2 → backend.
 
-Copy the task shape (Requirement, Files, Tests, Gate, Done when) into **your** product repo after install.
+## O que não existe (de propósito)
+
+Não há `examples/` com servidor. Não há demo de dbt/ML no pacote: isso está coberto pelos testes do gate. No **seu** produto, copie o formato dos campos (Requirement, Files, Tests, Gate, Done when) e aponte para os paths reais.

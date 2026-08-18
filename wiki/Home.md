@@ -1,37 +1,33 @@
-# Home
+# Agentic Fullstack
 
-**Agentic Fullstack** (`@luizsantiago/agentic-fullstack`) is an npm **extension** of the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness). It ships **layer sister skills** — short application manuals for Execute — plus a routing rule and a Python gate.
+Seu time já tem um agente que escreve código. O problema não é “falta de inteligência” — é **misturar andares no mesmo turno**: UI, API, dbt e treino de modelo no mesmo `tasks.md`, no mesmo contexto, no mesmo commit.
 
-The agent still **discovers** APIs, frameworks, and versions from your codebase, docs, and MCP. These skills say **how to apply** that knowledge on the right layer (tests, a11y, API validation, pipelines) at low token cost.
+**Agentic Fullstack** é a extensão que ensina o agente a **trabalhar um andar de cada vez**, em cima do [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness).
 
-Current npm version: **0.3.3**. License: MIT.
+- O **Harness** é o método: spec, tasks, gates, Verify, padrão de engenharia.
+- O **Fullstack** é o mapa do prédio: frontend, backend, dados, analytics, ciência de dados.
 
-## Start here
+Pacote npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) (hoje **0.3.3**, MIT).
 
-1. [Install](Install) — harness first, then fullstack
-2. [CLI](CLI) — `install`, `doctor`, `--sync-registry`
-3. [Layer skills](Layer-skills) — five sisters
-4. [Layer registry](Layer-registry) — `PROJECT.md` globs
-5. [Routing](Routing) — one layer per task, STOP if two
-6. [Layer routing gate](Layer-routing-gate) — `validate_layer_routing.py`
+## Promessa
 
-## What this package is not
+Menos contexto desperdiçado, PRs que um humano consegue revisar, e um STOP claro quando a task mistura camadas. O agente continua a **descobrir** React, Fastify, dbt ou sklearn no *seu* repo — as skills não são tutorial de framework. São o **manual de execução** daquele andar.
 
-- Not an application (no login app, no example service)
-- Not a framework tutorial
-- Not a replacement for harness gates, `engineering-standards.md`, or Verify sisters
+## O kit (o que cada ferramenta faz)
 
-## Pages
-
-| Page | Use when |
+| Ferramenta | Para quê |
 | --- | --- |
-| [Install](Install) | First setup in a product repo |
-| [CLI](CLI) | Flags and doctor issues |
-| [Layer skills](Layer-skills) | Which skill to load |
-| [Layer registry](Layer-registry) | Custom globs / `--sync-registry` |
-| [Routing](Routing) | Execute vs Verify, STOP rule |
-| [Layer routing gate](Layer-routing-gate) | CI / pre-Execute check |
-| [Demo](Demo) | Spec-only `demo-login` |
-| [Development](Development) | Working in this git repo |
-| [Publishing](Publishing) | npm + git tags |
-| [FAQ](FAQ) | Common pitfalls |
+| `install` | Copia as 5 skills, a regra de routing e o gate para o *seu* repo |
+| `doctor` | Confere se Harness + Fullstack estão no mesmo terreno |
+| `--sync-registry` | Atualiza só o mapa de andares no `PROJECT.md` |
+| `validate_layer_routing.py` | Semáforo: a task bateu em **um** andar? |
+| Skills `*-engineering.md` | Manual de Execute daquele andar (uma por turno) |
+| `fullstack-layer.mdc` | A regra: no máximo uma skill de camada por task |
+
+## Comece em três passos
+
+1. [Instalar](Instalar) — Harness primeiro, Fullstack depois.
+2. [Como usar no dia a dia](Como-usar) — o ritual Execute + Verify (Harness + **uma** skill).
+3. [As cinco skills](As-cinco-skills) — o que carregar (e o que *não* carregar).
+
+Se só puder ler uma página além desta: [Por que Harness + Fullstack](Por-que-Harness-e-Fullstack).

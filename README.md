@@ -140,7 +140,7 @@ Run `npm install` first in this repo: `prepare` links `node_modules/.bin/agentic
 
 ## Wiki
 
-Source pages (GitHub Wiki): [`wiki/`](wiki/). See `wiki/README.md` for how to publish after enabling Wikis on GitHub.
+Source pages (GitHub Wiki, Portuguese): [`wiki/`](wiki/). See `wiki/README.md` for how to publish after enabling Wikis on GitHub.
 
 ## License
 

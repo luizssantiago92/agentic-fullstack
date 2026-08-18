@@ -1,49 +1,46 @@
 # CLI
 
-Binary: `agentic-fullstack` (npm package `@luizsantiago/agentic-fullstack`).
+O binário chama-se `agentic-fullstack`. No projeto da empresa você usa via `npx`.
 
-```text
-Usage: agentic-fullstack [command]
+## install — pôr as peças no disco
 
-Commands:
-  install [--force] [--sync-registry]   Install layer skills, rule, and PROJECT template
-  doctor              Check harness + layer skills installation health
-  --help              Show this message
-  --version           Print the package version
+```bash
+npx @luizsantiago/agentic-fullstack install
 ```
 
-## install
+Copia skills (Cursor e Claude), a regra de routing, o gate Python, e cria `PROJECT.md` se faltar.
 
-| Flag | Effect |
-| --- | --- |
-| *(none)* | Requires harness hub `.cursor/skills/agent-architecture.md`. Copies skills, rule, gate. Creates `PROJECT.md` if missing. |
-| `--force` | Same copies without harness. Doctor will still report `harness_missing` / `gates_missing`. |
-| `--sync-registry` | Requires existing `PROJECT.md`. Replaces only `## Layer registry` from package `DEFAULT_LAYERS`. |
+```bash
+npx @luizsantiago/agentic-fullstack install --force
+```
 
-Install **refuses** to write outside the project root, through a **symlink file**, or under a **symlink parent directory**.
+Igual, sem exigir Harness. O doctor ainda vai reclamar — o produto completo precisa dos dois.
 
-## doctor
+```bash
+npx @luizsantiago/agentic-fullstack install --sync-registry
+```
 
-Exit `0` if no issues; `1` otherwise.
+Só reescreve a tabela **Layer registry**. Use depois de atualizar o pacote, se quiser os globs novos sem perder a seção Stack.
 
-Typical issues:
+O install recusa escrever fora do repo, em arquivo symlink, ou debaixo de uma pasta que seja symlink (proteção de caminho).
 
-| Code | Meaning |
-| --- | --- |
-| `harness_missing` | No `agent-architecture.md` hub |
-| `gates_missing` | No harness `validate_spec.py` |
-| `layer_gate_missing` | No `validate_layer_routing.py` |
-| `skill_missing:…` | A shipped skill is absent |
-| `rule_missing` | No `fullstack-layer.mdc` |
-| `project_missing` | No `PROJECT.md` |
-| `layer_registry_missing` | No `## Layer registry` heading |
-| `registry_unknown_skill:…` | Registry names a skill this package does not ship |
-| `registry_invalid_skill:…` | Skill basename failed validation |
+## doctor — o check-up
 
-Glob **drift** vs package defaults is logged as a warning (`run install --sync-registry`) and does **not** fail doctor.
+```bash
+npx @luizsantiago/agentic-fullstack doctor
+```
 
-Missing Python 3 is logged as degraded gate mode; it does not fail doctor by itself.
+Sai 0 se o hub do Harness, as cinco skills, a regra, o `PROJECT.md`, os gates do Harness e o gate de camadas estão lá. Códigos que você vai ver: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`.
 
-## npx in this git repo
+Aviso de globs diferentes do pacote **não falha** o doctor. Python em falta também não (só degrada o gate).
 
-When the current directory **is** the package, `npx @luizsantiago/agentic-fullstack` resolves to the local folder. Run `npm install` first so `prepare` links `node_modules/.bin/agentic-fullstack`. Fallback: `node index.js install`.
+## version / help
+
+```bash
+npx @luizsantiago/agentic-fullstack --version
+npx @luizsantiago/agentic-fullstack --help
+```
+
+## Se `npx` não acha o comando *neste* git do pacote
+
+Aí você está a desenvolver o **próprio** npm, não o app do cliente. Rode `npm install` na raiz (o `prepare` liga o bin local) ou use `node index.js install`. Detalhe em [Desenvolvimento](Desenvolvimento).
