@@ -6,7 +6,7 @@ import { doctor, install } from "./lib/install.js";
 const USAGE = `Usage: agentic-fullstack [command]
 
 Commands:
-  install [--force]   Install frontend/backend layer skills, rule, and PROJECT template
+  install [--force] [--sync-registry]   Install layer skills, rule, and PROJECT template
   doctor              Check harness + layer skills installation health
   --help              Show this message
   --version           Print the package version
@@ -18,7 +18,8 @@ Install order (recommended):
 Package root development: run npm install first (prepare links the local bin), then npx works.
 
 Options:
-  --force   Install layer skills without harness (doctor will still require harness)
+  --force          Install layer skills without harness (doctor will still require harness)
+  --sync-registry  Update only the Layer registry section in existing PROJECT.md
 `;
 
 const [, , command, ...args] = process.argv;
@@ -32,8 +33,9 @@ if (command === "--version" || command === "-v" || command === "version") {
   process.exit(command ? 0 : 1);
 } else if (command === "install") {
   const force = args.includes("--force");
+  const syncRegistry = args.includes("--sync-registry");
   try {
-    await install({ force });
+    await install({ force, syncRegistry });
     console.log("✨ Fullstack layer skills installed.");
   } catch (err) {
     console.error(`❌ ${err.message}`);

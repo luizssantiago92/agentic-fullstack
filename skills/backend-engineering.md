@@ -11,11 +11,20 @@ Lean application manual for **backend** tasks during Execute. Complements `engin
 
 ## When to Use
 
-Load during **Execute** when the current task's `Files` match the **backend** globs in `.specs/project/PROJECT.md` (defaults: `apps/api/**`, `backend/**`, `apps/api/**/routes/**`, `**/migrations/**`).
+Load during **Execute** when the current task's `Files` match the **backend** globs in `.specs/project/PROJECT.md` (defaults: `apps/api/**`, `backend/**`, `apps/api/**/routes/**`, `apps/api/**/migrations/**`, `backend/**/migrations/**`).
+
+## Task shapes (quick routing)
+
+| Shape | Focus |
+| --- | --- |
+| New API route | Contract test for status/body; validate inputs at boundary |
+| App migration | One migration per task; reversible only when spec requires |
+| Monorepo | Use task `Gate` + `PROJECT.md` filter — not root `npm test` by default |
 
 ## When NOT to Use
 
 - Frontend-only tasks (components, pages, styles) — record: `Backend skill: skipped — frontend-only task`
+- dbt, pipelines, analytics, ML experiments — use the matching data layer skill
 - Verify OWASP depth — use `security-review.md` always; use `appsec.md` when attack surface triggers fire
 - Task `Files` span frontend **and** backend — **STOP**; split the task or amend `tasks.md` per `fullstack-layer.mdc`
 

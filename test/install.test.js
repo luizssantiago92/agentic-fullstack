@@ -8,7 +8,9 @@ import { test } from "node:test";
 
 import {
   DEFAULT_LAYERS,
+  EXTENSION_SCRIPT_ASSETS,
   HARNESS_HUB,
+  HARNESS_SCRIPTS_DIR,
   PACKAGE_ROOT,
   PROJECT_DIR,
   PROJECT_FILE,
@@ -16,6 +18,7 @@ import {
   renderLayerRegistryTable,
 } from "../lib/constants.js";
 import { doctor, install, parseRegistrySkillFiles } from "../lib/install.js";
+import { renderProjectTemplate } from "../lib/project-template.js";
 import {
   pathExists,
   readFileSafe,
@@ -279,21 +282,80 @@ test("link-local-bin enables npx in package root", async () => {
   assert.match(version, /^\d+\.\d+\.\d+$/);
 });
 
-test("token budget: layer skills stay lean", async () => {
-  const front = await fs.readFile(
-    path.join(PACKAGE_ROOT, "skills/frontend-engineering.md"),
+test("install --sync-registry updates layer table without touching other sections", async () => {
+  const cwd = await makeTempDir("afs-sync-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+
+  const projectPath = path.join(cwd, PROJECT_DIR, PROJECT_FILE);
+  const before = await readFileSafe(projectPath);
+  assert.ok(before);
+  const stale = before.replace(
+    "| frontend | `frontend-engineering.md` |",
+    "| frontend | `frontend-engineering.md` | `stale/**` |",
+  );
+  await fs.writeFile(projectPath, stale, "utf8");
+
+  await install({ cwd, silent: true, syncRegistry: true });
+  const after = await readFileSafe(projectPath);
+  assert.ok(after?.includes("data-engineering.md"));
+  assert.ok(after?.includes("analytics-engineering.md"));
+  assert.ok(after?.includes("data-science-engineering.md"));
+  assert.ok(!after?.includes("stale/**"));
+  assert.ok(after?.includes("## Stack"));
+});
+
+test("renderProjectTemplate matches templates/PROJECT.md", async () => {
+  const template = await fs.readFile(
+    path.join(PACKAGE_ROOT, "templates", PROJECT_FILE),
     "utf8",
   );
-  const back = await fs.readFile(
-    path.join(PACKAGE_ROOT, "skills/backend-engineering.md"),
-    "utf8",
-  );
+  const rendered = renderProjectTemplate(DEFAULT_LAYERS);
+  assert.equal(rendered, template);
+});
+
+test("install copies layer routing gate script", async () => {
+  const cwd = await makeTempDir("afs-gate-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+
+  for (const script of EXTENSION_SCRIPT_ASSETS) {
+    const dest = path.join(cwd, HARNESS_SCRIPTS_DIR, script);
+    assert.equal(await pathExists(dest), true, `${script} should be installed`);
+    const src = await fs.readFile(path.join(PACKAGE_ROOT, "gates", script), "utf8");
+    const copied = await fs.readFile(dest, "utf8");
+    assert.equal(src, copied);
+  }
+});
+
+test("doctor flags missing layer routing gate", async () => {
+  const cwd = await makeTempDir("afs-layer-gate-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+
+  const gatePath = path.join(cwd, HARNESS_SCRIPTS_DIR, EXTENSION_SCRIPT_ASSETS[0]);
+  await fs.unlink(gatePath);
+
+  const { ok, issues } = await doctor({ cwd, silent: true });
+  assert.equal(ok, false);
+  assert.ok(issues.includes("layer_gate_missing"));
+});
+
+test("token budget: all layer skills and rule stay lean", async () => {
+  for (const skill of SKILL_ASSETS) {
+    const content = await fs.readFile(
+      path.join(PACKAGE_ROOT, "skills", skill),
+      "utf8",
+    );
+    assert.ok(
+      content.length / 4 < 2800,
+      `${skill} too large: ~${content.length / 4} tokens`,
+    );
+  }
+
   const rule = await fs.readFile(
     path.join(PACKAGE_ROOT, "rules/fullstack-layer.mdc"),
     "utf8",
   );
-
-  assert.ok(front.length / 4 < 2800, `frontend skill too large: ~${front.length / 4} tokens`);
-  assert.ok(back.length / 4 < 2800, `backend skill too large: ~${back.length / 4} tokens`);
   assert.ok(rule.length / 4 < 600, `rule too large: ~${rule.length / 4} tokens`);
 });
