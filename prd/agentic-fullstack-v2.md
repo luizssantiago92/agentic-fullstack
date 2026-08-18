@@ -12,7 +12,7 @@ Documented deviations from the original incremental plan:
 
 - **Monolithic release:** one PR/version instead of one PR per phase.
 - **Datascience globs:** `experiments/**`, `ml/**`, `models/**`, `training/**` — not a catch-all `**/*.ipynb` (training notebooks belong under those prefixes so they do not steal analytics explore notebooks).
-- **Fase 8 (example app code):** not shipped. Demo remains spec/tasks only; CI runs `demo:validate` against `.specs/features/demo-login/`.
+- **Fase 8 (example app code):** not shipped. Demo remains spec/tasks only (`demo-login`); routing for other layers is covered by gate unit tests.
 
 ## Goals
 

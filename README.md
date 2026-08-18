@@ -92,22 +92,13 @@ npm run demo:validate
 
 Each layer skill stays under ~700 tokens; the routing rule under ~600. Progressive loading avoids dumping all harness sisters every turn.
 
-## Demo features
+## Demo
 
-Spec-only routing demos (always shipped). CI runs `npm run demo:validate` against both:
+Spec-only example of layer split (no application code). CI runs `npm run demo:validate` against it:
 
-| Feature | Tasks | Layers |
-| --- | --- | --- |
-| `.specs/features/demo-login/` | T1, T2 | frontend, backend |
-| `.specs/features/demo-data-routing/` | T1, T2, T3 | data, analytics, datascience |
+`.specs/features/demo-login/` — T1 frontend (`apps/web/**`), T2 backend (`apps/api/**`).
 
-Optional **minimal code** for demo-login (REQ-001 form + REQ-002 API, no extra deps):
-
-```bash
-npm run demo:example
-```
-
-See [`examples/demo-login/`](examples/demo-login/).
+Routing for data / analytics / datascience is covered by `test/gate.test.js`, not extra demo apps.
 
 ## Releases
 
