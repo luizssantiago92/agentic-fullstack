@@ -26,6 +26,7 @@ except ImportError:  # pragma: no cover - degraded without harness
             self.target = target
             self.errors: list[str] = []
             self.warnings: list[str] = []
+            self.checks: list[str] = []
 
         def error(self, msg: str) -> None:
             self.errors.append(msg)
@@ -34,11 +35,13 @@ except ImportError:  # pragma: no cover - degraded without harness
             self.warnings.append(msg)
 
         def ok(self, msg: str) -> None:
-            pass
+            self.checks.append(msg)
 
         def emit(self, strict: bool = False) -> int:
             status = "PASS" if not self.errors else "FAIL"
             print(f"[{self.gate}] {status} - {self.target}")
+            for msg in self.checks:
+                print(f"  ok      {msg}")
             for msg in self.warnings:
                 print(f"  warn    {msg}")
             for msg in self.errors:
@@ -183,6 +186,10 @@ def main(argv: list[str] | None = None) -> int:
                 report.error(
                     f"{task_id} file {file_path} matches multiple layers: {', '.join(hits)}"
                 )
+            elif len(hits) == 0:
+                report.warn(
+                    f"{task_id} file {file_path} matches no layer — refine globs or PROJECT.md"
+                )
             layer_hits.update(hits)
         if len(layer_hits) > 1:
             report.error(
@@ -190,6 +197,10 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif len(layer_hits) == 1:
             report.ok(f"{task_id} → layer {next(iter(layer_hits))}")
+        else:
+            report.warn(
+                f"{task_id} matches 0 layers — refine globs or PROJECT.md"
+            )
 
     return report.emit()
 
