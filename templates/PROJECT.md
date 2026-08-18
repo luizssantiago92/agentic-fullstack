@@ -20,7 +20,7 @@ One layer skill per row. Task `Files` must match **at most one** layer per task.
 | backend | `backend-engineering.md` | `apps/api/**`, `backend/**`, `apps/api/**/routes/**`, `apps/api/**/migrations/**`, `backend/**/migrations/**` |
 | data | `data-engineering.md` | `dbt/**`, `pipelines/**`, `**/etl/**`, `warehouse/**`, `spark/**` |
 | analytics | `analytics-engineering.md` | `analytics/**`, `reports/**`, `**/sql/analytics/**`, `notebooks/explore/**` |
-| datascience | `data-science-engineering.md` | `experiments/**`, `ml/**`, `models/**`, `training/**` |
+| datascience | `data-science-engineering.md` | `experiments/**`, `ml/**`, `models/**`, `training/**`, `notebooks/training/**` |
 
 Future layers (not shipped by default): add a row + install `{layer}-engineering.md` — e.g. `mobile`, `cli`, `embedded`.
 
@@ -43,6 +43,9 @@ Discover from this section before each task. Prefer the narrowest command the ta
 | --- | --- |
 | frontend | `pnpm --filter web lint` |
 | backend | `pnpm --filter api lint` |
+| data | configure per stack (sqlfluff / dbt) |
+| analytics | configure per stack |
+| datascience | configure per stack (ruff / pytest lint) |
 | full | `pnpm lint` |
 
 ## Constraints
