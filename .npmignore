@@ -1,3 +1,5 @@
 test/
 .github/
 *.tgz
+__pycache__/
+*.pyc

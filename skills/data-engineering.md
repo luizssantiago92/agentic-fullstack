@@ -1,6 +1,6 @@
 ---
 name: data-engineering
-description: Layer sister skill for data pipeline Execute work. Load when task Files match data globs in .specs/project/PROJECT.md. Application manual for dbt, ETL, warehouse, batch quality — agent discovers stack from codebase and docs.
+description: Data pipeline Execute manual. Load when task Files match data globs in PROJECT.md. Agent discovers dbt/ETL APIs from the codebase.
 ---
 
 # Data Engineering
@@ -52,8 +52,9 @@ Run task `Gate`. Pass Adequacy A–D from `references/implement.md`. Drop this s
 
 PII, cross-system trust, or production pipeline promotion → defer to `security-review.md` on `/verify`.
 
-## Output (optional)
+## Output
 
+`Data skill: loaded — [task id]`
 `Data skill: skipped — [reason]`
 
 ## Related

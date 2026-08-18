@@ -12,6 +12,12 @@ npx @luizsantiago/agentic-fullstack doctor
 2. **Fullstack** — five skills, `fullstack-layer.mdc`, the layer gate, and `.specs/project/PROJECT.md` **only if it does not already exist**.
 3. **Doctor** — “All checks passed” means both packages landed.
 
+Layer gate (after tasks exist):
+
+```bash
+npx @luizsantiago/agentic-fullstack validate-layers your-feature
+```
+
 Flags and doctor codes: [CLI](CLI). Daily ritual: [How to use](How-to-use).
 
 ## Without Harness (manuals only)

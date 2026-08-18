@@ -13,7 +13,7 @@ npm install   # links local CLI bin — required in this repo before npx fullsta
 npx @luizsantiago/agentic-harness install
 npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
-npm run demo:validate   # layer routing gate on spec-only demo-login
+npm run demo:validate   # wraps: node index.js validate-layers demo-login
 
 ```
 
@@ -25,7 +25,7 @@ npm run demo:validate   # layer routing gate on spec-only demo-login
 
 Why `npm install` here: when the cwd is this package, `npx @luizsantiago/agentic-fullstack` resolves to the local folder but npm does not create `node_modules/.bin/agentic-fullstack` until `prepare` runs (`scripts/link-local-bin.mjs`). Without that step you get `agentic-fullstack: not found`.
 
-Fallback: `node index.js install` / `node index.js doctor`.
+Fallback: `node index.js install` / `node index.js doctor` / `node index.js validate-layers`.
 
 Published npm version: `npm view @luizsantiago/agentic-fullstack version`.
 
@@ -56,7 +56,7 @@ Push/PR to `main`: `.github/workflows/ci.yml` (lint workflows, `npm test`, pack 
 | `gates/validate_layer_routing.py` | Layer routing gate (copied to `.specs/harness/scripts/`) |
 | `lib/project-template.js` | Generates `PROJECT.md` from `DEFAULT_LAYERS` |
 | `templates/PROJECT.md` | Default project config (generated from constants) |
-| `.specs/features/demo-login/` | Spec-only FE/BE routing example (the only shipped demo) |
+| `.specs/features/demo-login/` | Spec-only FE/BE routing example (git repo only; not on npm, not copied by install) |
 | `prd/agentic-fullstack-v2.md` | PRD for v2 layers and boundaries |
 
 ### Harness integration

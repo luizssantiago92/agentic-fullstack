@@ -1,6 +1,6 @@
 # CLI
 
-The binary is `agentic-fullstack`. In the company app you call it via `npx`. Recommended order lives on [Install](Install) — this page is flags and doctor codes.
+The binary is `agentic-fullstack`. In the company app you call it via `npx`. Recommended order lives on [Install](Install) — this page is flags, doctor codes, and the layer gate.
 
 ## Flags
 
@@ -18,10 +18,13 @@ Install refuses to write outside the repo, into a symlink file, or under a direc
 
 ```bash
 npx @luizsantiago/agentic-fullstack doctor
+npx @luizsantiago/agentic-fullstack validate-layers my-feature
 npx @luizsantiago/agentic-fullstack --version
 npx @luizsantiago/agentic-fullstack --help
 ```
 
-Doctor exit 0 only if the Harness hub, five skills, rule, `PROJECT.md`, Harness gates, and the layer gate are present. Codes: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`. Glob drift vs package defaults **does not fail** doctor. Missing Python does not fail either (the gate degrades).
+`validate-layers` runs the same Python gate as `python3 .specs/harness/scripts/validate_layer_routing.py` (prefers the installed copy). Details: [Layer routing gate](Layer-routing-gate).
+
+Doctor exit 0 only if the Harness hub, five skills, rule, `PROJECT.md`, Harness gates, and the layer gate are present. Codes: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`. Glob drift vs package defaults **does not fail** doctor. Missing Python does not fail doctor (the gate degrades).
 
 If `npx` cannot find the command **in this package git**, run `npm install` first (links the local CLI), or use `node index.js install` / `node index.js doctor`.

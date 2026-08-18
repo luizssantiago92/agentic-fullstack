@@ -21,7 +21,9 @@ Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task.
 
 Always keep `engineering-standards.md` and the current phase reference (`references/implement.md`) in the working set. Layer skills are **additive**, not replacements.
 
-Run `python3 .specs/harness/scripts/validate_layer_routing.py <feature>` before Execute when available.
+**Pairing with Harness Tasks:** prefer a vertical *feature* (one user path). With this extension, each task `Files` list stays on **one layer**. Split UI vs API into T1/T2 with `Depends on` — do not mix `apps/web` and `apps/api` in one task.
+
+Run `npx @luizsantiago/agentic-fullstack validate-layers <feature>` before Execute (same as `python3 .specs/harness/scripts/validate_layer_routing.py <feature>`).
 
 ## After commit
 

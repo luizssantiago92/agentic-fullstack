@@ -1,6 +1,6 @@
 ---
 name: analytics-engineering
-description: Layer sister skill for analytics Execute work. Load when task Files match analytics globs in .specs/project/PROJECT.md. Application manual for EDA, SQL analytics, dashboards, reports — not ML training.
+description: Analytics Execute manual. Load when task Files match analytics globs in PROJECT.md. Agent discovers SQL/BI APIs from the codebase.
 ---
 
 # Analytics Engineering
@@ -52,8 +52,9 @@ Run task `Gate`. Adequacy A–D. Drop skill after commit.
 
 External-facing dashboards or regulated metrics → `security-review.md` on `/verify` if PII/compliance applies.
 
-## Output (optional)
+## Output
 
+`Analytics skill: loaded — [task id]`
 `Analytics skill: skipped — [reason]`
 
 ## Related

@@ -40,6 +40,7 @@ Auth, payments, PII, secrets, uploads, or trust boundaries → `appsec.md` on `/
 
 ## Output
 
+`Backend skill: loaded — [task id]`
 `Backend skill: skipped — [reason]`
 
 ## Related

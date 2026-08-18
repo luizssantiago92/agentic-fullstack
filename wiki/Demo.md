@@ -1,10 +1,10 @@
 # Demo
 
-This package is **not** a login product. The demo exists only to **show the task split** — spec and tasks, zero application code.
+This package is **not** a login product. The demo exists only to **show the task split** — spec and tasks, zero application code. It lives in this **git repository** (not copied by `install`, not shipped on npm).
 
-## What ships on npm
+## Spec-only split
 
-Folder `.specs/features/demo-login/`:
+Folder `.specs/features/demo-login/` in the package git:
 
 - **T1** — `apps/web/src/components/LoginForm.tsx` → frontend floor
 - **T2** — `apps/api/src/routes/login.ts` → backend floor
@@ -12,10 +12,14 @@ Folder `.specs/features/demo-login/`:
 In the spec: a form with email, password, and submit; API 200 with a token / 401 with a stable error. It is the “hello world” of *routing*, not a service you run.
 
 ```bash
-npm run demo:validate
+npx @luizsantiago/agentic-fullstack validate-layers demo-login
 ```
 
+(or `npm run demo:validate` in this repo)
+
 It should report T1 → frontend and T2 → backend.
+
+That split is the pairing contract: vertical **feature**, horizontal **tasks**. See [How to use](How-to-use).
 
 ## What is missing (on purpose)
 

@@ -18,7 +18,7 @@ npx @luizsantiago/agentic-fullstack install --sync-registry
 | analytics | `analytics/**`, `reports/**`, `**/sql/analytics/**`, `notebooks/explore/**` |
 | datascience | `experiments/**`, `ml/**`, `models/**`, `training/**`, `notebooks/training/**` |
 
-Edit the rows if your monorepo is different. Globs that overlap on purpose (two floors on the same path) make the gate fail — that is the product protecting the turn.
+Edit the rows if your monorepo is different. If the app lives under `src/app`, `src/pages`, or `packages/web`, add those globs to the matching layer — do not add extra always-on `**/*` globs. Globs that overlap on purpose (two floors on the same path) make the gate fail — that is the product protecting the turn.
 
 ## Details that avoid surprises
 

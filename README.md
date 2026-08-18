@@ -28,13 +28,17 @@ Re-running Harness install **does not delete** Fullstack skills. Re-run Fullstac
 
 ## Use with the Harness
 
+**Pairing contract:** keep the **feature** vertical (one user path, e.g. login). Split **tasks** horizontally — each task `Files` list on **one** floor. A Harness “vertical slice” is a thin *feature*, not one task mixing `apps/web` + `apps/api`. If both packages are installed, mixed `Files` fail the Fullstack layer gate. See [How to use](wiki/How-to-use.md).
+
 1. Write spec/tasks as usual (Harness).
-2. Keep each task `Files` on **one** floor.
+2. Keep each task `Files` on **one** floor. Use `Depends on` between T1/T2 when the API must land before the UI (or vice versa).
 3. Before Execute:
 
 ```bash
-python3 .specs/harness/scripts/validate_layer_routing.py your-feature
+npx @luizsantiago/agentic-fullstack validate-layers your-feature
 ```
+
+Same check as `python3 .specs/harness/scripts/validate_layer_routing.py your-feature`.
 
 4. During Execute load `engineering-standards.md` + `references/implement.md` **and one** layer skill (`frontend-engineering.md` *or* `backend-engineering.md` *or* data / analytics / datascience). Never two layer skills in the same turn.
 5. After commit, drop the layer skill. On `/verify`, load **no** Fullstack skills.
