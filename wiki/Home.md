@@ -1,33 +1,33 @@
 # Agentic Fullstack
 
-Seu time já tem um agente que escreve código. O problema não é “falta de inteligência” — é **misturar andares no mesmo turno**: UI, API, dbt e treino de modelo no mesmo `tasks.md`, no mesmo contexto, no mesmo commit.
+Your team already has an agent that writes code. The failure mode is not “not smart enough” — it is **mixing floors in the same turn**: UI, API, dbt, and model training in the same `tasks.md`, the same context, the same commit.
 
-**Agentic Fullstack** é a extensão que ensina o agente a **trabalhar um andar de cada vez**, em cima do [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness).
+**Agentic Fullstack** is the extension that teaches the agent to **work one floor at a time**, on top of the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness).
 
-- O **Harness** é o método: spec, tasks, gates, Verify, padrão de engenharia.
-- O **Fullstack** é o mapa do prédio: frontend, backend, dados, analytics, ciência de dados.
+- The **Harness** is the method: spec, tasks, gates, Verify, engineering standards.
+- **Fullstack** is the building map: frontend, backend, data, analytics, data science.
 
-Pacote npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) (hoje **0.3.3**, MIT).
+npm package: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) (currently **0.3.3**, MIT).
 
-## Promessa
+## Promise
 
-Menos contexto desperdiçado, PRs que um humano consegue revisar, e um STOP claro quando a task mistura camadas. O agente continua **descobrindo** React, Fastify, dbt ou sklearn no *seu* repo — as skills não são tutorial de framework. São o **manual de execução** daquele andar.
+Less wasted context, PRs a human can review, and a clear STOP when a task spans two layers. The agent still **discovers** React, Fastify, dbt, or sklearn in *your* repo — these skills are not framework tutorials. They are the **execution manual** for that floor.
 
-## O kit (o que cada ferramenta faz)
+## The kit (what each tool is for)
 
-| Ferramenta | Para quê |
+| Tool | Purpose |
 | --- | --- |
-| `install` | Copia as 5 skills, a regra de routing e o gate para o *seu* repo |
-| `doctor` | Confere se Harness + Fullstack estão no mesmo terreno |
-| `--sync-registry` | Atualiza só o mapa de andares no `PROJECT.md` |
-| `validate_layer_routing.py` | Semáforo: a task bateu em **um** andar? |
-| Skills `*-engineering.md` | Manual de Execute daquele andar (uma por turno) |
-| `fullstack-layer.mdc` | A regra: no máximo uma skill de camada por task |
+| `install` | Copies the 5 skills, the routing rule, and the gate into *your* repo |
+| `doctor` | Checks that Harness + Fullstack sit on the same ground |
+| `--sync-registry` | Updates only the floor map in `PROJECT.md` |
+| `validate_layer_routing.py` | Traffic light: did this task hit **one** floor? |
+| `*-engineering.md` skills | Execute manual for that floor (one per turn) |
+| `fullstack-layer.mdc` | The rule: at most one layer skill per task |
 
-## Comece em três passos
+## Start in three steps
 
-1. [Instalar](Instalar) — Harness primeiro, Fullstack depois.
-2. [Como usar no dia a dia](Como-usar) — o ritual Execute + Verify (Harness + **uma** skill).
-3. [As cinco skills](As-cinco-skills) — o que carregar (e o que *não* carregar).
+1. [Install](Install) — Harness first, Fullstack second.
+2. [How to use](How-to-use) — the Execute + Verify ritual (Harness + **one** skill).
+3. [Five skills](Five-skills) — what to load (and what *not* to load).
 
-Se só puder ler uma página além desta: [Por que Harness + Fullstack](Por-que-Harness-e-Fullstack).
+If you read only one extra page: [Why Harness + Fullstack](Why-Harness-and-Fullstack).

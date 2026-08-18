@@ -1,41 +1,41 @@
 # FAQ
 
-## Qual é a diferença para o Harness?
+## How is this different from the Harness?
 
-Harness = processo SDD. Fullstack = em que andar a task vive. Leia [Por que Harness + Fullstack](Por-que-Harness-e-Fullstack).
+Harness = SDD process. Fullstack = which floor the task lives on. Read [Why Harness + Fullstack](Why-Harness-and-Fullstack).
 
-## Posso carregar frontend e backend juntos “para ir mais rápido”?
+## Can I load frontend and backend together “to go faster”?
 
-Não. Esse é o anti-padrão que o produto existe para impedir. Parte a task.
+No. That is the anti-pattern this product exists to stop. Split the task.
 
-## O `doctor` falhou depois de `--force`
+## `doctor` failed after `--force`
 
-Esperado. Instale o Harness e rode de novo o install Fullstack.
+Expected. Install the Harness and run Fullstack install again.
 
-## O `install` não mudou o meu `PROJECT.md`
+## `install` did not change my `PROJECT.md`
 
-Normal. Use `--sync-registry` só para a tabela de camadas.
+Normal. Use `--sync-registry` only for the layer table.
 
-## O gate passou com `warn`
+## The gate passed with `warn`
 
-Zero andares. Os `Files` não estão no mapa. Não é vermelho, mas o Execute vai sem skill Fullstack — só `engineering-standards`.
+Zero floors. `Files` are not on the map. It is not red, but Execute will run without a Fullstack skill — `engineering-standards` only.
 
-## `npx` não encontra o comando neste repo do pacote
+## `npx` cannot find the command in this package repo
 
 ```bash
 npm install
 ```
 
-Ou `node index.js`.
+Or `node index.js`.
 
-## Cadê o app de exemplo?
+## Where is the sample app?
 
-Não há. A [Demo](Demo) é spec-only. O seu “hello world” é o primeiro login (ou o primeiro modelo) **no repo da empresa**.
+There is none. [Demo](Demo) is spec-only. Your “hello world” is the first login (or the first model) **in the company repo**.
 
-## `**/etl/**` não casava no meu CI antigo
+## `**/etl/**` did not match in my old CI
 
-Bug de globstar, corrigido no **0.3.2**. Atualize e reinstale o gate.
+Globstar bug, fixed in **0.3.2**. Upgrade and reinstall the gate.
 
-## Um `.tsx` em `apps/api` — qual skill?
+## A `.tsx` under `apps/api` — which skill?
 
-Backend, a partir do 0.3.2 (pasta ganha da extensão).
+Backend, from 0.3.2 (folder wins over extension).

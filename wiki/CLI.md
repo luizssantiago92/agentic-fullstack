@@ -1,38 +1,38 @@
 # CLI
 
-O binário chama-se `agentic-fullstack`. No projeto da empresa você usa via `npx`.
+The binary is `agentic-fullstack`. In the company project you call it via `npx`.
 
-## install — pôr as peças no disco
+## install — put the pieces on disk
 
 ```bash
 npx @luizsantiago/agentic-fullstack install
 ```
 
-Copia skills (Cursor e Claude), a regra de routing, o gate Python, e cria `PROJECT.md` se faltar.
+Copies skills (Cursor and Claude), the routing rule, the Python gate, and creates `PROJECT.md` if missing.
 
 ```bash
 npx @luizsantiago/agentic-fullstack install --force
 ```
 
-Igual, sem exigir Harness. O doctor ainda vai reclamar — o produto completo precisa dos dois.
+Same, without requiring Harness. Doctor will still complain — the complete product needs both.
 
 ```bash
 npx @luizsantiago/agentic-fullstack install --sync-registry
 ```
 
-Só reescreve a tabela **Layer registry**. Use depois de atualizar o pacote, se quiser os globs novos sem perder a seção Stack.
+Rewrites only the **Layer registry** table. Use after upgrading the package if you want the new globs without losing the Stack section.
 
-O install recusa escrever fora do repo, em arquivo symlink, ou debaixo de uma pasta que seja symlink (proteção de caminho).
+Install refuses to write outside the repo, into a symlink file, or under a directory that is a symlink (path protection).
 
-## doctor — o check-up
+## doctor — the check-up
 
 ```bash
 npx @luizsantiago/agentic-fullstack doctor
 ```
 
-Sai 0 se o hub do Harness, as cinco skills, a regra, o `PROJECT.md`, os gates do Harness e o gate de camadas estão lá. Códigos que você vai ver: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`.
+Exit 0 if the Harness hub, the five skills, the rule, `PROJECT.md`, Harness gates, and the layer gate are present. Codes you will see: `harness_missing`, `gates_missing`, `layer_gate_missing`, `skill_missing:…`, `registry_unknown_skill:…`.
 
-Aviso de globs diferentes do pacote **não falha** o doctor. Python em falta também não (só degrada o gate).
+A glob-diff warning vs the package **does not fail** doctor. Missing Python does not fail either (it only degrades the gate).
 
 ## version / help
 
@@ -41,6 +41,6 @@ npx @luizsantiago/agentic-fullstack --version
 npx @luizsantiago/agentic-fullstack --help
 ```
 
-## Se `npx` não acha o comando *neste* git do pacote
+## If `npx` cannot find the command *in this package git*
 
-Aí você está desenvolvendo o **próprio** npm, não o app do cliente. Rode `npm install` na raiz (o `prepare` liga o bin local) ou use `node index.js install`. Detalhe em [Desenvolvimento](Desenvolvimento).
+Then you are developing the **npm package itself**, not the customer app. Run `npm install` at the root (`prepare` links the local bin) or use `node index.js install`. Details: [Development](Development).

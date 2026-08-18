@@ -1,22 +1,22 @@
 # Demo
 
-Este pacote **não** é um produto de login. A demo existe só para **mostrar o split** de tasks — spec e tasks, zero código de app.
+This package is **not** a login product. The demo exists only to **show the task split** — spec and tasks, zero application code.
 
-## O que vem no npm
+## What ships on npm
 
-Pasta `.specs/features/demo-login/`:
+Folder `.specs/features/demo-login/`:
 
-- **T1** — `apps/web/src/components/LoginForm.tsx` → andar frontend  
-- **T2** — `apps/api/src/routes/login.ts` → andar backend  
+- **T1** — `apps/web/src/components/LoginForm.tsx` → frontend floor
+- **T2** — `apps/api/src/routes/login.ts` → backend floor
 
-No spec: formulário com email, password e submit; API 200 com token / 401 com erro estável. É o “olá, mundo” do *routing*, não um serviço para rodar.
+In the spec: a form with email, password, and submit; API 200 with a token / 401 with a stable error. It is the “hello world” of *routing*, not a service you run.
 
 ```bash
 npm run demo:validate
 ```
 
-Deve dizer T1 → frontend e T2 → backend.
+It should report T1 → frontend and T2 → backend.
 
-## O que não existe (de propósito)
+## What is missing (on purpose)
 
-Não há `examples/` com servidor. Não há demo de dbt/ML no pacote: isso está coberto pelos testes do gate. No **seu** produto, copie o formato dos campos (Requirement, Files, Tests, Gate, Done when) e aponte para os paths reais.
+No `examples/` with a server. No dbt/ML demo in the package: that is covered by the gate tests. In **your** product, copy the field shape (Requirement, Files, Tests, Gate, Done when) and point at real paths.

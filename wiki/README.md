@@ -1,5 +1,5 @@
-# Wiki — como publicar
+# Wiki — how to publish
 
-Páginas em português do Brasil, tom de produto. O Wiki do GitHub ainda precisa ser ligado em **Settings → Features → Wikis**. Depois copie cada arquivo (o nome do arquivo é o slug da página). `_Sidebar.md` vira o menu.
+English product playbook. The GitHub Wiki still needs **Settings → Features → Wikis** enabled. Then copy each file (the filename is the page slug). `_Sidebar.md` becomes the menu.
 
-Não entra no pacote npm.
+Not included in the npm package.
