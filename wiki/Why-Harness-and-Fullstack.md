@@ -18,17 +18,15 @@ Without the Harness, Fullstack is just a stack of manuals. Without Fullstack, th
 
 ## How they fit the SDD flow
 
-```text
-Discuss / Specify     →  Harness (spec.md, requirements)
-Tasks                 →  Harness + Fullstack (split Files by layer)
-Execute               →  Harness (implement.md, engineering-standards)
-                         + ONE Fullstack skill (the floor)
-Commit                →  drop the layer skill from context
-Verify                →  Harness (validate, security-review, qa/appsec)
-                         NO Fullstack skills
-```
+| Phase | Who runs it | What loads |
+| --- | --- | --- |
+| Discuss / Specify | Harness | `spec.md`, requirements |
+| Tasks | Harness + Fullstack | Split **Files** by layer |
+| Execute | Harness + **one** Fullstack skill | `implement.md`, `engineering-standards.md`, plus the floor manual |
+| Commit | You | Drop the layer skill from context |
+| Verify | Harness only | `validate.md`, `security-review.md`, and at most one of `appsec.md` or `qa-strategy.md` — **no** Fullstack skills |
 
-Golden rule: **one layer skill per Execute turn.** The Harness still owns spec/tasks/state gates. Fullstack adds `validate_layer_routing.py` for `Files` vs the map in `PROJECT.md`.
+Golden rule: **one layer skill per Execute turn.** The Harness still owns spec/tasks/state gates. Fullstack adds `validate_layer_routing.py` for **Files** vs the map in `PROJECT.md`.
 
 ## What this product is not
 

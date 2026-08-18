@@ -1,7 +1,29 @@
-# Wiki — how to publish
+# Wiki — how to publish on GitHub
 
-English product playbook for **end users** (install, Execute ritual, skills, registry). npm users install from the **repository README** (three `npx` commands). Maintainer setup and npm publish live in [`CONTRIBUTING.md`](../CONTRIBUTING.md) in this git repo — not in the wiki.
+English **end-user** playbook only (install, Execute ritual, skills, registry, FAQ).
 
-Enable **Settings → Features → Wikis**, then copy each file (the filename is the page slug). `_Sidebar.md` becomes the menu.
+- npm install: **repository [README](https://github.com/luizssantiago92/agentic-fullstack/blob/main/README.md)** (three `npx` commands).
+- Maintainer setup and npm publish: **[CONTRIBUTING.md](https://github.com/luizssantiago92/agentic-fullstack/blob/main/CONTRIBUTING.md)** in the git repo — **not** in this wiki.
 
-Not included in the npm package.
+## Enable the wiki
+
+**Settings → Features → Wikis** → enable.
+
+## Sync pages from `wiki/` in the repo
+
+For each file in this folder, create or edit a GitHub Wiki page. The **filename without `.md`** is the page title/slug (e.g. `How-to-use.md` → page **How-to-use**).
+
+Copy `_Sidebar.md` contents into the wiki **Sidebar** (edit sidebar in the wiki UI).
+
+## Remove obsolete pages
+
+If you copied an older version of this wiki, **delete** these pages from the GitHub Wiki — they are intentionally **not** in the repo anymore:
+
+- **Publishing** (maintainer/npm — lives in CONTRIBUTING.md)
+- **Development** (package contributors — lives in CONTRIBUTING.md)
+
+After sync, the sidebar should match `_Sidebar.md` (10 product pages + FAQ, no Publishing or Development).
+
+## What ships on npm
+
+This `wiki/` folder is **not** included in the npm package. It is source for GitHub Wiki only.
