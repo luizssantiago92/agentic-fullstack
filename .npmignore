@@ -2,4 +2,7 @@ test/
 .github/
 *.tgz
 __pycache__/
+**/__pycache__/
 *.pyc
+**/*.pyc
+gates/__pycache__/

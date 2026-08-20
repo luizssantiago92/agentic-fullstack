@@ -168,6 +168,81 @@ test("layer gate prefers path prefix over extension glob", async () => {
   assert.doesNotMatch(result.stdout, /spans layers/);
 });
 
+test("layer gate fails when Files is a multiline bullet list spanning layers", async () => {
+  const cwd = await makeTempDir("afs-gate-multiline-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "bad-multiline",
+    `# Bad multiline
+
+### T1: Mix frontend and backend files
+- **Requirement**: REQ-001
+- **Files**:
+  - apps/web/src/App.tsx
+  - apps/api/src/routes/app.ts
+- **Depends on**: —
+- **Tests**: apps/web/src/App.test.tsx
+- **Gate**: echo ok
+- **Done when**: Demo routing fixture
+- [ ] complete
+`,
+  );
+
+  const result = runGate(cwd, "bad-multiline");
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL/);
+  assert.match(result.stdout, /T1 spans layers backend, frontend/);
+});
+
+test("layer gate fails when Files paths are wrapped in backticks spanning layers", async () => {
+  const cwd = await makeTempDir("afs-gate-backticks-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "bad-backticks",
+    `# Bad backticks\n\n${taskBlock(
+      "T1",
+      "Mix frontend and backend files",
+      "`apps/web/src/App.tsx`, `apps/api/src/routes/app.ts`",
+    )}\n`,
+  );
+
+  const result = runGate(cwd, "bad-backticks");
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL/);
+  assert.match(result.stdout, /T1 spans layers backend, frontend/);
+});
+
+test("layer gate fails when first path is inline and second is a continuation bullet", async () => {
+  const cwd = await makeTempDir("afs-gate-cont-");
+  await stubHarness(cwd);
+  await install({ cwd, silent: true });
+  await writeFeature(
+    cwd,
+    "bad-continuation",
+    `# Bad continuation
+
+### T1: Mix frontend and backend files
+- **Requirement**: REQ-001
+- **Files**: apps/web/src/App.tsx
+  - apps/api/src/routes/app.ts
+- **Depends on**: —
+- **Tests**: apps/web/src/App.test.tsx
+- **Gate**: echo ok
+- **Done when**: Demo routing fixture
+- [ ] complete
+`,
+  );
+
+  const result = runGate(cwd, "bad-continuation");
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL/);
+  assert.match(result.stdout, /T1 spans layers backend, frontend/);
+});
+
 test("CLI validate-layers matches the Python gate on demo-login", async () => {
   const cwd = await makeTempDir("afs-cli-layers-");
   await stubHarness(cwd);
