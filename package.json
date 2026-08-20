@@ -21,7 +21,7 @@
     "skills/",
     "rules/",
     "templates/",
-    "gates/",
+    "gates/validate_layer_routing.py",
     "scripts/link-local-bin.mjs",
     "LICENSE"
   ],

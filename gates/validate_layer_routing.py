@@ -70,10 +70,6 @@ TASK_HEADING = re.compile(
     r"^#{2,6}\s*(?P<id>T\d{1,6})\s*[:\-–]?\s*(?P<title>.*)$",
     re.MULTILINE | re.IGNORECASE,
 )
-FIELD = re.compile(
-    r"^\s*[-*]?\s*\*{0,2}(?P<key>[A-Za-z][A-Za-z ]+?)\*{0,2}\s*:\s*(?P<value>.+?)\s*$",
-    re.MULTILINE,
-)
 REGISTRY_ROW = re.compile(
     r"^\|\s*(?P<id>[^|]+?)\s*\|\s*`(?P<skill>[^`]+)`\s*\|\s*(?P<globs>.+?)\s*\|\s*$"
 )
@@ -189,6 +185,71 @@ def _looks_like_code(file_path: str) -> bool:
     return Path(file_path).suffix.lower() in _CODE_SUFFIXES
 
 
+def _normalize_path_token(raw: str) -> str:
+    """Strip bullets, surrounding quotes/backticks from a Files path token."""
+    token = raw.strip()
+    token = re.sub(r"^[-*]\s+", "", token).strip()
+    if len(token) >= 2 and token[0] == token[-1] and token[0] in "`\"'":
+        token = token[1:-1].strip()
+    return token
+
+
+def _split_path_tokens(raw: str) -> list[str]:
+    return [
+        normalized
+        for part in re.split(r"[,;]", raw)
+        if (normalized := _normalize_path_token(part))
+    ]
+
+
+_FIELD_LINE = re.compile(
+    r"^\s*[-*]?\s*\*{0,2}(?P<key>[A-Za-z][A-Za-z ]+?)\*{0,2}\s*:\s*(?P<value>.*?)\s*$"
+)
+_CONTINUATION_LINE = re.compile(r"^\s+(?:[-*]\s+)?\S")
+
+
+def parse_files_field(body: str) -> list[str]:
+    """Parse a task Files field, including multiline bullet lists and backticks.
+
+    Agents often write:
+
+        - **Files**:
+          - apps/web/a.tsx
+          - apps/api/b.ts
+
+    or wrap paths in backticks. The line-oriented FIELD regex alone drops
+    continuation bullets (``\\s*`` after ``:`` swallows the newline) and keeps
+    backticks, which false-PASS cross-layer tasks.
+    """
+    lines = body.splitlines()
+    files: list[str] = []
+    i = 0
+    while i < len(lines):
+        match = _FIELD_LINE.match(lines[i])
+        if not match or match.group("key").strip().lower() != "files":
+            i += 1
+            continue
+
+        inline = match.group("value").strip()
+        if inline:
+            files.extend(_split_path_tokens(inline))
+
+        j = i + 1
+        while j < len(lines):
+            cont = lines[j]
+            if _FIELD_LINE.match(cont):
+                break
+            if not cont.strip():
+                break
+            if not _CONTINUATION_LINE.match(cont):
+                break
+            files.extend(_split_path_tokens(cont.strip()))
+            j += 1
+        break
+
+    return files
+
+
 def parse_tasks(tasks_text: str) -> list[tuple[str, list[str]]]:
     tasks: list[tuple[str, list[str]]] = []
     for match in TASK_HEADING.finditer(tasks_text):
@@ -196,13 +257,7 @@ def parse_tasks(tasks_text: str) -> list[tuple[str, list[str]]]:
         start = match.end()
         next_task = TASK_HEADING.search(tasks_text, start)
         body = tasks_text[start : next_task.start() if next_task else len(tasks_text)]
-        files: list[str] = []
-        for field in FIELD.finditer(body):
-            if field.group("key").strip().lower() == "files":
-                raw = field.group("value").strip()
-                files = [p.strip() for p in re.split(r",|;", raw) if p.strip()]
-                break
-        tasks.append((task_id, files))
+        tasks.append((task_id, parse_files_field(body)))
     return tasks
 
 
