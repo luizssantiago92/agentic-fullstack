@@ -17,22 +17,24 @@ Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task.
 | Matches **zero** layers | Neither — `engineering-standards.md` only | Layer skills |
 | Matches **two or more** | **STOP** — split task | All layer skills |
 
-Always keep Seatbelt `engineering-standards.md` + `references/implement.md`. Layer skills are additive.
+Always keep Seatbelt `engineering-standards.md` + `references/implement.md`.
 
 ## Specialist catalog (optional depth)
 
-After the layer manual is chosen, you may load **at most one** catalog skill (`…/SKILL.md` under `.cursor/skills/<id>/`) whose `metadata.domain` matches that layer. Open **at most two** `references/` files for the current topic. Prefer § Stack in `PROJECT.md` when several specialists match.
+After the layer manual, load **at most one** catalog `SKILL.md` suited to that Floor + § Stack / `Files`. Open **≤2** `references/` files.
+
+Catalog `metadata.domain` → Floor (allow if mapped): `frontend`→frontend; `backend`|`api-architecture`→backend; `data-ml`→data|analytics|datascience; `language`→any Floor when Files/stack fit. Other domains (devops, security, quality, …) only if they clearly serve this Floor’s Execute work — **never** on `/verify`.
 
 Specialists do not override task `Gate` or `PROJECT.md` test commands. Discover APIs from the repo.
 
-## Pairing with Spec Seatbelt
+## Pairing
 
-Vertical **feature**, horizontal **tasks** — one Floor per `Files`. Run `npx @luizsantiago/fullstack-floor-map validate-layers <feature>` (same as `python3 .specs/seatbelt/scripts/validate_layer_routing.py`).
+Vertical **feature**, horizontal **tasks**. Run `npx @luizsantiago/fullstack-floor-map validate-layers <feature>` (= `python3 .specs/seatbelt/scripts/validate_layer_routing.py`).
 
 ## After commit / Verify
 
-Drop layer + specialist before the next task. On **/verify**, load **no** Floors layers and **no** catalog specialists — use Seatbelt Verify only (`validate.md`, `security-review.md`, then at most one of `appsec.md` or `qa-strategy.md`).
+Drop layer + specialist. On **/verify**: no Floors, no catalog — Seatbelt Verify only.
 
 ## Re-install
 
-Seatbelt `install` does not delete Floors skills. Re-run `npx @luizsantiago/fullstack-floor-map install` to refresh layers, rule, layer gate, and catalog.
+Seatbelt does not delete Floors skills. Re-run `npx @luizsantiago/fullstack-floor-map install` to refresh.
