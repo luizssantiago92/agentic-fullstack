@@ -4,7 +4,7 @@
 
 ### What this repository is
 
-npm extension package `@luizsantiago/fullstack-floor-map` — **Full Stack Floor Map** companion for Spec Seatbelt: Floors layer sister skills (frontend, backend, data, analytics, data science) + specialist catalog. Primary deliverable is skills + CLI installer + layer routing gate. Display name: **Full Stack Floor Map**. See `docs/guide/rename-handoff.md` for publish/deprecation notes.
+npm extension package `@luizsantiago/fullstack-floor-map` — **Full Stack Floor Map** companion for Spec Seatbelt: **Lanes** (path-layer manuals) + specialist catalog; **Desks** planned for 0.5.0. Primary deliverable is skills + CLI installer + layer routing gate. Display name: **Full Stack Floor Map**. See `docs/guide/rename-handoff.md` and `docs/guide/Companion-sync.md`.
 
 ### Install (fresh clone)
 
@@ -43,7 +43,7 @@ Push/PR to `main`: `.github/workflows/ci.yml` (lint workflows, `npm test`, pack 
 
 ### Re-install safety
 
-- Seatbelt install overwrites only its catalog skills — extension skills (`*-engineering.md` + `catalog/`) survive.
+- Seatbelt install overwrites only its catalog skills — extension skills (`*-engineering.md` + `catalog/`) survive. When Desks ship, `.specs/desks/` must also be preserved by Seatbelt re-install.
 - Fullstack install refreshes extension skills, catalog, `fullstack-layer.mdc`, and `validate_layer_routing.py`; does not overwrite existing `.specs/project/PROJECT.md` unless `--sync-registry`.
 
 ### Key paths
