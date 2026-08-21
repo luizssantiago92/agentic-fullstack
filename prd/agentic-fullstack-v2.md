@@ -2,7 +2,7 @@
 
 ## Summary
 
-Extend `@luizsantiago/agentic-fullstack` with CLI registry sync, three data sister skills (engineering, analytics, data science), layer routing gate, and spec-only demo validation — without breaking v1 FE/BE routing or harness coexistence.
+Extend `@luizsantiago/fullstack-floor-map` with CLI registry sync, three data sister skills (engineering, analytics, data science), layer routing gate, and spec-only demo validation — without breaking v1 FE/BE routing or harness coexistence.
 
 ## Shipped in 0.2.3
 

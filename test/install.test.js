@@ -313,7 +313,7 @@ test("packaged skill files exist in package root", async () => {
 });
 
 test("link-local-bin enables npx in package root", async () => {
-  const binPath = path.join(PACKAGE_ROOT, "node_modules", ".bin", "agentic-fullstack");
+  const binPath = path.join(PACKAGE_ROOT, "node_modules", ".bin", "fullstack-floor-map");
   const { execFileSync } = await import("node:child_process");
   execFileSync(process.execPath, ["scripts/link-local-bin.mjs"], {
     cwd: PACKAGE_ROOT,

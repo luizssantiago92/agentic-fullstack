@@ -4,8 +4,8 @@
 
 ```bash
 npx @luizsantiago/spec-seatbelt install
-npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack doctor
+npx @luizsantiago/fullstack-floor-map install
+npx @luizsantiago/fullstack-floor-map doctor
 ```
 
 Done when doctor prints `All checks passed`.
@@ -17,13 +17,13 @@ Edit `.specs/project/PROJECT.md` § **Layer registry** and § **Stack** if your 
 After upgrading this package with new default globs:
 
 ```bash
-npx @luizsantiago/agentic-fullstack install --sync-registry
+npx @luizsantiago/fullstack-floor-map install --sync-registry
 ```
 
 ## 3. Before Execute
 
 ```bash
-npx @luizsantiago/agentic-fullstack validate-layers your-feature
+npx @luizsantiago/fullstack-floor-map validate-layers your-feature
 ```
 
 ## 4. During Execute

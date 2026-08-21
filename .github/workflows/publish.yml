@@ -17,7 +17,7 @@ on:
           - major
 
 concurrency:
-  group: npm-publish-agentic-fullstack
+  group: npm-publish-fullstack-floor-map
   cancel-in-progress: false
 
 jobs:
@@ -79,7 +79,7 @@ jobs:
         id: npm_check
         run: |
           VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")
-          if npm view @luizsantiago/agentic-fullstack@"$VERSION" version 2>/dev/null; then
+          if npm view @luizsantiago/fullstack-floor-map@"$VERSION" version 2>/dev/null; then
             echo "already_published=true" >> "$GITHUB_OUTPUT"
             echo "Version $VERSION is already on npm — skipping publish"
           else

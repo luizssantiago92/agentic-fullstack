@@ -92,19 +92,20 @@ if (!fs.existsSync(catalogRoot)) {
     if (/\bFirst\b.+\bthen\b/i.test(desc)) {
       fail(`catalog/${id}: Description Trap in description`);
     }
-    // Reference paths cited in table
-    const refDir = path.join(catalogRoot, id, "references");
-    const refMentions = [...text.matchAll(/`?references\/([^`\s|]+)`?/g)].map(
-      (m) => m[1],
-    );
-    for (const rel of refMentions) {
-      const target = path.join(refDir, rel);
-      if (!fs.existsSync(target) && !fs.existsSync(path.join(catalogRoot, id, rel))) {
-        // Also allow bare filename in references/
-        const bare = path.join(refDir, path.basename(rel));
-        if (!fs.existsSync(bare)) {
-          warn(`catalog/${id}: cited ref missing: ${rel}`);
-        }
+    // Reference paths in backticks (local references/… or ../sibling/references/…)
+    const skillRoot = path.join(catalogRoot, id);
+    const refDir = path.join(skillRoot, "references");
+    const refMentions = [
+      ...text.matchAll(/`([^`]*references\/[^`]+\.md)`/g),
+    ].map((m) => m[1]);
+    for (const rel of new Set(refMentions)) {
+      const candidates = [
+        path.join(skillRoot, rel),
+        path.join(refDir, rel.replace(/^references\//, "")),
+        path.resolve(skillRoot, rel),
+      ];
+      if (!candidates.some((c) => fs.existsSync(c))) {
+        warn(`catalog/${id}: cited ref missing: ${rel}`);
       }
     }
     if (!text.includes("Full Stack Floor Map / Spec Seatbelt")) {

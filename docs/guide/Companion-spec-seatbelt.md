@@ -6,8 +6,8 @@ Optional **floor map** for the same agent loop. Spec Seatbelt stays the seatbelt
 
 ```bash
 npx @luizsantiago/spec-seatbelt install
-npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack doctor
+npx @luizsantiago/fullstack-floor-map install
+npx @luizsantiago/fullstack-floor-map doctor
 ```
 
 ## Pairing contract

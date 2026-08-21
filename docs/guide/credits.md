@@ -1,6 +1,6 @@
 # Credits and lineage
 
-Agentic Fullstack (Full Stack Floor Map companion) combines original Floors routing with an adapted specialist catalog.
+Full Stack Floor Map combines original Floors routing with an adapted specialist catalog.
 
 ## Core lineage
 
@@ -12,6 +12,6 @@ Agentic Fullstack (Full Stack Floor Map companion) combines original Floors rout
 
 ## How to cite
 
-If you publish work that builds on this package, credit **jeffallan/claude-skills** and **spec-seatbelt** in addition to `@luizsantiago/agentic-fullstack`.
+If you publish work that builds on this package, credit **jeffallan/claude-skills** and **spec-seatbelt** in addition to `@luizsantiago/fullstack-floor-map`.
 
 When adding borrowed patterns, update this file, the README Credits section, and [NOTICE](../../NOTICE) in the same PR.

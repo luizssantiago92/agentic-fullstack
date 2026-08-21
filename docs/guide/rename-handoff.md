@@ -1,12 +1,13 @@
-# Rename handoff (post-ship)
+# Rename handoff
 
-Do **not** rename in the implementation PR. When ready:
+**Done in-repo:** package/CLI/docs use `@luizsantiago/fullstack-floor-map` / `fullstack-floor-map`.  
+GitHub repo: `luizssantiago92/fullstack-floor-map`.
 
-1. Choose npm name (candidate: `@luizsantiago/fullstack-floor-map`)  
-2. Create npm token / update GitHub secrets for publish  
-3. Rename GitHub repository  
-4. Update `package.json` `name` + `bin`, README, docs, AGENTS  
-5. Update Seatbelt [Companion-agentic-fullstack.md](https://github.com/luizssantiago92/spec-seatbelt/blob/main/docs/guide/Companion-agentic-fullstack.md)  
-6. Publish and deprecate or document migration from `@luizsantiago/agentic-fullstack`  
+## Still on you / follow-ups
 
-Display name: **Full Stack Floor Map**.
+1. Publish `@luizsantiago/fullstack-floor-map@0.4.0` (npm token / secrets)  
+2. Optionally deprecate `@luizsantiago/agentic-fullstack` on npm with a pointer message  
+3. Update Spec Seatbelt companion doc title/links if still named “Agentic Fullstack”:  
+   [Companion-agentic-fullstack.md](https://github.com/luizssantiago92/spec-seatbelt/blob/main/docs/guide/Companion-agentic-fullstack.md)  
+
+The CLI keeps an `agentic-fullstack` bin alias for migration.

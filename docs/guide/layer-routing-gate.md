@@ -3,7 +3,7 @@
 Fullstack-owned Python gate. Seatbelt re-install must not delete it.
 
 ```bash
-npx @luizsantiago/agentic-fullstack validate-layers my-feature
+npx @luizsantiago/fullstack-floor-map validate-layers my-feature
 # same as:
 python3 .specs/seatbelt/scripts/validate_layer_routing.py my-feature
 ```
