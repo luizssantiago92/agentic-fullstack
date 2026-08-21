@@ -5,7 +5,7 @@ description: Data pipeline Execute manual. Load when task Files match data globs
 
 # Data Engineering
 
-Lean application manual for **data pipeline** tasks during Execute. Complements `engineering-standards.md` — does not replace harness gates.
+Lean application manual for **data pipeline** tasks during Execute. Complements `engineering-standards.md` — does not replace Seatbelt gates.
 
 **Token rule.** Load only when task `Files` match the **data** layer in `PROJECT.md` § Layer registry. Drop after commit. Never load with another layer skill in the same turn.
 

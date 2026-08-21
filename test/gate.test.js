@@ -5,9 +5,8 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { PACKAGE_ROOT } from "../lib/constants.js";
+import { PACKAGE_ROOT, SEATBELT_HUB, SEATBELT_SCRIPTS_DIR } from "../lib/constants.js";
 import { install } from "../lib/install.js";
-import { HARNESS_HUB } from "../lib/constants.js";
 
 const GATE_SRC = path.join(PACKAGE_ROOT, "gates", "validate_layer_routing.py");
 
@@ -16,21 +15,22 @@ async function makeTempDir(prefix) {
   return fs.mkdtemp(path.join(os.tmpdir(), prefix));
 }
 
-async function stubHarness(cwd) {
-  const hubDir = path.join(cwd, path.dirname(HARNESS_HUB));
+async function stubSeatbelt(cwd) {
+  const hubDir = path.join(cwd, path.dirname(SEATBELT_HUB));
   await fs.mkdir(hubDir, { recursive: true });
   await fs.writeFile(
-    path.join(cwd, HARNESS_HUB),
+    path.join(cwd, SEATBELT_HUB),
     "# Agent Architecture (stub for tests)\n",
     "utf8",
   );
-  const scriptsDir = path.join(cwd, ".specs/harness/scripts");
+  const scriptsDir = path.join(cwd, SEATBELT_SCRIPTS_DIR);
   await fs.mkdir(scriptsDir, { recursive: true });
   await fs.writeFile(
     path.join(scriptsDir, "validate_spec.py"),
     "# stub\n",
     "utf8",
   );
+  await fs.writeFile(path.join(scriptsDir, "_common.py"), "# stub\n", "utf8");
 }
 
 /**
@@ -70,7 +70,7 @@ function runGate(cwd, target) {
 
 test("layer gate passes demo-login happy path", async () => {
   const cwd = await makeTempDir("afs-gate-ok-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -87,7 +87,7 @@ test("layer gate passes demo-login happy path", async () => {
 
 test("layer gate fails when one task spans two layers", async () => {
   const cwd = await makeTempDir("afs-gate-fail-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -103,7 +103,7 @@ test("layer gate fails when one task spans two layers", async () => {
 
 test("layer gate warns when docs files match zero layers", async () => {
   const cwd = await makeTempDir("afs-gate-warn-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -120,7 +120,7 @@ test("layer gate warns when docs files match zero layers", async () => {
 
 test("layer gate fails when code files match zero layers", async () => {
   const cwd = await makeTempDir("afs-gate-code-zero-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -137,7 +137,7 @@ test("layer gate fails when code files match zero layers", async () => {
 
 test("layer gate matches nested globstar paths", async () => {
   const cwd = await makeTempDir("afs-gate-globstar-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -154,7 +154,7 @@ test("layer gate matches nested globstar paths", async () => {
 
 test("layer gate prefers path prefix over extension glob", async () => {
   const cwd = await makeTempDir("afs-gate-tsx-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -170,7 +170,7 @@ test("layer gate prefers path prefix over extension glob", async () => {
 
 test("layer gate fails when Files is a multiline bullet list spanning layers", async () => {
   const cwd = await makeTempDir("afs-gate-multiline-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -198,7 +198,7 @@ test("layer gate fails when Files is a multiline bullet list spanning layers", a
 
 test("layer gate fails when Files paths are wrapped in backticks spanning layers", async () => {
   const cwd = await makeTempDir("afs-gate-backticks-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -218,7 +218,7 @@ test("layer gate fails when Files paths are wrapped in backticks spanning layers
 
 test("layer gate fails when first path is inline and second is a continuation bullet", async () => {
   const cwd = await makeTempDir("afs-gate-cont-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,
@@ -245,7 +245,7 @@ test("layer gate fails when first path is inline and second is a continuation bu
 
 test("CLI validate-layers matches the Python gate on demo-login", async () => {
   const cwd = await makeTempDir("afs-cli-layers-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
   await writeFeature(
     cwd,

@@ -7,20 +7,20 @@ import { validateLayers } from "./lib/validate-layers.js";
 const USAGE = `Usage: agentic-fullstack [command]
 
 Commands:
-  install [--force] [--sync-registry]   Install layer skills, rule, and PROJECT template
-  doctor              Check harness + layer skills installation health
+  install [--force] [--sync-registry]   Install Floors layers, specialist catalog, rule, gates
+  doctor              Check Spec Seatbelt + Floors + catalog health
   validate-layers [feature]   Run the layer routing gate (task Files vs PROJECT.md)
   --help              Show this message
   --version           Print the package version
 
 Install order (recommended):
-  npx @luizsantiago/agentic-harness install
+  npx @luizsantiago/spec-seatbelt install
   npx @luizsantiago/agentic-fullstack install
 
 Package root development: run npm install first (prepare links the local bin), then npx works.
 
 Options:
-  --force          Install layer skills without harness (doctor will still require harness)
+  --force          Install without Seatbelt hub (doctor will still require Seatbelt)
   --sync-registry  Update only the Layer registry section in existing PROJECT.md
 `;
 

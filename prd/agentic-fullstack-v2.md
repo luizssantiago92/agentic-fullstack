@@ -65,7 +65,7 @@ Documented deviations from the original incremental plan:
 
 ### Fase 7 — Gate
 
-- [x] `validate_layer_routing.py` installed to `.specs/harness/scripts/`
+- [x] `validate_layer_routing.py` installed to `.specs/seatbelt/scripts/` (Seatbelt 2.2+)
 - [x] Doctor checks `layer_gate_missing`
 - [x] `npm run demo:validate` exits 0 on demo-login
 
@@ -79,5 +79,7 @@ Each layer skill: `<2800` chars/4 (~700 tokens target, 2800 hard cap). Rule: `<6
 
 ## Compatibility
 
-- Requires `@luizsantiago/agentic-harness` >=0.7.0 for full doctor + harness gates
-- Extension gate requires Python 3 and harness `_common.py` (installed with harness)
+- Requires `@luizsantiago/spec-seatbelt` >=2.2.0 for full doctor + Seatbelt gates
+- Extension gate installs to `.specs/seatbelt/scripts/` (legacy `.specs/harness/scripts/` still resolved)
+- Extension gate requires Python 3 and Seatbelt `_common.py` (installed with Seatbelt)
+- Specialist catalog adapted from jeffallan/claude-skills (MIT) — see NOTICE / docs/guide/credits.md
