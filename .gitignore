@@ -6,6 +6,9 @@ actionlint
 __pycache__/
 *.pyc
 
+# Local demo sandbox (npm run demo:local)
+demo/workspace/
+
 # Spec Seatbelt / companion runtime (npx install)
 .cursor/
 .claude/

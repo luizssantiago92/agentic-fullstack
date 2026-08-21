@@ -8,6 +8,9 @@ The specialist catalog under `catalog/` is adapted from:
 
   https://github.com/Jeffallan/claude-skills
 
+Pinned release: **v0.4.16**
+Commit: 882ef55e377dbf9a4dbe496bb41ac6ccd0e555cf
+
 Copyright (c) 2025 Jeff Allan and contributors
 
 Licensed under the MIT License. See the MIT text in LICENSE (this package)
@@ -16,7 +19,8 @@ and the upstream repository for full terms.
 Upstream skills follow the Agent Skills specification and progressive
 disclosure (`SKILL.md` + `references/`). Adaptations for Spec Seatbelt /
 Full Stack Floor Map pairing (Execute vs Verify, Floors layer manuals first)
-are noted in each `SKILL.md`.
+are noted in each `SKILL.md`. Pin and sync process: `lib/catalog-pin.js`,
+`scripts/sync-catalog-from-upstream.mjs`, `docs/guide/catalog-status.md`.
 
 ## Spec Seatbelt
 

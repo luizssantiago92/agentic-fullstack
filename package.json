@@ -1,6 +1,6 @@
 {
   "name": "@luizsantiago/fullstack-floor-map",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Full Stack Floor Map companion for Spec Seatbelt — Floors layer Execute manuals plus a specialist skill catalog. Progressive loading, one layer per task.",
   "type": "module",
   "bin": {
@@ -12,9 +12,11 @@
   },
   "scripts": {
     "prepare": "node scripts/link-local-bin.mjs",
-    "test": "node --test test/install.test.js test/gate.test.js test/catalog.test.js",
+    "test": "node --test test/install.test.js test/gate.test.js test/catalog.test.js test/specialist-smoke.test.js test/catalog-pin.test.js",
     "validate:skills": "node scripts/validate-layer-skills.mjs",
-    "demo:validate": "node index.js validate-layers demo-login",
+    "sync:catalog": "node scripts/sync-catalog-from-upstream.mjs",
+    "demo:validate": "node scripts/demo-validate.mjs",
+    "demo:local": "node scripts/demo-local.mjs --keep",
     "prepublishOnly": "npm test"
   },
   "files": [

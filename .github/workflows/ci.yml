@@ -69,8 +69,8 @@ jobs:
           npm pack --dry-run 2>&1 | grep -q "scripts/link-local-bin.mjs"
           npm pack --dry-run 2>&1 | grep -q "catalog/react-expert/SKILL.md"
           npm pack --dry-run 2>&1 | grep -q "NOTICE"
-          if npm pack --dry-run 2>&1 | grep -E 'demo-login/'; then
-            echo "demo-login must not ship in the npm package" >&2
+          if npm pack --dry-run 2>&1 | grep -E 'demo-login/|demo/fixtures|demo/playbook'; then
+            echo "demo specs/fixtures must not ship in the npm package" >&2
             exit 1
           fi
           if npm pack --dry-run 2>&1 | grep -E 'test/'; then
