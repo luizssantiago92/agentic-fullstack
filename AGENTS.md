@@ -4,15 +4,15 @@
 
 ### What this repository is
 
-npm extension package `@luizsantiago/agentic-fullstack` — **Full Stack Floor Map** companion for Spec Seatbelt: Floors layer sister skills (frontend, backend, data, analytics, data science) + specialist catalog. Primary deliverable is skills + CLI installer + layer routing gate. Rename candidate: `fullstack-floor-map` (see `docs/guide/rename-handoff.md`).
+npm extension package `@luizsantiago/fullstack-floor-map` — **Full Stack Floor Map** companion for Spec Seatbelt: Floors layer sister skills (frontend, backend, data, analytics, data science) + specialist catalog. Primary deliverable is skills + CLI installer + layer routing gate. Display name: **Full Stack Floor Map**. See `docs/guide/rename-handoff.md` for publish/deprecation notes.
 
 ### Install (fresh clone)
 
 ```bash
 npm install # links local CLI bin — required in this repo before npx fullstack works
 npx @luizsantiago/spec-seatbelt install
-npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack doctor
+npx @luizsantiago/fullstack-floor-map install
+npx @luizsantiago/fullstack-floor-map doctor
 npm run demo:validate # wraps: node index.js validate-layers demo-login
 ```
 
@@ -20,9 +20,9 @@ npm run demo:validate # wraps: node index.js validate-layers demo-login
 
 `install --sync-registry` rewrites only the `## Layer registry` table in `.specs/project/PROJECT.md` from package defaults.
 
-`doctor` is a subcommand of `@luizsantiago/agentic-fullstack` — not a separate package.
+`doctor` is a subcommand of `@luizsantiago/fullstack-floor-map` — not a separate package.
 
-Why `npm install` here: when the cwd is this package, `npx @luizsantiago/agentic-fullstack` resolves to the local folder but npm does not create `node_modules/.bin/agentic-fullstack` until `prepare` runs (`scripts/link-local-bin.mjs`).
+Why `npm install` here: when the cwd is this package, `npx @luizsantiago/fullstack-floor-map` resolves to the local folder but npm does not create `node_modules/.bin/fullstack-floor-map` until `prepare` runs (`scripts/link-local-bin.mjs`).
 
 Fallback: `node index.js install` / `node index.js doctor` / `node index.js validate-layers`.
 

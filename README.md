@@ -1,12 +1,11 @@
-# Agentic Fullstack
+# Full Stack Floor Map
 
-[![npm version](https://img.shields.io/npm/v/@luizsantiago/agentic-fullstack.svg)](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
+[![npm version](https://img.shields.io/npm/v/@luizsantiago/fullstack-floor-map.svg)](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Full Stack Floor Map** companion for [Spec Seatbelt](https://github.com/luizssantiago92/spec-seatbelt) — map the stack into **Floors** (frontend, backend, data, analytics, data science), load **one layer manual per Execute task**, and optionally call **one specialist** from a 67-skill catalog (plus ≤2 references). Specialists enter only when called.
 
-npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) **0.4.x**  
-*(Rename candidate: **Full Stack Floor Map** / `@luizsantiago/fullstack-floor-map` — after you rotate npm token & secrets.)*
+npm: [`@luizsantiago/fullstack-floor-map`](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map) **0.4.x**  
 
 ---
 
@@ -16,8 +15,8 @@ In **your product repository** (Node.js 18+. Python 3.10+ for gates):
 
 ```bash
 npx @luizsantiago/spec-seatbelt install
-npx @luizsantiago/agentic-fullstack install
-npx @luizsantiago/agentic-fullstack doctor
+npx @luizsantiago/fullstack-floor-map install
+npx @luizsantiago/fullstack-floor-map doctor
 ```
 
 ### What install does

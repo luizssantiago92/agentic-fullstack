@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Full Stack Floor Map (Floors)
 
-Extension for `@luizsantiago/agentic-fullstack`. Requires Spec Seatbelt (`agent-architecture.md`).
+Extension for `@luizsantiago/fullstack-floor-map`. Requires Spec Seatbelt (`agent-architecture.md`).
 
 ## Layer registry (Floors)
 
@@ -27,7 +27,7 @@ Specialists do not override task `Gate` or `PROJECT.md` test commands. Discover 
 
 ## Pairing with Spec Seatbelt
 
-Vertical **feature**, horizontal **tasks** — one Floor per `Files`. Run `npx @luizsantiago/agentic-fullstack validate-layers <feature>` (same as `python3 .specs/seatbelt/scripts/validate_layer_routing.py`).
+Vertical **feature**, horizontal **tasks** — one Floor per `Files`. Run `npx @luizsantiago/fullstack-floor-map validate-layers <feature>` (same as `python3 .specs/seatbelt/scripts/validate_layer_routing.py`).
 
 ## After commit / Verify
 
@@ -35,4 +35,4 @@ Drop layer + specialist before the next task. On **/verify**, load **no** Floors
 
 ## Re-install
 
-Seatbelt `install` does not delete Floors skills. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh layers, rule, layer gate, and catalog.
+Seatbelt `install` does not delete Floors skills. Re-run `npx @luizsantiago/fullstack-floor-map install` to refresh layers, rule, layer gate, and catalog.

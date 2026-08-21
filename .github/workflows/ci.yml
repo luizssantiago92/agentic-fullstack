@@ -38,8 +38,8 @@ jobs:
       - name: Verify npx resolves local package CLI
         if: matrix.node-version == 22
         run: |
-          npx @luizsantiago/agentic-fullstack --version
-          test -x node_modules/.bin/agentic-fullstack
+          npx @luizsantiago/fullstack-floor-map --version
+          test -x node_modules/.bin/fullstack-floor-map
 
       - name: Run tests
         run: npm test

@@ -1,4 +1,9 @@
 # Changelog
+## 0.4.0 — rename
+
+- Package/CLI renamed to `@luizsantiago/fullstack-floor-map` / `fullstack-floor-map` (alias `agentic-fullstack` kept)
+- GitHub repo: `luizssantiago92/fullstack-floor-map`
+
 
 ## 0.4.0
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Link agentic-fullstack into node_modules/.bin when developing at the package root.
+ * Link fullstack-floor-map into node_modules/.bin when developing at the package root.
  * npx resolves to the local package (same name as package.json) but npm does not
  * create a self-bin link — this script fixes that after `npm install`.
  *
@@ -25,10 +25,7 @@ if (initCwd !== pkgRoot) {
 }
 
 const binDir = path.join(pkgRoot, "node_modules", ".bin");
-const binPath = path.join(binDir, "agentic-fullstack");
 const relativeIndex = path.relative(binDir, indexPath).replace(/\\/g, "/");
-
-fs.mkdirSync(binDir, { recursive: true });
 
 const shim = `#!/usr/bin/env node
 const { spawnSync } = require("node:child_process");
@@ -40,10 +37,14 @@ const result = spawnSync(process.execPath, [indexPath, ...process.argv.slice(2)]
 process.exit(result.status ?? 1);
 `;
 
-try {
-  fs.rmSync(binPath, { force: true });
-} catch {
-  /* ignore */
-}
+fs.mkdirSync(binDir, { recursive: true });
 
-fs.writeFileSync(binPath, shim, { mode: 0o755 });
+for (const name of ["fullstack-floor-map", "agentic-fullstack"]) {
+  const binPath = path.join(binDir, name);
+  try {
+    fs.rmSync(binPath, { force: true });
+  } catch {
+    /* ignore */
+  }
+  fs.writeFileSync(binPath, shim, { mode: 0o755 });
+}

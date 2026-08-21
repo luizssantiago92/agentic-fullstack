@@ -1,6 +1,6 @@
 # Guide index
 
-Agentic Fullstack — **Full Stack Floor Map** companion for Spec Seatbelt.
+**Full Stack Floor Map** — **Full Stack Floor Map** companion for Spec Seatbelt.
 
 | Page | Summary |
 | --- | --- |

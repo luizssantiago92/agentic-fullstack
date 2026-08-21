@@ -4,7 +4,7 @@ import { PACKAGE_VERSION } from "./lib/constants.js";
 import { doctor, install } from "./lib/install.js";
 import { validateLayers } from "./lib/validate-layers.js";
 
-const USAGE = `Usage: agentic-fullstack [command]
+const USAGE = `Usage: fullstack-floor-map [command]
 
 Commands:
   install [--force] [--sync-registry]   Install Floors layers, specialist catalog, rule, gates
@@ -15,13 +15,15 @@ Commands:
 
 Install order (recommended):
   npx @luizsantiago/spec-seatbelt install
-  npx @luizsantiago/agentic-fullstack install
+  npx @luizsantiago/fullstack-floor-map install
 
 Package root development: run npm install first (prepare links the local bin), then npx works.
 
 Options:
   --force          Install without Seatbelt hub (doctor will still require Seatbelt)
   --sync-registry  Update only the Layer registry section in existing PROJECT.md
+
+Migration: the CLI also responds as \`agentic-fullstack\` (same binary).
 `;
 
 const [, , command, ...args] = process.argv;
@@ -38,7 +40,7 @@ if (command === "--version" || command === "-v" || command === "version") {
   const syncRegistry = args.includes("--sync-registry");
   try {
     await install({ force, syncRegistry });
-    console.log("✨ Fullstack layer skills installed.");
+    console.log("✨ Full Stack Floor Map installed.");
   } catch (err) {
     console.error(`❌ ${err.message}`);
     process.exit(1);

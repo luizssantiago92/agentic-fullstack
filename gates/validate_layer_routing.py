@@ -274,7 +274,7 @@ def main(argv: list[str] | None = None) -> int:
     project_path = cwd / ".specs" / "project" / "PROJECT.md"
     if not project_path.is_file():
         report = Report(gate=GATE, target=str(project_path))
-        report.error("Missing .specs/project/PROJECT.md — run agentic-fullstack install")
+        report.error("Missing .specs/project/PROJECT.md — run fullstack-floor-map install")
         return report.emit()
 
     registry = parse_registry(project_path.read_text(encoding="utf-8"))

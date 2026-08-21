@@ -31,4 +31,4 @@ MIT License — Luiz Santiago and contributors.
 ## Floors (legacy Execute)
 
 Layer registry, `fullstack-layer.mdc`, and `validate_layer_routing.py` are
-original to this package (`@luizsantiago/agentic-fullstack`).
+original to this package (`@luizsantiago/fullstack-floor-map`).
