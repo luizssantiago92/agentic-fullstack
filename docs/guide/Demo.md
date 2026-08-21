@@ -32,9 +32,9 @@ Artifacts in `demo/workspace/demo/`:
 - `last-run.json` — pass/fail summary  
 - `playbook.md` — manual agent Execute / Verify checklist  
 
-Specialist fixtures: [`demo/fixtures/specialist-smoke.json`](../demo/fixtures/specialist-smoke.json).
+Specialist fixtures: [`demo/fixtures/specialist-smoke.json`](../../demo/fixtures/specialist-smoke.json).
 
-Manual follow-up: [playbook.md](../demo/playbook.md).
+Manual follow-up: [playbook.md](../../demo/playbook.md).
 
 ### What this proves vs does not
 
