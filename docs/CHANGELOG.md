@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Companion Sync ack: align Floor Map docs with Spec Seatbelt PR #80 (Lane terminology, ownership table, Desks planned 0.5.0, coexistence)
 - Companion Sync process + Desks v3 (planned) prompt for Spec Seatbelt agent chats (`docs/guide/Companion-sync.md`)
 
 ## 0.4.1

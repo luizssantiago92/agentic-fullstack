@@ -37,11 +37,12 @@ After a Floor Map change that affects **pairing**, ownership of paths under `.sp
 
 ## Sync log
 
-| Date | Topic | Prompt | Seatbelt action |
+| Date | Topic | Prompt / note | Action |
 | --- | --- | --- | --- |
-| 2026-08-21 | Desks v3 (planned 0.5.0) | [Companion-sync-prompt-desks-v3.md](Companion-sync-prompt-desks-v3.md) | Paste into Seatbelt agent chat; docs/pairing only until Floor Map ships Desks |
+| 2026-08-21 | Desks v3 (planned 0.5.0) | [Companion-sync-prompt-desks-v3.md](Companion-sync-prompt-desks-v3.md) | Sent to Seatbelt → [PR #80](https://github.com/luizssantiago92/spec-seatbelt/pull/80) |
+| 2026-08-21 | Ack Seatbelt PR #80 | Floor Map docs aligned to companion contract | This repo — Lane/ownership/Desks planned; no runtime yet |
 
 ## Related
 
 - [Companion: Spec Seatbelt](Companion-spec-seatbelt.md)  
-- Mirror on Seatbelt: `docs/guide/Companion-agentic-fullstack.md` (rename to Floor Map when updated there)
+- Seatbelt mirror: [Companion-fullstack-floor-map.md](https://github.com/luizssantiago92/spec-seatbelt/blob/cursor/companion-desks-v3-docs-29db/docs/guide/Companion-fullstack-floor-map.md)

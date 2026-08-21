@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@luizsantiago/fullstack-floor-map.svg)](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Full Stack Floor Map** companion for [Spec Seatbelt](https://github.com/luizssantiago92/spec-seatbelt) — map the stack into **Floors** (frontend, backend, data, analytics, data science), load **one layer manual per Execute task**, and optionally call **one specialist** from a 67-skill catalog (plus ≤2 references). Specialists enter only when called.
+**Full Stack Floor Map** companion for [Spec Seatbelt](https://github.com/luizssantiago92/spec-seatbelt) — map the stack into **Lanes** (frontend, backend, data, analytics, data science), load **one layer manual per Execute task**, and optionally call **one specialist** from a 67-skill catalog (plus ≤2 craft references). Specialists enter only when called. **Desks** (specialist memory under `.specs/desks/`) are planned for **0.5.0** — not shipped yet.
 
 npm: [`@luizsantiago/fullstack-floor-map`](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map) **0.4.1**  
 
@@ -23,20 +23,20 @@ npx @luizsantiago/fullstack-floor-map doctor
 
 | Lands in your project | Purpose |
 | --- | --- |
-| `.cursor/skills/*-engineering.md` (+ `.claude/`) | Floors layer manuals (legacy Execute) |
+| `.cursor/skills/*-engineering.md` (+ `.claude/`) | Lane manuals (path layers; docs may say “Floors”) |
 | `.cursor/skills/<specialist>/` | Specialist catalog (`SKILL.md` + `references/`) |
-| `.cursor/rules/fullstack-layer.mdc` | One Floor + at most one specialist |
-| `.specs/seatbelt/scripts/validate_layer_routing.py` | Layer gate (Fullstack-owned) |
+| `.cursor/rules/fullstack-layer.mdc` | One Lane + at most one specialist |
+| `.specs/seatbelt/scripts/validate_layer_routing.py` | Layer gate (Floor Map–owned) |
 | `.specs/project/PROJECT.md` | Stack + Layer registry (created if missing) |
 
-Re-run Seatbelt install anytime — it does **not** delete Floors skills. Re-run Fullstack `install` to refresh layers, rule, gate, and catalog.
+Re-run Seatbelt install anytime — it does **not** delete Floor Map skills, catalog, the layer gate script, or (when Desks ship) `.specs/desks/`. Re-run Fullstack `install` to refresh lanes, rule, gate, and catalog.
 
 | Need | Command |
 | --- | --- |
 | Skills without Seatbelt yet | `install --force` |
 | Refresh registry globs only | `install --sync-registry` |
 | Check health | `doctor` |
-| Check task `Files` vs floors | `validate-layers <feature>` |
+| Check task `Files` vs lanes | `validate-layers <feature>` |
 
 ---
 
@@ -45,15 +45,16 @@ Re-run Seatbelt install anytime — it does **not** delete Floors skills. Re-run
 | Idea | Package | Role |
 | --- | --- | --- |
 | **Seatbelt** | `@luizsantiago/spec-seatbelt` | Spec, tasks, gates, Verify |
-| **Floors** | this package (legacy) | Which floor a task lives on |
+| **Lane** | this package | Which path layer a task lives on |
 | **Specialists** | catalog in this package | Framework craft — load on demand |
+| **Desk** | this package (planned 0.5.0) | Specialist memory / continuity |
 
-**Pairing:** keep the **feature** vertical (one user path). Split **tasks** by floor — never mix `apps/web` and `apps/api` in one `Files` list.
+**Pairing:** keep the **feature** vertical (one user path). Split **tasks** by Lane — never mix `apps/web` and `apps/api` in one `Files` list.
 
-**Execute load:** Seatbelt working set + **one** `*-engineering.md` + **at most one** specialist `SKILL.md` + **≤2** `references/`.  
-**Verify:** Seatbelt only — no Floors layers, no catalog specialists.
+**Execute load:** Seatbelt working set + **one** `*-engineering.md` + **at most one** specialist `SKILL.md` + **≤2** craft `references/`.  
+**Verify:** Seatbelt only — no Lane manuals, no catalog specialists.
 
-Plain-language tour: [Home](docs/guide/Home.md) · [Quick start](docs/guide/Quick-start.md) · [Concepts](docs/guide/concepts.md)
+Ownership and harmony loop: [Companion: Spec Seatbelt](docs/guide/Companion-spec-seatbelt.md).
 
 ---
 
@@ -66,7 +67,8 @@ Plain-language tour: [Home](docs/guide/Home.md) · [Quick start](docs/guide/Quic
 | [Five floors](docs/guide/five-skills.md) | Layer manuals |
 | [Specialist catalog](docs/guide/specialist-catalog.md) | 67 skills, install ≠ load |
 | [Layer routing gate](docs/guide/layer-routing-gate.md) | Gate paths & CLI |
-| [Companion: Spec Seatbelt](docs/guide/Companion-spec-seatbelt.md) | Pairing contract |
+| [Companion: Spec Seatbelt](docs/guide/Companion-spec-seatbelt.md) | Pairing contract / ownership |
+| [Companion Sync](docs/guide/Companion-sync.md) | Keep Seatbelt docs in sync |
 | [CLI](docs/guide/CLI.md) | Commands |
 | [FAQ](docs/guide/FAQ.md) | Common questions |
 | [Credits](docs/guide/credits.md) | Attribution |
