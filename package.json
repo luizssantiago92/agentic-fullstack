@@ -12,9 +12,10 @@
   },
   "scripts": {
     "prepare": "node scripts/link-local-bin.mjs",
-    "test": "node --test test/install.test.js test/gate.test.js test/catalog.test.js",
+    "test": "node --test test/install.test.js test/gate.test.js test/catalog.test.js test/specialist-smoke.test.js",
     "validate:skills": "node scripts/validate-layer-skills.mjs",
-    "demo:validate": "node index.js validate-layers demo-login",
+    "demo:validate": "node scripts/demo-validate.mjs",
+    "demo:local": "node scripts/demo-local.mjs --keep",
     "prepublishOnly": "npm test"
   },
   "files": [

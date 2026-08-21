@@ -14,7 +14,7 @@
 | [Layer routing gate](layer-routing-gate.md) | Gate CLI |
 | [CLI](CLI.md) | install / doctor / validate-layers |
 | [Companion: Spec Seatbelt](Companion-spec-seatbelt.md) | Pairing contract |
-| [Demo](Demo.md) | demo-login |
+| [Demo](Demo.md) | demo-* layer gates + `npm run demo:local` |
 | [FAQ](FAQ.md) | FAQ |
 | [Credits](credits.md) | Attribution |
 | [Rename handoff](rename-handoff.md) | Post-ship rename checklist |

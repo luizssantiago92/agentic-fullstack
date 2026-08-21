@@ -1,0 +1,72 @@
+[
+  {
+    "id": "react-login-form",
+    "prompt": "Build a React login form with useState and accessible labels in a .tsx file",
+    "floor": "frontend",
+    "expectSkill": "react-expert",
+    "expectDomain": "frontend"
+  },
+  {
+    "id": "nextjs-app-router",
+    "prompt": "Add a Next.js App Router page with Server Components",
+    "floor": "frontend",
+    "expectSkill": "nextjs-developer",
+    "expectDomain": "frontend"
+  },
+  {
+    "id": "fastapi-login",
+    "prompt": "Implement a FastAPI POST /login endpoint returning JWT",
+    "floor": "backend",
+    "expectSkill": "fastapi-expert",
+    "expectDomain": "backend"
+  },
+  {
+    "id": "api-contract",
+    "prompt": "Design the REST API contract and error shapes for authentication",
+    "floor": "backend",
+    "expectSkill": "api-designer",
+    "expectDomain": "api-architecture"
+  },
+  {
+    "id": "spark-etl",
+    "prompt": "Write a PySpark data processing pipeline that aggregates daily active users from parquet",
+    "floor": "data",
+    "expectSkill": "spark-engineer",
+    "expectDomain": "data-ml"
+  },
+  {
+    "id": "pandas-eda",
+    "prompt": "Explore the CSV with pandas and produce an analytics summary notebook",
+    "floor": "analytics",
+    "expectSkill": "pandas-pro",
+    "expectDomain": "data-ml"
+  },
+  {
+    "id": "sql-report",
+    "prompt": "Write SQL analytics queries for a weekly revenue report",
+    "floor": "analytics",
+    "expectSkill": "sql-pro",
+    "expectDomain": "language"
+  },
+  {
+    "id": "ml-pipeline",
+    "prompt": "Build an ML training pipeline and evaluation for churn models",
+    "floor": "datascience",
+    "expectSkill": "ml-pipeline",
+    "expectDomain": "data-ml"
+  },
+  {
+    "id": "playwright-e2e",
+    "prompt": "Add Playwright end-to-end tests for the login flow",
+    "floor": "frontend",
+    "expectSkill": "playwright-expert",
+    "expectDomain": "quality"
+  },
+  {
+    "id": "postgres-indexes",
+    "prompt": "Optimize Postgres indexes and query plans for the login sessions table",
+    "floor": "backend",
+    "expectSkill": "postgres-pro",
+    "expectDomain": "infrastructure"
+  }
+]
