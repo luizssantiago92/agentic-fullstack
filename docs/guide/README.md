@@ -4,9 +4,9 @@
 
 | Page | Summary |
 | --- | --- |
-| [Home](Home.md) | Why Floors + specialists |
+| [Home](Home.md) | Why Lanes + specialists (+ Desks planned) |
 | [Quick start](Quick-start.md) | Install and first validate-layers |
-| [Concepts](concepts.md) | Floors, pairing, load policy |
+| [Concepts](concepts.md) | Lanes, Desks planned, pairing, load policy |
 | [How it works](How-it-works.md) | Day-to-day with Seatbelt phases |
 | [Five floors](five-skills.md) | Layer manuals |
 | [Specialist catalog](specialist-catalog.md) | 67 skills; install ≠ load |
