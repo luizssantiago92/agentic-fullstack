@@ -61,8 +61,17 @@ Push/PR to `main`: `.github/workflows/ci.yml` (lint workflows, `npm test`, pack 
 | `.specs/features/demo-*/` | Spec-only Floor examples (git only; not on npm) |
 | `demo/` | Local sandbox (`demo:local`), smoke fixtures, playbook |
 | `lib/catalog-pin.js` | Upstream pin + verify-forbidden list |
+| `docs/guide/Companion-sync.md` | Seatbelt companion sync process |
+| `docs/guide/Companion-sync-prompt-desks-v3.md` | Copy-paste prompt for Seatbelt agent (Desks planned) |
 | `prd/agentic-fullstack-v2.md` | PRD for v2 layers |
 
 ### Seatbelt integration
 
 Do not edit Seatbelt-owned files expecting them to persist (`agent-architecture.md`, core gates). Extend via this package only. `validate_layer_routing.py` is extension-owned and refreshed on fullstack install.
+
+When a change affects **pairing** (Execute/Verify load rules, `.specs/` ownership, install order, companion naming): emit or update a **Companion Sync** prompt under `docs/guide/Companion-sync-prompt-*.md`, log it in `docs/guide/Companion-sync.md`, and include it in the PR body so it can be pasted into a Spec Seatbelt–only agent chat. If Seatbelt needs no change, log **Lego only — no Seatbelt sync**.
+
+| Path | Role |
+| --- | --- |
+| `docs/guide/Companion-sync.md` | Sync process + log |
+| `docs/guide/Companion-sync-prompt-desks-v3.md` | Desks v3 (planned) prompt for Seatbelt |

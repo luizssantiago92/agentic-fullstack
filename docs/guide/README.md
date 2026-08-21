@@ -17,6 +17,8 @@
 | [Layer routing gate](layer-routing-gate.md) | Gate CLI |
 | [CLI](CLI.md) | install / doctor / validate-layers |
 | [Companion: Spec Seatbelt](Companion-spec-seatbelt.md) | Pairing contract |
+| [Companion Sync](Companion-sync.md) | Process + prompts for Seatbelt repo |
+| [Companion Sync: Desks v3](Companion-sync-prompt-desks-v3.md) | Copy-paste prompt for Seatbelt agent |
 | [Demo](Demo.md) | demo-* layer gates + `npm run demo:local` |
 | [FAQ](FAQ.md) | FAQ |
 | [Credits](credits.md) | Attribution |
