@@ -1,38 +1,38 @@
 ---
-description: Layer routing for frontend/backend/data sister skills during Execute. Reads .specs/project/PROJECT.md Layer registry. At most one layer skill per task. Compatible with Spec-Driven Harness — does not replace gates or engineering-standards.
+description: Floors layer routing + specialist catalog for Execute. At most one layer skill and one specialist SKILL.md (≤2 refs). Compatible with Spec Seatbelt — does not replace gates.
 alwaysApply: true
 ---
 
-# Fullstack Layer Routing
+# Full Stack Floor Map (Floors)
 
-Extension for `@luizsantiago/agentic-fullstack`. Requires Spec-Driven Harness (`agent-architecture.md`).
+Extension for `@luizsantiago/agentic-fullstack`. Requires Spec Seatbelt (`agent-architecture.md`).
 
-## Layer registry
+## Layer registry (Floors)
 
-Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task. Each row maps a layer id → skill file → path globs. Shipped layers: **frontend**, **backend**, **data**, **analytics**, **datascience** — do not load two layer skills in one turn.
-
-## Execute — which skill to load
+Read `.specs/project/PROJECT.md` § **Layer registry** before each Execute task. One layer skill per turn: **frontend**, **backend**, **data**, **analytics**, **datascience**.
 
 | Task `Files` vs registry | Load | Do not load |
 | --- | --- | --- |
-| Matches **one** layer only | That layer's skill (e.g. `frontend-engineering.md`) | Other layer skills |
-| Matches **zero** layers | Neither — follow `engineering-standards.md` only | Layer skills |
-| Matches **two or more** layers | **STOP** — split task or amend `tasks.md` | All layer skills |
+| Matches **one** layer | That `*-engineering.md` | Other layer skills |
+| Matches **zero** layers | Neither — `engineering-standards.md` only | Layer skills |
+| Matches **two or more** | **STOP** — split task | All layer skills |
 
-Always keep `engineering-standards.md` and the current phase reference (`references/implement.md`) in the working set. Layer skills are **additive**, not replacements.
+Always keep Seatbelt `engineering-standards.md` + `references/implement.md`. Layer skills are additive.
 
-**Pairing with Harness Tasks:** prefer a vertical *feature* (one user path). With this extension, each task `Files` list stays on **one layer**. Split UI vs API into T1/T2 with `Depends on` — do not mix `apps/web` and `apps/api` in one task.
+## Specialist catalog (optional depth)
 
-Run `npx @luizsantiago/agentic-fullstack validate-layers <feature>` before Execute (same as `python3 .specs/harness/scripts/validate_layer_routing.py <feature>`).
+After the layer manual is chosen, you may load **at most one** catalog skill (`…/SKILL.md` under `.cursor/skills/<id>/`) whose `metadata.domain` matches that layer. Open **at most two** `references/` files for the current topic. Prefer § Stack in `PROJECT.md` when several specialists match.
 
-## After commit
+Specialists do not override task `Gate` or `PROJECT.md` test commands. Discover APIs from the repo.
 
-Drop the layer skill from context before the next task (same pattern as conditional Verify sisters).
+## Pairing with Spec Seatbelt
 
-## Verify
+Vertical **feature**, horizontal **tasks** — one Floor per `Files`. Run `npx @luizsantiago/agentic-fullstack validate-layers <feature>` (same as `python3 .specs/seatbelt/scripts/validate_layer_routing.py`).
 
-Do **not** load layer skills on `/verify`. Use harness Verify stack: `validate.md`, `security-review.md`, then at most one of `appsec.md` or `qa-strategy.md`.
+## After commit / Verify
 
-## Re-install safety
+Drop layer + specialist before the next task. On **/verify**, load **no** Floors layers and **no** catalog specialists — use Seatbelt Verify only (`validate.md`, `security-review.md`, then at most one of `appsec.md` or `qa-strategy.md`).
 
-Harness `install` overwrites its own skills only. Extension-owned: `frontend-engineering.md`, `backend-engineering.md`, `data-engineering.md`, `analytics-engineering.md`, `data-science-engineering.md`, this rule, `validate_layer_routing.py`. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh the extension.
+## Re-install
+
+Seatbelt `install` does not delete Floors skills. Re-run `npx @luizsantiago/agentic-fullstack install` to refresh layers, rule, layer gate, and catalog.

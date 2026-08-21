@@ -1,0 +1,34 @@
+# NOTICE
+
+This package includes material adapted from open-source projects.
+
+## jeffallan/claude-skills
+
+The specialist catalog under `catalog/` is adapted from:
+
+  https://github.com/Jeffallan/claude-skills
+
+Copyright (c) 2025 Jeff Allan and contributors
+
+Licensed under the MIT License. See the MIT text in LICENSE (this package)
+and the upstream repository for full terms.
+
+Upstream skills follow the Agent Skills specification and progressive
+disclosure (`SKILL.md` + `references/`). Adaptations for Spec Seatbelt /
+Full Stack Floor Map pairing (Execute vs Verify, Floors layer manuals first)
+are noted in each `SKILL.md`.
+
+## Spec Seatbelt
+
+Companion pairing, docs/guide documentation shape, and Verify ownership
+patterns are aligned with:
+
+  https://github.com/luizssantiago92/spec-seatbelt
+  npm: @luizsantiago/spec-seatbelt
+
+MIT License — Luiz Santiago and contributors.
+
+## Floors (legacy Execute)
+
+Layer registry, `fullstack-layer.mdc`, and `validate_layer_routing.py` are
+original to this package (`@luizsantiago/agentic-fullstack`).

@@ -9,11 +9,12 @@ import { test } from "node:test";
 import {
   DEFAULT_LAYERS,
   EXTENSION_SCRIPT_ASSETS,
-  HARNESS_HUB,
-  HARNESS_SCRIPTS_DIR,
   PACKAGE_ROOT,
   PROJECT_DIR,
   PROJECT_FILE,
+  SEATBELT_HUB,
+  SEATBELT_SCRIPTS_DIR,
+  LEGACY_SCRIPTS_DIR,
   SKILL_ASSETS,
   renderLayerRegistryTable,
 } from "../lib/constants.js";
@@ -32,22 +33,28 @@ async function makeTempDir(prefix) {
   return fs.mkdtemp(path.join(os.tmpdir(), prefix));
 }
 
-/** Minimal harness hub to simulate installed harness. */
-async function stubHarness(cwd) {
-  const hubDir = path.join(cwd, path.dirname(HARNESS_HUB));
+/**
+ * Minimal Spec Seatbelt hub + gates (preferred path).
+ * @param {string} cwd
+ * @param {{ legacy?: boolean }} [opts]
+ */
+async function stubSeatbelt(cwd, opts = {}) {
+  const hubDir = path.join(cwd, path.dirname(SEATBELT_HUB));
   await fs.mkdir(hubDir, { recursive: true });
   await fs.writeFile(
-    path.join(cwd, HARNESS_HUB),
+    path.join(cwd, SEATBELT_HUB),
     "# Agent Architecture (stub for tests)\n",
     "utf8",
   );
-  const scriptsDir = path.join(cwd, ".specs/harness/scripts");
+  const scriptsRel = opts.legacy ? LEGACY_SCRIPTS_DIR : SEATBELT_SCRIPTS_DIR;
+  const scriptsDir = path.join(cwd, scriptsRel);
   await fs.mkdir(scriptsDir, { recursive: true });
   await fs.writeFile(
     path.join(scriptsDir, "validate_spec.py"),
     "# stub\n",
     "utf8",
   );
+  await fs.writeFile(path.join(scriptsDir, "_common.py"), "# stub\n", "utf8");
 }
 
 /** @param {string} content */
@@ -57,7 +64,7 @@ function sha256(content) {
 
 test("install copies skills, rule, and creates PROJECT.md when missing", async () => {
   const cwd = await makeTempDir("afs-install-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
 
   const { projectCreated } = await install({ cwd, silent: true });
   assert.equal(projectCreated, true);
@@ -76,15 +83,15 @@ test("install copies skills, rule, and creates PROJECT.md when missing", async (
   assert.ok(project?.includes("## Layer registry"));
 });
 
-test("install rejects when harness missing without --force", async () => {
-  const cwd = await makeTempDir("afs-no-harness-");
+test("install rejects when Seatbelt missing without --force", async () => {
+  const cwd = await makeTempDir("afs-no-seatbelt-");
   await assert.rejects(
     () => install({ cwd, silent: true }),
-    /Spec-Driven Harness not detected/,
+    /Spec Seatbelt not detected/,
   );
 });
 
-test("install --force works without harness", async () => {
+test("install --force works without Seatbelt", async () => {
   const cwd = await makeTempDir("afs-force-");
   const { projectCreated } = await install({ cwd, silent: true, force: true });
   assert.equal(projectCreated, true);
@@ -95,13 +102,13 @@ test("install --force works without harness", async () => {
 
   const { ok, issues } = await doctor({ cwd, silent: true });
   assert.equal(ok, false);
-  assert.ok(issues.includes("harness_missing"));
+  assert.ok(issues.includes("seatbelt_missing"));
   assert.ok(issues.includes("gates_missing"));
 });
 
 test("install does not overwrite existing PROJECT.md", async () => {
   const cwd = await makeTempDir("afs-nooverwrite-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   const projectPath = path.join(cwd, PROJECT_DIR, PROJECT_FILE);
   await fs.mkdir(path.dirname(projectPath), { recursive: true });
   const custom = "# Custom PROJECT\n\n## Layer registry\n\ncustom\n";
@@ -116,7 +123,7 @@ test("install does not overwrite existing PROJECT.md", async () => {
 
 test("install refreshes extension skills on re-run", async () => {
   const cwd = await makeTempDir("afs-refresh-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   const skillPath = path.join(cwd, ".cursor/skills", SKILL_ASSETS[0]);
@@ -127,20 +134,20 @@ test("install refreshes extension skills on re-run", async () => {
   assert.ok(content?.includes("Frontend Engineering"));
 });
 
-test("harness re-install simulation preserves extension skills", async () => {
-  const cwd = await makeTempDir("afs-harness-sim-");
-  await stubHarness(cwd);
+test("seatbelt re-install simulation preserves extension skills", async () => {
+  const cwd = await makeTempDir("afs-seatbelt-sim-");
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
-  const harnessSkills = [
+  const seatbeltSkills = [
     "agent-architecture.md",
     "engineering-standards.md",
     "security-review.md",
   ];
-  for (const skill of harnessSkills) {
+  for (const skill of seatbeltSkills) {
     await fs.writeFile(
       path.join(cwd, ".cursor/skills", skill),
-      `# harness ${skill}\n`,
+      `# seatbelt ${skill}\n`,
       "utf8",
     );
   }
@@ -153,7 +160,7 @@ test("harness re-install simulation preserves extension skills", async () => {
 
 test("install preserves skill file checksums", async () => {
   const cwd = await makeTempDir("afs-checksum-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   for (const skill of SKILL_ASSETS) {
@@ -175,7 +182,7 @@ test("writeFileSafe rejects paths outside project root", async () => {
 
 test("install refuses symlink skill destination", async () => {
   const cwd = await makeTempDir("afs-symlink-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   const skillDir = path.join(cwd, ".cursor/skills");
   const target = path.join(cwd, "real-skill-target.md");
   const link = path.join(skillDir, SKILL_ASSETS[0]);
@@ -201,7 +208,7 @@ test("install refuses symlink parent directory", async () => {
     "# Agent Architecture (stub for tests)\n",
     "utf8",
   );
-  const scriptsDir = path.join(cwd, ".specs/harness/scripts");
+  const scriptsDir = path.join(cwd, SEATBELT_SCRIPTS_DIR);
   await fs.mkdir(scriptsDir, { recursive: true });
   await fs.writeFile(path.join(scriptsDir, "validate_spec.py"), "# stub\n", "utf8");
   await fs.symlink(outside, path.join(cwd, ".cursor"));
@@ -212,19 +219,19 @@ test("install refuses symlink parent directory", async () => {
   );
 });
 
-test("doctor fails when harness and gates are missing", async () => {
+test("doctor fails when Seatbelt and gates are missing", async () => {
   const cwd = await makeTempDir("afs-doctor-fail-");
   await install({ cwd, silent: true, force: true });
 
   const { ok, issues } = await doctor({ cwd, silent: true });
   assert.equal(ok, false);
-  assert.ok(issues.includes("harness_missing"));
+  assert.ok(issues.includes("seatbelt_missing"));
   assert.ok(issues.includes("gates_missing"));
 });
 
 test("doctor passes after install", async () => {
   const cwd = await makeTempDir("afs-doctor-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   const { ok, issues } = await doctor({ cwd, silent: true });
@@ -234,7 +241,7 @@ test("doctor passes after install", async () => {
 
 test("doctor flags unknown registry skill files", async () => {
   const cwd = await makeTempDir("afs-registry-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   const projectPath = path.join(cwd, PROJECT_DIR, PROJECT_FILE);
@@ -319,7 +326,7 @@ test("link-local-bin enables npx in package root", async () => {
 
 test("install --sync-registry updates layer table without touching other sections", async () => {
   const cwd = await makeTempDir("afs-sync-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   const projectPath = path.join(cwd, PROJECT_DIR, PROJECT_FILE);
@@ -349,13 +356,13 @@ test("renderProjectTemplate matches templates/PROJECT.md", async () => {
   assert.equal(rendered, template);
 });
 
-test("install copies layer routing gate script", async () => {
+test("install copies layer routing gate to seatbelt scripts dir", async () => {
   const cwd = await makeTempDir("afs-gate-");
-  await stubHarness(cwd);
+  await stubSeatbelt(cwd);
   await install({ cwd, silent: true });
 
   for (const script of EXTENSION_SCRIPT_ASSETS) {
-    const dest = path.join(cwd, HARNESS_SCRIPTS_DIR, script);
+    const dest = path.join(cwd, SEATBELT_SCRIPTS_DIR, script);
     assert.equal(await pathExists(dest), true, `${script} should be installed`);
     const src = await fs.readFile(path.join(PACKAGE_ROOT, "gates", script), "utf8");
     const copied = await fs.readFile(dest, "utf8");
@@ -363,12 +370,22 @@ test("install copies layer routing gate script", async () => {
   }
 });
 
-test("doctor flags missing layer routing gate", async () => {
-  const cwd = await makeTempDir("afs-layer-gate-");
-  await stubHarness(cwd);
+test("doctor accepts legacy harness scripts dir for Seatbelt gates", async () => {
+  const cwd = await makeTempDir("afs-legacy-gates-");
+  await stubSeatbelt(cwd, { legacy: true });
   await install({ cwd, silent: true });
 
-  const gatePath = path.join(cwd, HARNESS_SCRIPTS_DIR, EXTENSION_SCRIPT_ASSETS[0]);
+  // install writes layer gate to seatbelt; seatbelt gates only on legacy
+  const { ok, issues } = await doctor({ cwd, silent: true });
+  assert.equal(ok, true, issues.join(", "));
+});
+
+test("doctor flags missing layer routing gate", async () => {
+  const cwd = await makeTempDir("afs-layer-gate-");
+  await stubSeatbelt(cwd);
+  await install({ cwd, silent: true });
+
+  const gatePath = path.join(cwd, SEATBELT_SCRIPTS_DIR, EXTENSION_SCRIPT_ASSETS[0]);
   await fs.unlink(gatePath);
 
   const { ok, issues } = await doctor({ cwd, silent: true });
@@ -393,4 +410,22 @@ test("token budget: all layer skills and rule stay lean", async () => {
     "utf8",
   );
   assert.ok(rule.length / 4 < 600, `rule too large: ~${rule.length / 4} tokens`);
+});
+
+test("install copies specialist catalog when packaged", async () => {
+  const cwd = await makeTempDir("afs-catalog-");
+  await stubSeatbelt(cwd);
+  const { catalogCount } = await install({ cwd, silent: true });
+  if (catalogCount === 0) {
+    return; // Floors-only checkout
+  }
+  assert.ok(catalogCount >= 60);
+  assert.equal(
+    await pathExists(path.join(cwd, ".cursor/skills/react-expert/SKILL.md")),
+    true,
+  );
+  assert.equal(
+    await pathExists(path.join(cwd, ".claude/skills/react-expert/SKILL.md")),
+    true,
+  );
 });

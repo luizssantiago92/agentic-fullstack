@@ -5,7 +5,7 @@ description: Frontend Execute manual. Load when task Files match frontend globs 
 
 # Frontend Engineering
 
-Application manual for **frontend** Execute. Complements `engineering-standards.md`. Does not replace harness gates.
+Application manual for **frontend** Execute. Complements `engineering-standards.md`. Does not replace Seatbelt gates.
 
 **Token rule.** Load only when task `Files` match the **frontend** layer. Drop after commit. Never load with another layer skill in the same turn.
 

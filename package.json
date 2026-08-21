@@ -1,7 +1,7 @@
 {
   "name": "@luizsantiago/agentic-fullstack",
-  "version": "0.3.5",
-  "description": "Layer sister skills (frontend, backend, data, analytics, data science) for the Spec-Driven Harness. Application manuals per stack layer — progressive loading, low token cost.",
+  "version": "0.4.0",
+  "description": "Full Stack Floor Map companion for Spec Seatbelt — Floors layer Execute manuals plus a specialist skill catalog. Progressive loading, one layer per task.",
   "type": "module",
   "bin": {
     "agentic-fullstack": "./index.js"
@@ -11,7 +11,8 @@
   },
   "scripts": {
     "prepare": "node scripts/link-local-bin.mjs",
-    "test": "node --test test/install.test.js test/gate.test.js",
+    "test": "node --test test/install.test.js test/gate.test.js test/catalog.test.js",
+    "validate:skills": "node scripts/validate-layer-skills.mjs",
     "demo:validate": "node index.js validate-layers demo-login",
     "prepublishOnly": "npm test"
   },
@@ -19,10 +20,12 @@
     "index.js",
     "lib/",
     "skills/",
+    "catalog/",
     "rules/",
     "templates/",
     "gates/validate_layer_routing.py",
     "scripts/link-local-bin.mjs",
+    "NOTICE",
     "LICENSE"
   ],
   "repository": {
@@ -35,7 +38,8 @@
     "cursor",
     "claude",
     "spec-driven",
-    "harness",
+    "seatbelt",
+    "floors",
     "fullstack",
     "frontend",
     "backend",
@@ -49,10 +53,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@luizsantiago/agentic-harness": ">=0.7.0"
+    "@luizsantiago/spec-seatbelt": ">=2.2.0"
   },
   "peerDependenciesMeta": {
-    "@luizsantiago/agentic-harness": {
+    "@luizsantiago/spec-seatbelt": {
       "optional": true
     }
   }
