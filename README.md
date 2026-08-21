@@ -3,72 +3,87 @@
 [![npm version](https://img.shields.io/npm/v/@luizsantiago/agentic-fullstack.svg)](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Layer sister skills for the [Spec-Driven Harness](https://github.com/luizssantiago92/spec-driven-harness). The Harness is the SDD method. This package is the **floor map**: frontend, backend, data, analytics, data science — one Execute manual per layer.
+**Full Stack Floor Map** companion for [Spec Seatbelt](https://github.com/luizssantiago92/spec-seatbelt) — map the stack into **Floors** (frontend, backend, data, analytics, data science), load **one layer manual per Execute task**, and optionally call **one specialist** from a 67-skill catalog (plus ≤2 references). Specialists enter only when called.
 
-npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack)
+npm: [`@luizsantiago/agentic-fullstack`](https://www.npmjs.com/package/@luizsantiago/agentic-fullstack) **0.4.x**  
+*(Rename candidate: **Full Stack Floor Map** / `@luizsantiago/fullstack-floor-map` — after you rotate npm token & secrets.)*
+
+---
 
 ## Install
 
-Run these in **your product repository** (the company app). Node.js 18+. Python 3.10+ for gates.
+In **your product repository** (Node.js 18+. Python 3.10+ for gates):
 
 ```bash
-npx @luizsantiago/agentic-harness install
+npx @luizsantiago/spec-seatbelt install
 npx @luizsantiago/agentic-fullstack install
 npx @luizsantiago/agentic-fullstack doctor
 ```
 
-Done when doctor prints `All checks passed`. Then edit `.specs/project/PROJECT.md` if your folders are not `apps/web`, `apps/api`, `dbt`, and so on.
+### What install does
 
-| Command | When |
+| Lands in your project | Purpose |
 | --- | --- |
-| `install --force` | Skills only, no Harness yet (`doctor` still fails until Harness is installed) |
-| `install --sync-registry` | Refresh **only** the Layer registry table after a package upgrade (keeps your Stack / test commands) |
+| `.cursor/skills/*-engineering.md` (+ `.claude/`) | Floors layer manuals (legacy Execute) |
+| `.cursor/skills/<specialist>/` | Specialist catalog (`SKILL.md` + `references/`) |
+| `.cursor/rules/fullstack-layer.mdc` | One Floor + at most one specialist |
+| `.specs/seatbelt/scripts/validate_layer_routing.py` | Layer gate (Fullstack-owned) |
+| `.specs/project/PROJECT.md` | Stack + Layer registry (created if missing) |
 
-Re-running Harness install **does not delete** Fullstack skills. Re-run Fullstack `install` to refresh skills, the rule, and the layer gate.
+Re-run Seatbelt install anytime — it does **not** delete Floors skills. Re-run Fullstack `install` to refresh layers, rule, gate, and catalog.
 
-## Use with the Harness
-
-**Pairing contract:** keep the **feature** vertical (one user path, e.g. login). Split **tasks** horizontally — each task `Files` list on **one** floor. A Harness “vertical slice” is a thin *feature*, not one task mixing `apps/web` + `apps/api`. If both packages are installed, mixed `Files` fail the Fullstack layer gate. See [How to use](wiki/How-to-use.md).
-
-1. Write spec/tasks as usual (Harness).
-2. Keep each task `Files` on **one** floor. Use `Depends on` between T1/T2 when the API must land before the UI (or vice versa).
-3. Before Execute:
-
-```bash
-npx @luizsantiago/agentic-fullstack validate-layers your-feature
-```
-
-Same check as `python3 .specs/harness/scripts/validate_layer_routing.py your-feature`.
-
-4. During Execute load `engineering-standards.md` + `references/implement.md` **and one** layer skill (`frontend-engineering.md` *or* `backend-engineering.md` *or* data / analytics / datascience). Never two layer skills in the same turn.
-5. After commit, drop the layer skill. On `/verify`, load **no** Fullstack skills.
-
-How to pick a skill and the daily ritual: [wiki — How to use](wiki/How-to-use.md).
-
-## What you get
-
-| Artifact | Purpose |
+| Need | Command |
 | --- | --- |
-| `.cursor/skills/*-engineering.md` | Five Execute manuals (also copied to `.claude/skills/`) |
-| `.cursor/rules/fullstack-layer.mdc` | At most one layer skill per task |
-| `.specs/harness/scripts/validate_layer_routing.py` | Gate: task `Files` vs the registry |
-| `.specs/project/PROJECT.md` | Your stack + layer map (created if missing, never overwritten on a normal install) |
+| Skills without Seatbelt yet | `install --force` |
+| Refresh registry globs only | `install --sync-registry` |
+| Check health | `doctor` |
+| Check task `Files` vs floors | `validate-layers <feature>` |
 
-| Layer | Skill | Typical paths |
+---
+
+## How the pieces fit together
+
+| Idea | Package | Role |
 | --- | --- | --- |
-| `frontend` | `frontend-engineering.md` | `apps/web/**`, `**/*.tsx` |
-| `backend` | `backend-engineering.md` | `apps/api/**`, `backend/**` |
-| `data` | `data-engineering.md` | `dbt/**`, `**/etl/**`, `warehouse/**` |
-| `analytics` | `analytics-engineering.md` | `analytics/**`, `notebooks/explore/**` |
-| `datascience` | `data-science-engineering.md` | `experiments/**`, `ml/**`, `training/**` |
+| **Seatbelt** | `@luizsantiago/spec-seatbelt` | Spec, tasks, gates, Verify |
+| **Floors** | this package (legacy) | Which floor a task lives on |
+| **Specialists** | catalog in this package | Framework craft — load on demand |
 
-Skills are application manuals, not framework tutorials. The agent still discovers React, Fastify, dbt, or sklearn from **your** repo. Token budget: each skill `<2800` chars÷4; the routing rule `<600`.
+**Pairing:** keep the **feature** vertical (one user path). Split **tasks** by floor — never mix `apps/web` and `apps/api` in one `Files` list.
 
-Peer: `@luizsantiago/agentic-harness` **≥ 0.7.0** (optional on npm; required for a green `doctor`).
+**Execute load:** Seatbelt working set + **one** `*-engineering.md` + **at most one** specialist `SKILL.md` + **≤2** `references/`.  
+**Verify:** Seatbelt only — no Floors layers, no catalog specialists.
 
-## Wiki
+Plain-language tour: [Home](docs/guide/Home.md) · [Quick start](docs/guide/Quick-start.md) · [Concepts](docs/guide/concepts.md)
 
-Product playbook (why, skills, registry, FAQ): [`wiki/`](wiki/). Enable GitHub Wikis, then copy those files (see `wiki/README.md`).
+---
+
+## Documentation
+
+| Guide | Topic |
+| --- | --- |
+| [Quick start](docs/guide/Quick-start.md) | Install → registry → validate-layers → Execute |
+| [Concepts](docs/guide/concepts.md) | Floors, pairing, load policy |
+| [Five floors](docs/guide/five-skills.md) | Layer manuals |
+| [Specialist catalog](docs/guide/specialist-catalog.md) | 67 skills, install ≠ load |
+| [Layer routing gate](docs/guide/layer-routing-gate.md) | Gate paths & CLI |
+| [Companion: Spec Seatbelt](docs/guide/Companion-spec-seatbelt.md) | Pairing contract |
+| [CLI](docs/guide/CLI.md) | Commands |
+| [FAQ](docs/guide/FAQ.md) | Common questions |
+| [Credits](docs/guide/credits.md) | Attribution |
+
+---
+
+## Credits
+
+This package adapts open ideas; Floors layer routing is original here.
+
+| Source | License | How we use it |
+| --- | --- | --- |
+| [jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | MIT | Specialist catalog (`SKILL.md` + `references/`) |
+| [spec-seatbelt](https://github.com/luizssantiago92/spec-seatbelt) | MIT | Companion pairing, guide shape, Verify ownership |
+
+Extended attribution: [docs/guide/credits.md](docs/guide/credits.md) · [NOTICE](NOTICE)
 
 ## License
 
