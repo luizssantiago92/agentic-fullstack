@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Companion Sync process + Desks v3 (planned) prompt for Spec Seatbelt agent chats (`docs/guide/Companion-sync.md`)
+
 ## 0.4.1
 
 - Catalog pin to jeffallan/claude-skills **0.4.16** (`lib/catalog-pin.js`, NOTICE, catalog-status)
