@@ -92,18 +92,16 @@ if (!fs.existsSync(catalogRoot)) {
     if (/\bFirst\b.+\bthen\b/i.test(desc)) {
       fail(`catalog/${id}: Description Trap in description`);
     }
-    // Reference paths cited in tables / lists (incl. ../sibling/references/...)
+    // Reference paths in backticks (local references/… or ../sibling/references/…)
     const skillRoot = path.join(catalogRoot, id);
     const refDir = path.join(skillRoot, "references");
     const refMentions = [
-      ...text.matchAll(/`((?:\.\.\/)?[\w.-]+(?:\/[\w.-]+)*\/references\/[\w.-]+\.md)`/g),
-      ...text.matchAll(/`?references\/([^`\s|]+)`?/g),
+      ...text.matchAll(/`([^`]*references\/[^`]+\.md)`/g),
     ].map((m) => m[1]);
     for (const rel of new Set(refMentions)) {
       const candidates = [
         path.join(skillRoot, rel),
-        path.join(refDir, rel),
-        path.join(refDir, path.basename(rel)),
+        path.join(refDir, rel.replace(/^references\//, "")),
         path.resolve(skillRoot, rel),
       ];
       if (!candidates.some((c) => fs.existsSync(c))) {
