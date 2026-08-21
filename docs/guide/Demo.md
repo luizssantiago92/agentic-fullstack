@@ -44,3 +44,6 @@ Manual follow-up: [playbook.md](../demo/playbook.md).
 | Catalog skill ranks for sample prompts | End-to-end code quality from a skill |
 
 Smoke is a **routing heuristic**, not an LLM eval.
+
+For proving activation in a **separate product repo**, see [product-activation-proof.md](product-activation-proof.md).
+

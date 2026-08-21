@@ -2,6 +2,8 @@
 
 Use after `npm run demo:local` creates `demo/workspace/`. Open that folder in Cursor (or keep this repo open and treat paths as product-repo examples).
 
+For a **separate product repository** proof, prefer [docs/guide/product-activation-proof.md](../docs/guide/product-activation-proof.md).
+
 ## What automated demo already proved
 
 - Seatbelt + Floor Map install + doctor
@@ -26,6 +28,15 @@ For each row: start an Execute-style turn, load Seatbelt implement + **one** Flo
 2. Agent loads **at most one** catalog `SKILL.md` (optional) with domain allowed for that Floor.
 3. Agent opens **≤2** `references/` files.
 4. On a `/verify` turn, agent loads **neither** Floor nor catalog skills.
+
+## Activation failure modes
+
+| Symptom | Likely cause |
+| --- | --- |
+| Floor loaded, no specialist | Prompt too vague; ask for the named skill or name the framework |
+| Two specialists loaded | Policy violation — stop and drop one |
+| Specialist on `/verify` | Wrong phase — unload catalog; use Seatbelt Verify |
+| Skill missing on disk | Re-run `npx @luizsantiago/fullstack-floor-map install` |
 
 ## Verify-only check
 

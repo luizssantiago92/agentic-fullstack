@@ -56,8 +56,11 @@ Push/PR to `main`: `.github/workflows/ci.yml` (lint workflows, `npm test`, pack 
 | `gates/validate_layer_routing.py` | Layer gate → `.specs/seatbelt/scripts/` |
 | `lib/project-template.js` | Generates `PROJECT.md` from `DEFAULT_LAYERS` |
 | `docs/guide/` | User guide (no wiki) |
+| `docs/guide/catalog-index.md` | Generated specialist index (domain → Floor) |
+| `docs/guide/product-activation-proof.md` | Manual proof in a product repo |
 | `.specs/features/demo-*/` | Spec-only Floor examples (git only; not on npm) |
 | `demo/` | Local sandbox (`demo:local`), smoke fixtures, playbook |
+| `lib/catalog-pin.js` | Upstream pin + verify-forbidden list |
 | `prd/agentic-fullstack-v2.md` | PRD for v2 layers |
 
 ### Seatbelt integration

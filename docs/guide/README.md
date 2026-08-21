@@ -10,6 +10,9 @@
 | [How it works](How-it-works.md) | Day-to-day with Seatbelt phases |
 | [Five floors](five-skills.md) | Layer manuals |
 | [Specialist catalog](specialist-catalog.md) | 67 skills; install ≠ load |
+| [Catalog index](catalog-index.md) | Domain → Floor allow-list |
+| [Catalog status](catalog-status.md) | Upstream pin + adapted skills |
+| [Product activation proof](product-activation-proof.md) | Repo produto: Execute/Verify checklist |
 | [Layer registry](layer-registry.md) | `PROJECT.md` |
 | [Layer routing gate](layer-routing-gate.md) | Gate CLI |
 | [CLI](CLI.md) | install / doctor / validate-layers |

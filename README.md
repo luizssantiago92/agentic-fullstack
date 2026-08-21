@@ -5,7 +5,7 @@
 
 **Full Stack Floor Map** companion for [Spec Seatbelt](https://github.com/luizssantiago92/spec-seatbelt) — map the stack into **Floors** (frontend, backend, data, analytics, data science), load **one layer manual per Execute task**, and optionally call **one specialist** from a 67-skill catalog (plus ≤2 references). Specialists enter only when called.
 
-npm: [`@luizsantiago/fullstack-floor-map`](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map) **0.4.x**  
+npm: [`@luizsantiago/fullstack-floor-map`](https://www.npmjs.com/package/@luizsantiago/fullstack-floor-map) **0.4.1**  
 
 ---
 
